@@ -401,6 +401,8 @@ h1.glitch {
     body {
         overflow-x: hidden;
         width: 100%;
+        max-width: 100vw;
+        /* Strict limit */
     }
 
     /* Navbar */
@@ -434,18 +436,21 @@ h1.glitch {
     }
 
     h1.glitch {
-        font-size: 2.2rem;
-        /* Much smaller to fit screen */
+        font-size: clamp(1.8rem, 8vw, 3rem);
+        /* Fluid font size */
         word-break: break-word;
+        line-height: 1.2;
     }
 
     .hero-sub {
         font-size: 0.8rem;
+        padding: 0 1rem;
     }
 
     .cyber-circle {
-        width: 180px;
-        height: 180px;
+        width: clamp(150px, 50vw, 250px);
+        /* Fluid size */
+        height: clamp(150px, 50vw, 250px);
         margin: 0 auto;
     }
 
@@ -455,12 +460,13 @@ h1.glitch {
     }
 
     .section-title {
-        font-size: 1.4rem;
-        /* Reduced from 1.8rem to fit "ESTABLISH_UPLINK" */
+        font-size: clamp(1.2rem, 6vw, 2rem);
+        /* Fluid font size */
         border-left: 3px solid var(--neon-pink);
         word-break: break-word;
-        /* Ensure long words wrap */
         hyphens: auto;
+        overflow-wrap: break-word;
+        /* Extra safety */
     }
 
     /* About & Contact */
@@ -468,7 +474,6 @@ h1.glitch {
     #contact {
         padding: 3rem 1rem;
         padding-bottom: 5rem;
-        /* Extra padding at bottom */
     }
 
     .skill-cloud {
