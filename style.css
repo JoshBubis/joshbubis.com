@@ -84,6 +84,75 @@ h3 {
     text-shadow: 0 0 10px var(--neon-cyan);
 }
 
+/* --- Mobile Optimization --- */
+@media (max-width: 768px) {
+
+    /* Navbar */
+    .navbar {
+        flex-direction: column;
+        padding: 1rem;
+        background: rgba(5, 5, 5, 0.95);
+        /* Darker bg for readability */
+    }
+
+    .nav-links {
+        margin-top: 1rem;
+        gap: 1rem;
+        font-size: 0.8rem;
+    }
+
+    /* Hero */
+    #hero {
+        flex-direction: column-reverse;
+        /* Visual on top or bottom? Let's put text on top */
+        justify-content: center;
+        text-align: center;
+        padding-top: 120px;
+        /* Space for stacked nav */
+    }
+
+    .hero-content {
+        margin-bottom: 3rem;
+    }
+
+    h1.glitch {
+        font-size: 3rem;
+        /* Smaller title */
+    }
+
+    .hero-sub {
+        font-size: 0.9rem;
+    }
+
+    .cyber-circle {
+        width: 200px;
+        height: 200px;
+        margin: 0 auto;
+        /* Center it */
+    }
+
+    /* Projects */
+    #work {
+        padding: 3rem 5%;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        border-left: 3px solid var(--neon-pink);
+        /* Thinner border */
+    }
+
+    /* About & Contact */
+    #about,
+    #contact {
+        padding: 3rem 5%;
+    }
+
+    .skill-cloud {
+        justify-content: center;
+    }
+}
+
 .nav-links {
     display: flex;
     gap: 2rem;
