@@ -54,19 +54,22 @@ document.addEventListener('DOMContentLoaded', () => {
             title: "CATAMIST",
             desc: "AI-powered news summarization platform. Aggregates global news and uses LLMs to generate neutral, concise summaries.",
             tech: ["Ruby on Rails 8", "PostgreSQL", "Gemini AI", "Heroku"],
-            link: "https://github.com/JoshBubis/catamist"
+            link: "https://github.com/JoshBubis/catamist",
+            liveSystem: "https://catamist.com"
         },
         {
             title: "HACKYCHAT",
             desc: "Real-time chat platform overlay for the web. Chrome extension + Rails API + React Frontend monorepo.",
             tech: ["Rails API", "React", "ActionCable", "Redis"],
-            link: "https://github.com/JoshBubis/hackychat"
+            link: "https://github.com/JoshBubis/hackychat",
+            liveSystem: "https://hacky.chat"
         },
         {
             title: "RELAYRA",
             desc: "AI Phone Receptionist. Handles inbound calls, schedules appointments, and manages billing via Stripe.",
             tech: ["Node.js", "Twilio", "Deepgram", "Stripe"],
-            link: "https://github.com/JoshBubis/relayra"
+            link: "https://github.com/JoshBubis/relayra",
+            liveSystem: "https://relayra.com"
         },
         {
             title: "WHITE HAT SCANNER",
@@ -91,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="tech-stack">${techTags}</div>
                 <div class="project-links">
                     <a href="${project.link}" target="_blank">[ VIEW_CODE ]</a>
-                    <a href="#" onclick="alert('Demo coming soon')">[ LIVE_SYSTEM ]</a>
+                    ${project.liveSystem ? `<a href="${project.liveSystem}" target="_blank">[ LIVE_SYSTEM ]</a>` : `<a href="#" onclick="alert('Demo coming soon')">[ LIVE_SYSTEM ]</a>`}
                 </div>
             `;
 
