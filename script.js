@@ -86,18 +86,56 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = document.createElement('div');
             card.className = 'project-card';
 
-            const techTags = project.tech.map(t => `<span class="tech-tag">${t}</span>`).join('');
+            // Title
+            const title = document.createElement('h3');
+            title.className = 'project-title';
+            title.textContent = project.title;
+            card.appendChild(title);
 
-            card.innerHTML = `
-                <h3 class="project-title">${project.title}</h3>
-                <p class="project-desc">${project.desc}</p>
-                <div class="tech-stack">${techTags}</div>
-                <div class="project-links">
-                    <a href="${project.link}" target="_blank">[ VIEW_CODE ]</a>
-                    ${project.liveSystem ? `<a href="${project.liveSystem}" target="_blank">[ LIVE_SYSTEM ]</a>` : `<a href="#" onclick="alert('Demo coming soon')">[ LIVE_SYSTEM ]</a>`}
-                </div>
-            `;
+            // Description
+            const desc = document.createElement('p');
+            desc.className = 'project-desc';
+            desc.textContent = project.desc;
+            card.appendChild(desc);
 
+            // Tech stack
+            const techStack = document.createElement('div');
+            techStack.className = 'tech-stack';
+            project.tech.forEach(tech => {
+                const tag = document.createElement('span');
+                tag.className = 'tech-tag';
+                tag.textContent = tech;
+                techStack.appendChild(tag);
+            });
+            card.appendChild(techStack);
+
+            // Links container
+            const linksContainer = document.createElement('div');
+            linksContainer.className = 'project-links';
+
+            // View Code link
+            const codeLink = document.createElement('a');
+            codeLink.href = project.link;
+            codeLink.target = '_blank';
+            codeLink.textContent = '[ VIEW_CODE ]';
+            linksContainer.appendChild(codeLink);
+
+            // Live System link
+            const liveLink = document.createElement('a');
+            if (project.liveSystem) {
+                liveLink.href = project.liveSystem;
+                liveLink.target = '_blank';
+            } else {
+                liveLink.href = '#';
+                liveLink.onclick = (e) => {
+                    e.preventDefault();
+                    alert('Demo coming soon');
+                };
+            }
+            liveLink.textContent = '[ LIVE_SYSTEM ]';
+            linksContainer.appendChild(liveLink);
+
+            card.appendChild(linksContainer);
             projectsContainer.appendChild(card);
         });
     }
