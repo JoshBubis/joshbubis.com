@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             title: "CATAMIST",
             desc: "AI-powered news summarization platform. Aggregates global news and uses LLMs to generate neutral, concise summaries.",
-            tech: ["Ruby on Rails 8", "PostgreSQL", "Gemini AI", "Heroku"],
+            tech: ["Ruby on Rails 8", "PostgreSQL", "Gemini AI", "Self-hosted Docker"],
             link: "https://github.com/JoshBubis/catamist",
             liveSystem: "https://catamist.com"
         },
