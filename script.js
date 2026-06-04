@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('SYSTEM_INITIALIZED...');
 
     // Typing Effect for Hero
-    const text = "BUILDING USEFUL SOFTWARE_";
+    const text = "BUILDING PRACTICAL SOFTWARE_";
     const typingElement = document.querySelector('.typing-effect');
     let index = 0;
 

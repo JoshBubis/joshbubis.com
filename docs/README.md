@@ -14,3 +14,4 @@ Static GitHub Pages portfolio for `joshbubis.com`.
 - The site is published from the `main` branch root.
 - The featured projects are Catamist, HackyChat, and Relayra.
 - White Hat Scanner was removed from the public portfolio project list to keep the site more focused and professional.
+- Current positioning emphasizes practical web products, Rails apps, product-focused systems, and useful AI/LLM features without overstating language fluency.
