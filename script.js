@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('SYSTEM_INITIALIZED...');
 
     // Typing Effect for Hero
-    const text = "ARCHITECTING INTELLIGENCE_";
+    const text = "BUILDING USEFUL SOFTWARE_";
     const typingElement = document.querySelector('.typing-effect');
     let index = 0;
 
@@ -52,30 +52,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const projects = [
         {
             title: "CATAMIST",
-            desc: "AI-powered news summarization platform. Aggregates global news and uses LLMs to generate neutral, concise summaries.",
+            desc: "AI-powered news platform that aggregates global stories and uses LLMs to generate neutral, concise summaries.",
             tech: ["Ruby on Rails 8", "PostgreSQL", "Gemini AI", "Self-hosted Docker"],
             link: "https://github.com/JoshBubis/catamist",
             liveSystem: "https://catamist.com"
         },
         {
             title: "HACKYCHAT",
-            desc: "Real-time chat platform overlay for the web. Chrome extension + Rails API + React Frontend monorepo.",
+            desc: "Real-time web chat platform with a Chrome extension, Rails API, and React frontend.",
             tech: ["Rails API", "React", "ActionCable", "Redis"],
             link: "https://github.com/JoshBubis/hackychat",
             liveSystem: "https://hacky.chat"
         },
         {
             title: "RELAYRA",
-            desc: "AI Phone Receptionist. Handles inbound calls, schedules appointments, and manages billing via Stripe.",
+            desc: "AI phone receptionist that answers inbound calls, handles appointment workflows, and manages billing through Stripe.",
             tech: ["Node.js", "Twilio", "Deepgram", "Stripe"],
             link: "https://github.com/JoshBubis/relayra",
             liveSystem: "https://relayra.com"
-        },
-        {
-            title: "WHITE HAT SCANNER",
-            desc: "Security research tool to detect credential leaks in git history. Includes entropy scanning and real-time GitHub firehose monitoring.",
-            tech: ["Python", "Git", "Entropy Analysis", "GitHub API"],
-            link: "https://github.com/JoshBubis/whitehat_scanner"
         }
     ];
 
@@ -117,7 +111,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const codeLink = document.createElement('a');
             codeLink.href = project.link;
             codeLink.target = '_blank';
-            codeLink.textContent = '[ VIEW_CODE ]';
+            codeLink.rel = 'noopener noreferrer';
+            codeLink.textContent = '[ CODE ]';
             linksContainer.appendChild(codeLink);
 
             // Live System link
@@ -125,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (project.liveSystem) {
                 liveLink.href = project.liveSystem;
                 liveLink.target = '_blank';
+                liveLink.rel = 'noopener noreferrer';
             } else {
                 liveLink.href = '#';
                 liveLink.onclick = (e) => {
@@ -132,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert('Demo coming soon');
                 };
             }
-            liveLink.textContent = '[ LIVE_SYSTEM ]';
+            liveLink.textContent = '[ LIVE_SITE ]';
             linksContainer.appendChild(liveLink);
 
             card.appendChild(linksContainer);
