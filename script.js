@@ -2,18 +2,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-    const text = 'SITES WORTH HIRING FOR_';
+    const text = 'SITES WORTH HIRING FOR';
     const typingElement = document.querySelector('.typing-effect');
     let index = 0;
 
     function typeWriter() {
         if (!typingElement) return;
         if (index < text.length) {
-            typingElement.innerHTML = text.substring(0, index + 1) + '<span class="blinking-cursor">|</span>';
+            typingElement.innerHTML =
+                text.substring(0, index + 1) + '<span class="blinking-cursor">_</span>';
             index += 1;
             setTimeout(typeWriter, 70);
         } else {
-            typingElement.innerHTML = text;
+            // Keep the trailing underscore blinking like a terminal cursor.
+            typingElement.innerHTML = text + '<span class="blinking-cursor">_</span>';
         }
     }
 

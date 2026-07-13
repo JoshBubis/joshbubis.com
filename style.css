@@ -167,6 +167,9 @@ h1, h2, h3 {
 }
 
 .blinking-cursor {
+    display: inline-block;
+    margin-left: 0.02em;
+    color: var(--neon-cyan);
     animation: blink 1s step-end infinite;
 }
 
