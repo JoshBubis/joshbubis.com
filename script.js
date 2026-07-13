@@ -63,15 +63,15 @@
     }
 
     function seed(w, h) {
-      var count = Math.max(18, Math.floor((w * h) / 38000));
+      var count = Math.max(28, Math.floor((w * h) / 22000));
       nodes = [];
       for (var i = 0; i < count; i++) {
         nodes.push({
           x: Math.random() * w,
           y: Math.random() * h,
-          r: 1.2 + Math.random() * 2.4,
-          vx: (Math.random() - 0.5) * 0.18,
-          vy: (Math.random() - 0.5) * 0.18,
+          r: 1.4 + Math.random() * 3.2,
+          vx: (Math.random() - 0.5) * 0.28,
+          vy: (Math.random() - 0.5) * 0.28,
           phase: Math.random() * Math.PI * 2
         });
       }
@@ -83,31 +83,37 @@
       var t = (now - t0) / 1000;
       ctx.clearRect(0, 0, w, h);
 
-      /* soft radial wash */
-      var g = ctx.createRadialGradient(w * 0.72, h * 0.2, 0, w * 0.72, h * 0.2, w * 0.7);
-      g.addColorStop(0, "rgba(200, 30, 30, 0.07)");
+      var g = ctx.createRadialGradient(w * 0.78, h * 0.28, 0, w * 0.78, h * 0.28, w * 0.55);
+      g.addColorStop(0, "rgba(200, 30, 30, 0.18)");
+      g.addColorStop(0.55, "rgba(200, 30, 30, 0.05)");
       g.addColorStop(1, "rgba(200, 30, 30, 0)");
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, w, h);
 
+      var g2 = ctx.createRadialGradient(w * 0.15, h * 0.75, 0, w * 0.15, h * 0.75, w * 0.45);
+      g2.addColorStop(0, "rgba(11, 11, 12, 0.06)");
+      g2.addColorStop(1, "rgba(11, 11, 12, 0)");
+      ctx.fillStyle = g2;
+      ctx.fillRect(0, 0, w, h);
+
       for (var i = 0; i < nodes.length; i++) {
         var n = nodes[i];
-        n.x += n.vx + Math.sin(t * 0.4 + n.phase) * 0.05;
-        n.y += n.vy + Math.cos(t * 0.35 + n.phase) * 0.05;
+        n.x += n.vx + Math.sin(t * 0.45 + n.phase) * 0.08;
+        n.y += n.vy + Math.cos(t * 0.4 + n.phase) * 0.08;
         if (n.x < -20) n.x = w + 20;
         if (n.x > w + 20) n.x = -20;
         if (n.y < -20) n.y = h + 20;
         if (n.y > h + 20) n.y = -20;
       }
 
-      ctx.lineWidth = 1;
+      ctx.lineWidth = 1.1;
       for (var a = 0; a < nodes.length; a++) {
         for (var b = a + 1; b < nodes.length; b++) {
           var dx = nodes[a].x - nodes[b].x;
           var dy = nodes[a].y - nodes[b].y;
           var dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 140) {
-            var alpha = (1 - dist / 140) * 0.18;
+          if (dist < 160) {
+            var alpha = (1 - dist / 160) * 0.32;
             ctx.strokeStyle = "rgba(11, 11, 12, " + alpha + ")";
             ctx.beginPath();
             ctx.moveTo(nodes[a].x, nodes[a].y);
@@ -120,7 +126,7 @@
       for (var j = 0; j < nodes.length; j++) {
         var p = nodes[j];
         ctx.beginPath();
-        ctx.fillStyle = "rgba(11, 11, 12, 0.28)";
+        ctx.fillStyle = "rgba(11, 11, 12, 0.42)";
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
       }
