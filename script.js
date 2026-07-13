@@ -1,164 +1,213 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const yearEl = document.getElementById('year');
-    if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+(function () {
+  var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    const text = 'SITES WORTH HIRING FOR';
-    const typingElement = document.querySelector('.typing-effect');
-    let index = 0;
+  document.documentElement.classList.add("js-ready");
 
-    function typeWriter() {
-        if (!typingElement) return;
-        if (index < text.length) {
-            typingElement.innerHTML =
-                text.substring(0, index + 1) + '<span class="blinking-cursor">_</span>';
-            index += 1;
-            setTimeout(typeWriter, 70);
-        } else {
-            // Keep the trailing underscore blinking like a terminal cursor.
-            typingElement.innerHTML = text + '<span class="blinking-cursor">_</span>';
-        }
+  var yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+
+  /* Header border on scroll */
+  var header = document.querySelector(".site-header");
+  function onScrollHeader() {
+    if (!header) return;
+    header.classList.toggle("is-scrolled", window.scrollY > 12);
+  }
+  onScrollHeader();
+  window.addEventListener("scroll", onScrollHeader, { passive: true });
+
+  /* Scroll reveals */
+  if (!reduceMotion) {
+    var reveals = document.querySelectorAll("[data-reveal]");
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-in");
+              io.unobserve(entry.target);
+            }
+          });
+        },
+        { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+      );
+      reveals.forEach(function (el) {
+        io.observe(el);
+      });
+    } else {
+      reveals.forEach(function (el) {
+        el.classList.add("is-in");
+      });
     }
-
-    setTimeout(typeWriter, 600);
-
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%';
-    document.querySelectorAll('.glitch-link').forEach(link => {
-        link.addEventListener('mouseover', event => {
-            let iterations = 0;
-            const originalText = link.dataset.text;
-            if (!originalText) return;
-
-            const interval = setInterval(() => {
-                event.target.innerText = originalText
-                    .split('')
-                    .map((letter, i) => {
-                        if (i < iterations) return originalText[i];
-                        return chars[Math.floor(Math.random() * chars.length)];
-                    })
-                    .join('');
-
-                if (iterations >= originalText.length) clearInterval(interval);
-                iterations += 1 / 3;
-            }, 30);
-        });
+  } else {
+    document.querySelectorAll("[data-reveal]").forEach(function (el) {
+      el.classList.add("is-in");
     });
+  }
 
-    const siteTypes = [
-        {
-            index: '01',
-            title: 'Personal / Portfolio',
-            desc: 'A sharp one-pager or short multi-page site that presents you or your work — brand-first, fast, and easy to update.',
-            meta: 'GitHub Pages · Cloudflare Pages',
-            accent: '#3de0d0'
-        },
-        {
-            index: '02',
-            title: 'Small Business',
-            desc: 'Services, hours, contact, and trust — a clean public face for a local business or solo practice.',
-            meta: 'Static · SEO-ready · mobile-first',
-            accent: '#ff4d8d'
-        },
-        {
-            index: '03',
-            title: 'Product Landing',
-            desc: 'One job: explain the product and convert. Hero, proof, pricing or waitlist, clear CTA.',
-            meta: 'Campaign-ready · analytics-friendly',
-            accent: '#f0a46a'
-        },
-        {
-            index: '04',
-            title: 'Event / Campaign',
-            desc: 'Time-bound pages for launches, events, or announcements — focused story, strong visual anchor.',
-            meta: 'Fast ship · short lifespan OK',
-            accent: '#8ad4ff'
-        }
-    ];
+  /* Hero canvas — soft mesh field */
+  var canvas = document.getElementById("hero-canvas");
+  if (canvas && canvas.getContext && !reduceMotion) {
+    var ctx = canvas.getContext("2d");
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var nodes = [];
+    var raf = 0;
+    var t0 = performance.now();
 
-    const typesGrid = document.getElementById('types-grid');
-    if (typesGrid) {
-        siteTypes.forEach(type => {
-            const card = document.createElement('article');
-            card.className = 'type-card';
-            card.style.setProperty('--type-accent', type.accent);
-            card.innerHTML = `
-                <span class="type-card__index">${type.index}</span>
-                <h3 class="type-card__title">${type.title}</h3>
-                <p class="type-card__desc">${type.desc}</p>
-                <p class="type-card__meta">${type.meta}</p>
-            `;
-            typesGrid.appendChild(card);
-        });
+    function resize() {
+      var w = canvas.clientWidth;
+      var h = canvas.clientHeight;
+      canvas.width = Math.floor(w * dpr);
+      canvas.height = Math.floor(h * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      seed(w, h);
     }
 
-    const projects = [
-        {
-            title: 'CATAMIST',
-            desc: 'AI-powered news platform that aggregates global stories and uses LLMs for neutral, concise summaries.',
-            tech: ['Ruby on Rails 8', 'PostgreSQL', 'Gemini AI', 'Self-hosted Docker'],
-            link: 'https://github.com/JoshBubis/catamist',
-            liveSystem: 'https://catamist.com'
-        },
-        {
-            title: 'HACKYCHAT',
-            desc: 'Real-time web chat with a Chrome extension, Rails API, and React frontend.',
-            tech: ['Rails API', 'React', 'ActionCable', 'Redis'],
-            link: 'https://github.com/JoshBubis/hackychat',
-            liveSystem: 'https://hacky.chat'
-        },
-        {
-            title: 'RELAYRA',
-            desc: 'AI phone receptionist for inbound calls, appointments, and Stripe billing.',
-            tech: ['Node.js', 'Twilio', 'Deepgram', 'Stripe'],
-            link: 'https://github.com/JoshBubis/relayra',
-            liveSystem: 'https://relayra.com'
-        }
-    ];
-
-    const projectsContainer = document.getElementById('projects-grid');
-    if (projectsContainer) {
-        projects.forEach(project => {
-            const card = document.createElement('div');
-            card.className = 'project-card';
-
-            const title = document.createElement('h3');
-            title.className = 'project-title';
-            title.textContent = project.title;
-            card.appendChild(title);
-
-            const desc = document.createElement('p');
-            desc.className = 'project-desc';
-            desc.textContent = project.desc;
-            card.appendChild(desc);
-
-            const techStack = document.createElement('div');
-            techStack.className = 'tech-stack';
-            project.tech.forEach(tech => {
-                const tag = document.createElement('span');
-                tag.className = 'tech-tag';
-                tag.textContent = tech;
-                techStack.appendChild(tag);
-            });
-            card.appendChild(techStack);
-
-            const linksContainer = document.createElement('div');
-            linksContainer.className = 'project-links';
-
-            const codeLink = document.createElement('a');
-            codeLink.href = project.link;
-            codeLink.target = '_blank';
-            codeLink.rel = 'noopener noreferrer';
-            codeLink.textContent = '[ CODE ]';
-            linksContainer.appendChild(codeLink);
-
-            const liveLink = document.createElement('a');
-            liveLink.href = project.liveSystem;
-            liveLink.target = '_blank';
-            liveLink.rel = 'noopener noreferrer';
-            liveLink.textContent = '[ LIVE_SITE ]';
-            linksContainer.appendChild(liveLink);
-
-            card.appendChild(linksContainer);
-            projectsContainer.appendChild(card);
+    function seed(w, h) {
+      var count = Math.max(18, Math.floor((w * h) / 38000));
+      nodes = [];
+      for (var i = 0; i < count; i++) {
+        nodes.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: 1.2 + Math.random() * 2.4,
+          vx: (Math.random() - 0.5) * 0.18,
+          vy: (Math.random() - 0.5) * 0.18,
+          phase: Math.random() * Math.PI * 2
         });
+      }
     }
-});
+
+    function frame(now) {
+      var w = canvas.clientWidth;
+      var h = canvas.clientHeight;
+      var t = (now - t0) / 1000;
+      ctx.clearRect(0, 0, w, h);
+
+      /* soft radial wash */
+      var g = ctx.createRadialGradient(w * 0.72, h * 0.2, 0, w * 0.72, h * 0.2, w * 0.7);
+      g.addColorStop(0, "rgba(200, 30, 30, 0.07)");
+      g.addColorStop(1, "rgba(200, 30, 30, 0)");
+      ctx.fillStyle = g;
+      ctx.fillRect(0, 0, w, h);
+
+      for (var i = 0; i < nodes.length; i++) {
+        var n = nodes[i];
+        n.x += n.vx + Math.sin(t * 0.4 + n.phase) * 0.05;
+        n.y += n.vy + Math.cos(t * 0.35 + n.phase) * 0.05;
+        if (n.x < -20) n.x = w + 20;
+        if (n.x > w + 20) n.x = -20;
+        if (n.y < -20) n.y = h + 20;
+        if (n.y > h + 20) n.y = -20;
+      }
+
+      ctx.lineWidth = 1;
+      for (var a = 0; a < nodes.length; a++) {
+        for (var b = a + 1; b < nodes.length; b++) {
+          var dx = nodes[a].x - nodes[b].x;
+          var dy = nodes[a].y - nodes[b].y;
+          var dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 140) {
+            var alpha = (1 - dist / 140) * 0.18;
+            ctx.strokeStyle = "rgba(11, 11, 12, " + alpha + ")";
+            ctx.beginPath();
+            ctx.moveTo(nodes[a].x, nodes[a].y);
+            ctx.lineTo(nodes[b].x, nodes[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+
+      for (var j = 0; j < nodes.length; j++) {
+        var p = nodes[j];
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(11, 11, 12, 0.28)";
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      raf = requestAnimationFrame(frame);
+    }
+
+    resize();
+    window.addEventListener("resize", resize);
+    raf = requestAnimationFrame(frame);
+  } else if (canvas && reduceMotion) {
+    canvas.style.display = "none";
+  }
+
+  /* Magnetic CTAs */
+  if (!reduceMotion) {
+    document.querySelectorAll("[data-magnetic]").forEach(function (btn) {
+      var strength = 18;
+      btn.addEventListener("pointermove", function (e) {
+        var rect = btn.getBoundingClientRect();
+        var x = e.clientX - rect.left - rect.width / 2;
+        var y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform =
+          "translate(" + (x / rect.width) * strength + "px, " + (y / rect.height) * strength + "px)";
+      });
+      btn.addEventListener("pointerleave", function () {
+        btn.style.transform = "translate(0, 0)";
+      });
+    });
+  }
+
+  /* Work rail: progress + drag */
+  var rail = document.getElementById("work-rail");
+  var progress = document.getElementById("work-progress-bar");
+  if (rail) {
+    function updateProgress() {
+      if (!progress) return;
+      var max = rail.scrollWidth - rail.clientWidth;
+      var pct = max > 0 ? (rail.scrollLeft / max) * 100 : 0;
+      progress.style.width = pct + "%";
+    }
+    rail.addEventListener("scroll", updateProgress, { passive: true });
+    updateProgress();
+
+    var dragging = false;
+    var startX = 0;
+    var startScroll = 0;
+
+    rail.addEventListener("pointerdown", function (e) {
+      if (e.pointerType === "touch") return;
+      dragging = true;
+      startX = e.clientX;
+      startScroll = rail.scrollLeft;
+      rail.classList.add("is-dragging");
+      rail.setPointerCapture(e.pointerId);
+    });
+    rail.addEventListener("pointermove", function (e) {
+      if (!dragging) return;
+      rail.scrollLeft = startScroll - (e.clientX - startX);
+    });
+    function endDrag(e) {
+      if (!dragging) return;
+      dragging = false;
+      rail.classList.remove("is-dragging");
+      try {
+        rail.releasePointerCapture(e.pointerId);
+      } catch (_) {}
+    }
+    rail.addEventListener("pointerup", endDrag);
+    rail.addEventListener("pointercancel", endDrag);
+  }
+
+  /* Approach accordion (keyboard / touch; hover handled in CSS) */
+  document.querySelectorAll(".approach-trigger").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var item = btn.closest(".approach-item");
+      if (!item) return;
+      var open = item.classList.contains("is-open");
+      document.querySelectorAll(".approach-item.is-open").forEach(function (el) {
+        el.classList.remove("is-open");
+        var t = el.querySelector(".approach-trigger");
+        if (t) t.setAttribute("aria-expanded", "false");
+      });
+      if (!open) {
+        item.classList.add("is-open");
+        btn.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+})();

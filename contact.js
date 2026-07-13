@@ -12,6 +12,15 @@
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
   if (started) started.value = String(Math.floor(Date.now() / 1000));
 
+  var header = document.querySelector(".site-header");
+  if (header) {
+    var onScroll = function () {
+      header.classList.toggle("is-scrolled", window.scrollY > 12);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }
+
   function showAlert(kind, text) {
     if (!alertEl) return;
     alertEl.hidden = false;
@@ -41,7 +50,7 @@
       }
       widgetId = turnstile.render("#turnstile-container", {
         sitekey: sitekey,
-        theme: "dark",
+        theme: "light",
         "refresh-expired": "auto",
         callback: function (token) {
           tokenInput.value = token;

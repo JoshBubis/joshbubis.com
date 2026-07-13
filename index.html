@@ -4,120 +4,172 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josh Bubis | Sites &amp; Web Products</title>
+    <title>Josh Bubis — Commissioned websites</title>
     <meta name="description"
-        content="Josh Bubis builds commissioned websites and practical web products — portfolios, small-business sites, product landings, and custom Rails apps.">
+        content="Josh Bubis designs and builds commissioned websites and web products — portfolios, small-business sites, product landings, and custom systems.">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Orbitron:wght@500;700;900&family=Space+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Syne:wght@600;700;800&display=swap"
         rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="noise" aria-hidden="true"></div>
-    <div class="grid-bg" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
 
-    <nav class="navbar">
-        <a class="logo" href="#hero">JOSH_BUBIS</a>
-        <ul class="nav-links">
-            <li><a href="#types" class="glitch-link" data-text="SITE TYPES">SITE TYPES</a></li>
-            <li><a href="#work" class="glitch-link" data-text="WORK">WORK</a></li>
-            <li><a href="#about" class="glitch-link" data-text="ABOUT">ABOUT</a></li>
-            <li><a href="contact.html" class="nav-cta">START A PROJECT</a></li>
-        </ul>
-    </nav>
+    <header class="site-header">
+        <a class="wordmark" href="#top">Josh Bubis</a>
+        <nav class="site-nav" aria-label="Primary">
+            <a href="#work">Work</a>
+            <a href="#approach">Approach</a>
+            <a href="#about">About</a>
+            <a href="contact.html" class="nav-cta">Start a project</a>
+        </nav>
+    </header>
 
-    <main>
-        <section id="hero">
-            <div class="hero-content">
-                <p class="hero-eyebrow">AVAILABLE FOR COMMISSIONED SITES</p>
-                <h1 class="brand-name">
-                    <span class="brand-line">JOSH</span>
-                    <span class="brand-line accent">BUBIS</span>
+    <main id="top">
+        <section class="hero" aria-label="Introduction">
+            <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+            <div class="hero-inner">
+                <h1 class="brand reveal" data-reveal>
+                    <span class="brand-line">Josh</span>
+                    <span class="brand-line">Bubis</span>
                 </h1>
-                <h2 class="typing-effect">SITES WORTH HIRING FOR<span class="blinking-cursor">_</span></h2>
-                <p class="hero-sub">Static portfolios · small-business sites · product landings · custom web apps</p>
-                <div class="hero-actions">
-                    <a href="#types" class="cyber-btn">
-                        <span class="cyber-btn__tag">SEE</span>
-                        <span class="cyber-btn__text">WHAT I BUILD</span>
-                    </a>
-                    <a href="contact.html" class="text-link">Start a project →</a>
+                <p class="hero-headline reveal" data-reveal>
+                    Websites with the craft clients feel.
+                </p>
+                <p class="hero-sub reveal" data-reveal>
+                    Commissioned sites shipped clean — and full systems when the work needs to become a product.
+                </p>
+                <div class="hero-actions reveal" data-reveal>
+                    <a href="#work" class="btn btn-primary magnetic" data-magnetic>See the work</a>
+                    <a href="contact.html" class="btn btn-ghost">Start a project</a>
                 </div>
             </div>
-            <div class="hero-visual" aria-hidden="true">
-                <div class="hero-panel">
-                    <div class="hero-panel__bar"></div>
-                    <div class="hero-panel__lines">
-                        <span></span><span></span><span></span><span></span>
+        </section>
+
+        <section id="work" class="section work-section">
+            <div class="section-head reveal" data-reveal>
+                <p class="eyebrow">Selected systems</p>
+                <h2 class="section-title">Proof I can own the stack.</h2>
+            </div>
+
+            <div class="work-rail-wrap">
+                <div class="work-rail" id="work-rail" tabindex="0" aria-label="Shipped systems, scroll horizontally">
+                    <article class="work-panel reveal" data-reveal>
+                        <p class="work-index">01</p>
+                        <h3 class="work-name">Catamist</h3>
+                        <p class="work-desc">AI news platform — aggregation, neutral summaries, and a product surface people return to.</p>
+                        <div class="work-links">
+                            <a href="https://catamist.com" target="_blank" rel="noopener noreferrer">Live</a>
+                            <a href="https://github.com/JoshBubis/catamist" target="_blank" rel="noopener noreferrer">Code</a>
+                        </div>
+                    </article>
+                    <article class="work-panel reveal" data-reveal>
+                        <p class="work-index">02</p>
+                        <h3 class="work-name">HackyChat</h3>
+                        <p class="work-desc">Real-time chat with a Rails API, React client, and Chrome extension — live systems, not demos.</p>
+                        <div class="work-links">
+                            <a href="https://hacky.chat" target="_blank" rel="noopener noreferrer">Live</a>
+                            <a href="https://github.com/JoshBubis/hackychat" target="_blank" rel="noopener noreferrer">Code</a>
+                        </div>
+                    </article>
+                    <article class="work-panel reveal" data-reveal>
+                        <p class="work-index">03</p>
+                        <h3 class="work-name">Relayra</h3>
+                        <p class="work-desc">AI phone receptionist — inbound calls, appointments, and billing wired end to end.</p>
+                        <div class="work-links">
+                            <a href="https://relayra.com" target="_blank" rel="noopener noreferrer">Live</a>
+                            <a href="https://github.com/JoshBubis/relayra" target="_blank" rel="noopener noreferrer">Code</a>
+                        </div>
+                    </article>
+                </div>
+                <div class="work-progress" aria-hidden="true">
+                    <div class="work-progress__bar" id="work-progress-bar"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="approach" class="section approach-section">
+            <div class="section-head reveal" data-reveal>
+                <p class="eyebrow">Approach</p>
+                <h2 class="section-title">Most commissions start as a focused static site.</h2>
+                <p class="section-lead">GitHub Pages or Cloudflare Pages — intentional, fast, easy to own. Pick a shape; we scope from there.</p>
+            </div>
+
+            <ul class="approach-list">
+                <li class="approach-item reveal" data-reveal>
+                    <button type="button" class="approach-trigger" aria-expanded="false">
+                        <span class="approach-num">01</span>
+                        <span class="approach-label">Personal / Portfolio</span>
+                        <span class="approach-chevron" aria-hidden="true"></span>
+                    </button>
+                    <div class="approach-body">
+                        <p>A sharp one-pager or short multi-page site that presents you or your work — brand-first, fast, and easy to update.</p>
                     </div>
-                    <div class="cyber-circle"></div>
-                </div>
-            </div>
-        </section>
-
-        <section id="types">
-            <h2 class="section-title">SITE_TYPES <span class="blinking-cursor">_</span></h2>
-            <p class="section-lead">Most commissioned work is a clean static site — GitHub Pages or Cloudflare Pages —
-                shipped fast and easy to own. Pick a shape; we scope from there.</p>
-            <div class="types-grid" id="types-grid">
-                <!-- Injected by script.js -->
-            </div>
-        </section>
-
-        <section id="work">
-            <h2 class="section-title">SYSTEMS_SHIPPED <span class="blinking-cursor">_</span></h2>
-            <p class="section-lead">Products I built and run — proof I can own the full stack when a site needs to become
-                a system.</p>
-            <div class="projects-grid" id="projects-grid">
-                <!-- Injected by script.js -->
-            </div>
-        </section>
-
-        <section id="about">
-            <div class="about-container">
-                <h2 class="section-title">ABOUT</h2>
-                <div class="about-content">
-                    <p>I build practical websites and web products — often with <strong>Ruby on Rails</strong>, modern
-                        front-end tooling, and a product-first mindset. For commissions, that usually means a focused
-                        static site that looks intentional and is simple for you to keep.</p>
-                    <p>When the job needs more — auth, billing, AI features, self-hosted ops — I design and ship the
-                        whole system, the same way I run Catamist, HackyChat, Relayra, and Hub.</p>
-                    <div class="skill-cloud">
-                        <span>STATIC SITES</span>
-                        <span>RAILS APPS</span>
-                        <span>PRODUCT LANDINGS</span>
-                        <span>SELF-HOSTING</span>
-                        <span>AI WHERE IT HELPS</span>
+                </li>
+                <li class="approach-item reveal" data-reveal>
+                    <button type="button" class="approach-trigger" aria-expanded="false">
+                        <span class="approach-num">02</span>
+                        <span class="approach-label">Small business</span>
+                        <span class="approach-chevron" aria-hidden="true"></span>
+                    </button>
+                    <div class="approach-body">
+                        <p>Services, hours, contact, and trust — a clean public face for a local business or solo practice.</p>
                     </div>
+                </li>
+                <li class="approach-item reveal" data-reveal>
+                    <button type="button" class="approach-trigger" aria-expanded="false">
+                        <span class="approach-num">03</span>
+                        <span class="approach-label">Product landing</span>
+                        <span class="approach-chevron" aria-hidden="true"></span>
+                    </button>
+                    <div class="approach-body">
+                        <p>One job: explain the product and convert. Hero, proof, pricing or waitlist, clear call to action.</p>
+                    </div>
+                </li>
+                <li class="approach-item reveal" data-reveal>
+                    <button type="button" class="approach-trigger" aria-expanded="false">
+                        <span class="approach-num">04</span>
+                        <span class="approach-label">Event / Campaign</span>
+                        <span class="approach-chevron" aria-hidden="true"></span>
+                    </button>
+                    <div class="approach-body">
+                        <p>Time-bound pages for launches, events, or announcements — focused story, strong visual anchor.</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <section id="about" class="section about-section">
+            <div class="about-grid reveal" data-reveal>
+                <p class="eyebrow">About</p>
+                <div class="about-copy">
+                    <h2 class="section-title">Practical sites. Product-grade systems when you need them.</h2>
+                    <p>I build commissioned websites and web products — often with Ruby on Rails, modern front-end tooling, and a product-first mindset. For most clients that means a focused static site that looks intentional and stays simple to keep.</p>
+                    <p>When the job needs more — auth, billing, AI, self-hosted ops — I design and ship the whole system, the same way I run Catamist, HackyChat, Relayra, and Hub.</p>
+                    <p class="about-capabilities">Static sites · Rails apps · Product landings · Self-hosting · AI where it helps</p>
                 </div>
             </div>
         </section>
 
-        <section id="contact">
-            <h2 class="section-title">START_A_PROJECT<span class="blinking-cursor">_</span></h2>
-            <div class="contact-box">
-                <p>Tell me what kind of site you need, your timeline, and any examples you like. I’ll reply with scope
-                    and next steps.</p>
-                <a href="contact.html" class="cyber-btn">
-                    <span class="cyber-btn__tag">MSG</span>
-                    <span class="cyber-btn__text">OPEN_FORM</span>
-                </a>
-                <div class="social-links">
-                    <a href="https://github.com/JoshBubis" target="_blank" rel="noopener noreferrer">GITHUB</a>
-                    <a href="https://linkedin.com/in/joshbubis" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
-                </div>
-            </div>
+        <section id="close" class="section close-section reveal" data-reveal>
+            <h2 class="close-title">Tell me what you’re building.</h2>
+            <p class="close-sub">Scope, timeline, examples you like — I’ll reply with next steps.</p>
+            <a href="contact.html" class="btn btn-primary magnetic" data-magnetic>Start a project</a>
         </section>
     </main>
 
     <footer class="site-footer">
         <span>© <span id="year"></span> Josh Bubis</span>
-        <a href="mailto:joshbubis@gmail.com">joshbubis@gmail.com</a>
+        <div class="footer-links">
+            <a href="https://github.com/JoshBubis" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a href="https://linkedin.com/in/joshbubis" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="mailto:joshbubis@gmail.com">joshbubis@gmail.com</a>
+        </div>
     </footer>
 
     <script src="script.js"></script>
