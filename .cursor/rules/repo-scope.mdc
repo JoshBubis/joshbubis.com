@@ -1,0 +1,9 @@
+---
+description: This repo is static portfolio only — Hub owns contracts and contact backend
+alwaysApply: true
+---
+
+# joshbubis.com scope
+
+Edit only static public site files here. Contracts, Vault, SES, Turnstile verify,
+and Access automation live in `/Users/jbair/Projects/hub`. See `AGENTS.md`.

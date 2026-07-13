@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start a Project | Josh Bubis</title>
+    <meta name="description"
+        content="Tell Josh what kind of site you need. Contact form protected by Cloudflare Turnstile.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Orbitron:wght@500;700;900&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="noise" aria-hidden="true"></div>
+    <div class="grid-bg" aria-hidden="true"></div>
+
+    <nav class="navbar">
+        <a class="logo" href="/">JOSH_BUBIS</a>
+        <ul class="nav-links">
+            <li><a href="/#types" class="glitch-link" data-text="SITE TYPES">SITE TYPES</a></li>
+            <li><a href="/#work" class="glitch-link" data-text="WORK">WORK</a></li>
+            <li><a href="/#about" class="glitch-link" data-text="ABOUT">ABOUT</a></li>
+            <li><a href="/contact.html" class="nav-cta">START A PROJECT</a></li>
+        </ul>
+    </nav>
+
+    <main class="contact-page">
+        <section class="contact-form-section">
+            <h1 class="section-title">START_A_PROJECT<span class="blinking-cursor">_</span></h1>
+            <p class="contact-lead">Tell me what kind of site you need, your timeline, and any examples you like. I’ll
+                reply with scope and next steps.</p>
+
+            <div id="contact-alert" class="contact-alert" hidden></div>
+
+            <form id="contact-form" class="contact-form" method="post"
+                action="https://hub.joshbubis.com/webhooks/contact" novalidate>
+                <input type="hidden" name="return_to" value="https://joshbubis.com">
+                <input type="hidden" name="form_started_at" id="form_started_at" value="">
+                <input type="hidden" name="cf_turnstile_response" id="cf-turnstile-response" value="">
+
+                <!-- Honeypots — leave empty -->
+                <div class="hp" aria-hidden="true">
+                    <label>Company <input type="text" name="company" tabindex="-1" autocomplete="off"></label>
+                    <label>Website <input type="text" name="website_url" tabindex="-1" autocomplete="off"></label>
+                </div>
+
+                <label class="field">
+                    <span>Name</span>
+                    <input type="text" name="name" required maxlength="120" autocomplete="name">
+                </label>
+
+                <label class="field">
+                    <span>Email</span>
+                    <input type="email" name="email" required maxlength="200" autocomplete="email">
+                </label>
+
+                <label class="field">
+                    <span>Subject <em>(optional)</em></span>
+                    <input type="text" name="subject" maxlength="200" placeholder="Website project inquiry">
+                </label>
+
+                <label class="field">
+                    <span>Message</span>
+                    <textarea name="message" required maxlength="5000" rows="7"
+                        placeholder="What you need, timeline, examples…"></textarea>
+                </label>
+
+                <div id="turnstile-wrap" class="turnstile-wrap">
+                    <div id="turnstile-container"></div>
+                    <p id="turnstile-status" class="muted small">Loading bot check…</p>
+                </div>
+
+                <button type="submit" class="cyber-btn" id="submit-btn" disabled>
+                    <span class="cyber-btn__tag">SEND</span>
+                    <span class="cyber-btn__text">MESSAGE</span>
+                </button>
+            </form>
+
+            <p class="contact-alt">Prefer email? <a href="mailto:joshbubis@gmail.com?subject=Website%20project%20inquiry">joshbubis@gmail.com</a></p>
+
+            <div class="social-links">
+                <a href="https://github.com/JoshBubis" target="_blank" rel="noopener noreferrer">GITHUB</a>
+                <a href="https://linkedin.com/in/joshbubis" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <span>© <span id="year"></span> Josh Bubis</span>
+        <a href="mailto:joshbubis@gmail.com">joshbubis@gmail.com</a>
+    </footer>
+
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+    <script src="contact.js"></script>
+</body>
+
+</html>
