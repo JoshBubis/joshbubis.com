@@ -1,17 +1,20 @@
 ## joshbubis.com
 
-Static GitHub Pages portfolio for `joshbubis.com`.
+Static GitHub Pages portfolio and services pitch site for `joshbubis.com`.
 
 ### Structure
 
-- `index.html` contains the main page sections and portfolio copy.
-- `style.css` contains the visual design, responsive layout, and neon/cyber styling.
-- `script.js` contains the typing animation and project card data.
-- `CNAME` connects GitHub Pages to the custom domain.
+- `index.html` — hero, site types, shipped systems, about, contact
+- `style.css` — layout, atmosphere, responsive rules
+- `script.js` — typing animation, site-type + project card data
+- `CNAME` — custom domain for GitHub Pages
 
-### Current Notes
+### Positioning
 
-- The site is published from the `main` branch root.
-- The featured projects are Catamist, HackyChat, and Relayra.
-- White Hat Scanner was removed from the public portfolio project list to keep the site more focused and professional.
-- Current positioning emphasizes practical web products, Rails apps, product-focused systems, and useful AI/LLM features without overstating language fluency.
+- Public face for commissioned static sites (GitHub / Cloudflare Pages) and larger web products
+- **Site types** explain what kind of site Josh builds; **Systems shipped** (Catamist, HackyChat, Relayra) prove full-stack delivery
+- Contact is mailto for now; contract drafting/sending lives in Hub (**Client Work**), not on this static site
+
+### Deploy
+
+Published from the `main` branch root. Push to `main` updates production.

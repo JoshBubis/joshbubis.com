@@ -1,98 +1,133 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('SYSTEM_INITIALIZED...');
+    const yearEl = document.getElementById('year');
+    if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-    // Typing Effect for Hero
-    const text = "BUILDING PRACTICAL SOFTWARE_";
+    const text = 'SITES WORTH HIRING FOR_';
     const typingElement = document.querySelector('.typing-effect');
     let index = 0;
 
     function typeWriter() {
+        if (!typingElement) return;
         if (index < text.length) {
             typingElement.innerHTML = text.substring(0, index + 1) + '<span class="blinking-cursor">|</span>';
-            index++;
-            setTimeout(typeWriter, 100); // Speed
+            index += 1;
+            setTimeout(typeWriter, 70);
         } else {
-            typingElement.innerHTML = text; // Remove cursor at end
+            typingElement.innerHTML = text;
         }
     }
 
-    // Start typing after a slight delay
-    setTimeout(typeWriter, 1000);
+    setTimeout(typeWriter, 600);
 
-    // Glitch Effect on Hover (Random characters)
-    const glitchLinks = document.querySelectorAll('.glitch-link');
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*';
-
-    glitchLinks.forEach(link => {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%';
+    document.querySelectorAll('.glitch-link').forEach(link => {
         link.addEventListener('mouseover', event => {
             let iterations = 0;
             const originalText = link.dataset.text;
+            if (!originalText) return;
 
             const interval = setInterval(() => {
                 event.target.innerText = originalText
                     .split('')
-                    .map((letter, index) => {
-                        if (index < iterations) {
-                            return originalText[index];
-                        }
+                    .map((letter, i) => {
+                        if (i < iterations) return originalText[i];
                         return chars[Math.floor(Math.random() * chars.length)];
                     })
                     .join('');
 
-                if (iterations >= originalText.length) {
-                    clearInterval(interval);
-                }
-
+                if (iterations >= originalText.length) clearInterval(interval);
                 iterations += 1 / 3;
             }, 30);
         });
     });
 
-    // --- Project Data Injection ---
-    const projects = [
+    const siteTypes = [
         {
-            title: "CATAMIST",
-            desc: "AI-powered news platform that aggregates global stories and uses LLMs to generate neutral, concise summaries.",
-            tech: ["Ruby on Rails 8", "PostgreSQL", "Gemini AI", "Self-hosted Docker"],
-            link: "https://github.com/JoshBubis/catamist",
-            liveSystem: "https://catamist.com"
+            index: '01',
+            title: 'Personal / Portfolio',
+            desc: 'A sharp one-pager or short multi-page site that presents you or your work — brand-first, fast, and easy to update.',
+            meta: 'GitHub Pages · Cloudflare Pages',
+            accent: '#3de0d0'
         },
         {
-            title: "HACKYCHAT",
-            desc: "Real-time web chat platform with a Chrome extension, Rails API, and React frontend.",
-            tech: ["Rails API", "React", "ActionCable", "Redis"],
-            link: "https://github.com/JoshBubis/hackychat",
-            liveSystem: "https://hacky.chat"
+            index: '02',
+            title: 'Small Business',
+            desc: 'Services, hours, contact, and trust — a clean public face for a local business or solo practice.',
+            meta: 'Static · SEO-ready · mobile-first',
+            accent: '#ff4d8d'
         },
         {
-            title: "RELAYRA",
-            desc: "AI phone receptionist that answers inbound calls, handles appointment workflows, and manages billing through Stripe.",
-            tech: ["Node.js", "Twilio", "Deepgram", "Stripe"],
-            link: "https://github.com/JoshBubis/relayra",
-            liveSystem: "https://relayra.com"
+            index: '03',
+            title: 'Product Landing',
+            desc: 'One job: explain the product and convert. Hero, proof, pricing or waitlist, clear CTA.',
+            meta: 'Campaign-ready · analytics-friendly',
+            accent: '#f0a46a'
+        },
+        {
+            index: '04',
+            title: 'Event / Campaign',
+            desc: 'Time-bound pages for launches, events, or announcements — focused story, strong visual anchor.',
+            meta: 'Fast ship · short lifespan OK',
+            accent: '#8ad4ff'
         }
     ];
 
-    const projectsContainer = document.querySelector('.projects-grid');
+    const typesGrid = document.getElementById('types-grid');
+    if (typesGrid) {
+        siteTypes.forEach(type => {
+            const card = document.createElement('article');
+            card.className = 'type-card';
+            card.style.setProperty('--type-accent', type.accent);
+            card.innerHTML = `
+                <span class="type-card__index">${type.index}</span>
+                <h3 class="type-card__title">${type.title}</h3>
+                <p class="type-card__desc">${type.desc}</p>
+                <p class="type-card__meta">${type.meta}</p>
+            `;
+            typesGrid.appendChild(card);
+        });
+    }
 
+    const projects = [
+        {
+            title: 'CATAMIST',
+            desc: 'AI-powered news platform that aggregates global stories and uses LLMs for neutral, concise summaries.',
+            tech: ['Ruby on Rails 8', 'PostgreSQL', 'Gemini AI', 'Self-hosted Docker'],
+            link: 'https://github.com/JoshBubis/catamist',
+            liveSystem: 'https://catamist.com'
+        },
+        {
+            title: 'HACKYCHAT',
+            desc: 'Real-time web chat with a Chrome extension, Rails API, and React frontend.',
+            tech: ['Rails API', 'React', 'ActionCable', 'Redis'],
+            link: 'https://github.com/JoshBubis/hackychat',
+            liveSystem: 'https://hacky.chat'
+        },
+        {
+            title: 'RELAYRA',
+            desc: 'AI phone receptionist for inbound calls, appointments, and Stripe billing.',
+            tech: ['Node.js', 'Twilio', 'Deepgram', 'Stripe'],
+            link: 'https://github.com/JoshBubis/relayra',
+            liveSystem: 'https://relayra.com'
+        }
+    ];
+
+    const projectsContainer = document.getElementById('projects-grid');
     if (projectsContainer) {
         projects.forEach(project => {
             const card = document.createElement('div');
             card.className = 'project-card';
 
-            // Title
             const title = document.createElement('h3');
             title.className = 'project-title';
             title.textContent = project.title;
             card.appendChild(title);
 
-            // Description
             const desc = document.createElement('p');
             desc.className = 'project-desc';
             desc.textContent = project.desc;
             card.appendChild(desc);
 
-            // Tech stack
             const techStack = document.createElement('div');
             techStack.className = 'tech-stack';
             project.tech.forEach(tech => {
@@ -103,11 +138,9 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             card.appendChild(techStack);
 
-            // Links container
             const linksContainer = document.createElement('div');
             linksContainer.className = 'project-links';
 
-            // View Code link
             const codeLink = document.createElement('a');
             codeLink.href = project.link;
             codeLink.target = '_blank';
@@ -115,19 +148,10 @@ document.addEventListener('DOMContentLoaded', () => {
             codeLink.textContent = '[ CODE ]';
             linksContainer.appendChild(codeLink);
 
-            // Live System link
             const liveLink = document.createElement('a');
-            if (project.liveSystem) {
-                liveLink.href = project.liveSystem;
-                liveLink.target = '_blank';
-                liveLink.rel = 'noopener noreferrer';
-            } else {
-                liveLink.href = '#';
-                liveLink.onclick = (e) => {
-                    e.preventDefault();
-                    alert('Demo coming soon');
-                };
-            }
+            liveLink.href = project.liveSystem;
+            liveLink.target = '_blank';
+            liveLink.rel = 'noopener noreferrer';
             liveLink.textContent = '[ LIVE_SITE ]';
             linksContainer.appendChild(liveLink);
 

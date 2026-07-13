@@ -4,55 +4,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josh Bubis | Web Developer & Product Builder</title>
-    <meta name="description" content="Portfolio of Josh Bubis - building practical web products, Rails applications, and useful AI-powered features.">
+    <title>Josh Bubis | Sites &amp; Web Products</title>
+    <meta name="description"
+        content="Josh Bubis builds commissioned websites and practical web products — portfolios, small-business sites, product landings, and custom Rails apps.">
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Orbitron:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Orbitron:wght@500;700;900&family=Space+Mono:wght@400;700&display=swap"
         rel="stylesheet">
 
-    <!-- Styles -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div class="scanline"></div>
-    <div class="noise"></div>
+    <div class="noise" aria-hidden="true"></div>
+    <div class="grid-bg" aria-hidden="true"></div>
 
     <nav class="navbar">
-        <div class="logo" data-text="JOSH_BUBIS">JOSH_BUBIS</div>
+        <a class="logo" href="#hero">JOSH_BUBIS</a>
         <ul class="nav-links">
-            <li><a href="#work" class="glitch-link" data-text="PROJECTS">PROJECTS</a></li>
+            <li><a href="#types" class="glitch-link" data-text="SITE TYPES">SITE TYPES</a></li>
+            <li><a href="#work" class="glitch-link" data-text="WORK">WORK</a></li>
             <li><a href="#about" class="glitch-link" data-text="ABOUT">ABOUT</a></li>
-            <li><a href="#contact" class="glitch-link" data-text="CONTACT">CONTACT</a></li>
+            <li><a href="#contact" class="nav-cta">START A PROJECT</a></li>
         </ul>
     </nav>
 
     <main>
         <section id="hero">
             <div class="hero-content">
-                <h1 class="glitch" data-text="JOSH BUBIS">JOSH BUBIS</h1>
-                <h2 class="typing-effect">BUILDING PRACTICAL SOFTWARE_</h2>
-                <p class="hero-sub">WEB APPS // PRODUCT SYSTEMS // USEFUL AI FEATURES</p>
-                <a href="#work" class="cyber-btn">
-                    <span class="cyber-btn__glitch"></span>
-                    <span class="cyber-btn__tag">PORTFOLIO</span>
-                    <span class="cyber-btn__text">ENTER</span>
-                </a>
+                <p class="hero-eyebrow">AVAILABLE FOR COMMISSIONED SITES</p>
+                <h1 class="brand-name">
+                    <span class="brand-line">JOSH</span>
+                    <span class="brand-line accent">BUBIS</span>
+                </h1>
+                <h2 class="typing-effect">SITES WORTH HIRING FOR_</h2>
+                <p class="hero-sub">Static portfolios · small-business sites · product landings · custom web apps</p>
+                <div class="hero-actions">
+                    <a href="#types" class="cyber-btn">
+                        <span class="cyber-btn__tag">SEE</span>
+                        <span class="cyber-btn__text">WHAT I BUILD</span>
+                    </a>
+                    <a href="#contact" class="text-link">Start a project →</a>
+                </div>
             </div>
-            <div class="hero-visual">
-                <!-- 3D/Canvas element will go here -->
-                <div class="cyber-circle"></div>
+            <div class="hero-visual" aria-hidden="true">
+                <div class="hero-panel">
+                    <div class="hero-panel__bar"></div>
+                    <div class="hero-panel__lines">
+                        <span></span><span></span><span></span><span></span>
+                    </div>
+                    <div class="cyber-circle"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="types">
+            <h2 class="section-title">SITE_TYPES <span class="blinking-cursor">_</span></h2>
+            <p class="section-lead">Most commissioned work is a clean static site — GitHub Pages or Cloudflare Pages —
+                shipped fast and easy to own. Pick a shape; we scope from there.</p>
+            <div class="types-grid" id="types-grid">
+                <!-- Injected by script.js -->
             </div>
         </section>
 
         <section id="work">
-            <h2 class="section-title">SELECTED_PROJECTS <span class="blinking-cursor">_</span></h2>
-            <div class="projects-grid">
-                <!-- Projects will be injected here -->
+            <h2 class="section-title">SYSTEMS_SHIPPED <span class="blinking-cursor">_</span></h2>
+            <p class="section-lead">Products I built and run — proof I can own the full stack when a site needs to become
+                a system.</p>
+            <div class="projects-grid" id="projects-grid">
+                <!-- Injected by script.js -->
             </div>
         </section>
 
@@ -60,40 +82,43 @@
             <div class="about-container">
                 <h2 class="section-title">ABOUT</h2>
                 <div class="about-content">
-                    <p>I build practical web products, often with <strong>Ruby on Rails</strong>,
-                        <strong>modern web tooling</strong>, and a product-first mindset. I care about turning ideas into
-                        working systems that are clear, useful, and maintainable.</p>
-                    <p>Recently, I have been building autonomous agents, real-time communication platforms, and
-                        self-hosted applications that use AI where it adds real product value.</p>
-
+                    <p>I build practical websites and web products — often with <strong>Ruby on Rails</strong>, modern
+                        front-end tooling, and a product-first mindset. For commissions, that usually means a focused
+                        static site that looks intentional and is simple for you to keep.</p>
+                    <p>When the job needs more — auth, billing, AI features, self-hosted ops — I design and ship the
+                        whole system, the same way I run Catamist, HackyChat, Relayra, and Hub.</p>
                     <div class="skill-cloud">
+                        <span>STATIC SITES</span>
                         <span>RAILS APPS</span>
-                        <span>WEB PRODUCTS</span>
-                        <span>AI TOOLING</span>
+                        <span>PRODUCT LANDINGS</span>
                         <span>SELF-HOSTING</span>
-                        <span>LLM INTEGRATION</span>
-                        <span>PRODUCT BUILDING</span>
+                        <span>AI WHERE IT HELPS</span>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="contact">
-            <h2 class="section-title">CONTACT</h2>
+            <h2 class="section-title">START_A_PROJECT</h2>
             <div class="contact-box">
-                <p>Want to talk about a project, role, or collaboration?</p>
-                <a href="mailto:joshbubis@gmail.com" class="cyber-btn">
-                    <span class="cyber-btn__glitch"></span>
+                <p>Tell me what kind of site you need, your timeline, and any examples you like. I’ll reply with scope
+                    and next steps.</p>
+                <a href="mailto:joshbubis@gmail.com?subject=Website%20project%20inquiry" class="cyber-btn">
                     <span class="cyber-btn__tag">MSG</span>
                     <span class="cyber-btn__text">EMAIL_ME</span>
                 </a>
                 <div class="social-links">
-                    <a href="https://github.com/JoshBubis" target="_blank">GITHUB</a>
-                    <a href="https://linkedin.com/in/joshbubis" target="_blank">LINKEDIN</a>
+                    <a href="https://github.com/JoshBubis" target="_blank" rel="noopener noreferrer">GITHUB</a>
+                    <a href="https://linkedin.com/in/joshbubis" target="_blank" rel="noopener noreferrer">LINKEDIN</a>
                 </div>
             </div>
         </section>
     </main>
+
+    <footer class="site-footer">
+        <span>© <span id="year"></span> Josh Bubis</span>
+        <a href="mailto:joshbubis@gmail.com">joshbubis@gmail.com</a>
+    </footer>
 
     <script src="script.js"></script>
 </body>
