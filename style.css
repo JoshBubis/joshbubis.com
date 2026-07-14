@@ -347,6 +347,18 @@ body {
 
 .work-rail.is-dragging {
     cursor: grabbing;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.work-rail.is-dragging * {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+}
+
+.work-shot img {
+    -webkit-user-drag: none;
+    user-select: none;
 }
 
 .work-track {
@@ -502,12 +514,46 @@ body {
     pointer-events: none;
 }
 
+.work-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.15rem var(--pad) 0.35rem;
+}
+
 .work-dots {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.55rem;
-    padding: 0.15rem var(--pad) 0.35rem;
+}
+
+.work-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.72);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease, transform 0.25s var(--ease);
+}
+
+.work-arrow:hover {
+    border-color: rgba(11, 11, 12, 0.28);
+    background: #fff;
+}
+
+.work-arrow:active {
+    transform: scale(0.96);
 }
 
 .work-dot {
@@ -531,7 +577,8 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .work-dot {
+    .work-dot,
+    .work-arrow {
         transition: none;
     }
     .work-panel {

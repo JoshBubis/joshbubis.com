@@ -404,31 +404,67 @@
 
     var startX = 0;
     var startOffset = 0;
+    var pointerId = null;
+    var dragCandidate = false;
+    var DRAG_THRESHOLD = 8;
 
-    rail.addEventListener("pointerdown", function (e) {
-      if (e.target.closest && e.target.closest("a,button")) return;
+    function clearSelection() {
+      var sel = window.getSelection && window.getSelection();
+      if (sel && sel.removeAllRanges) sel.removeAllRanges();
+    }
+
+    function beginDrag(e) {
+      if (dragging) return;
       dragging = true;
+      dragCandidate = false;
       settling = false;
       paused = true;
+      clearSelection();
+      rail.classList.add("is-dragging");
+      try {
+        rail.setPointerCapture(pointerId);
+      } catch (_) {}
+      startRail();
+    }
+
+    rail.addEventListener("pointerdown", function (e) {
+      if (e.button != null && e.button !== 0) return;
+      if (e.target.closest && e.target.closest("a,button")) return;
+      /* Pending drag — allow click/select until the pointer moves enough */
+      dragCandidate = true;
+      dragging = false;
+      pointerId = e.pointerId;
       startX = e.clientX;
       startOffset = x;
-      rail.classList.add("is-dragging");
-      rail.setPointerCapture(e.pointerId);
-      startRail();
+      settling = false;
+      paused = true;
+      lastTs = 0;
     });
     rail.addEventListener("pointermove", function (e) {
+      if (!dragCandidate && !dragging) return;
+      if (pointerId != null && e.pointerId !== pointerId) return;
+      var dx = e.clientX - startX;
+      if (dragCandidate && !dragging) {
+        if (Math.abs(dx) < DRAG_THRESHOLD) return;
+        beginDrag(e);
+      }
       if (!dragging) return;
-      x = startOffset - (e.clientX - startX);
+      e.preventDefault();
+      x = startOffset - dx;
       x = wrapX(x);
       apply();
       syncDots();
     });
     function endDrag(e) {
-      if (!dragging) return;
+      if (!dragCandidate && !dragging) return;
+      if (pointerId != null && e.pointerId !== pointerId) return;
+      var wasDragging = dragging;
+      dragCandidate = false;
       dragging = false;
+      pointerId = null;
       rail.classList.remove("is-dragging");
       try {
-        rail.releasePointerCapture(e.pointerId);
+        if (wasDragging) rail.releasePointerCapture(e.pointerId);
       } catch (_) {}
       paused = false;
       lastTs = 0;
@@ -436,13 +472,45 @@
     }
     rail.addEventListener("pointerup", endDrag);
     rail.addEventListener("pointercancel", endDrag);
+    rail.addEventListener("lostpointercapture", function () {
+      dragCandidate = false;
+      if (dragging) {
+        dragging = false;
+        rail.classList.remove("is-dragging");
+        paused = false;
+        lastTs = 0;
+        if (railVisible) startRail();
+      }
+    });
+    rail.addEventListener("selectstart", function (e) {
+      if (dragging) e.preventDefault();
+    });
+
+    function step(dir) {
+      goTo(activeIndex + dir);
+    }
+
+    var prevBtn = document.getElementById("work-prev");
+    var nextBtn = document.getElementById("work-next");
+    if (prevBtn) prevBtn.addEventListener("click", function () { step(-1); });
+    if (nextBtn) nextBtn.addEventListener("click", function () { step(1); });
+
+    rail.addEventListener("keydown", function (e) {
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        step(-1);
+      } else if (e.key === "ArrowRight") {
+        e.preventDefault();
+        step(1);
+      }
+    });
 
     /* Hover should not freeze the rail — only drag/focus/settle pause motion */
     rail.addEventListener("focusin", function () {
       paused = true;
     });
     rail.addEventListener("focusout", function () {
-      if (!rail.contains(document.activeElement) && !dragging && !settling) {
+      if (!rail.contains(document.activeElement) && !dragging && !settling && !dragCandidate) {
         paused = false;
         lastTs = 0;
       }
