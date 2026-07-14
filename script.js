@@ -430,7 +430,9 @@
     rail.addEventListener("pointerdown", function (e) {
       if (e.button != null && e.button !== 0) return;
       if (e.target.closest && e.target.closest("a,button")) return;
-      /* Pending drag — allow click/select until the pointer moves enough */
+      /* Only drag from the screenshot chrome — body text stays selectable */
+      if (!(e.target.closest && e.target.closest(".work-shot"))) return;
+      /* Pending drag — allow click until the pointer moves enough */
       dragCandidate = true;
       dragging = false;
       pointerId = e.pointerId;
