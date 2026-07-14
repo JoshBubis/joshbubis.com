@@ -7,6 +7,8 @@
     --accent-soft: rgba(200, 30, 30, 0.12);
     --line: rgba(11, 11, 12, 0.12);
     --focus: rgba(200, 30, 30, 0.45);
+    /* Fixed header clearance for in-page jumps (padding only — do not also set scroll-margin) */
+    --header-offset: 4.25rem;
 
     --font-display: "Syne", sans-serif;
     --font-body: "Instrument Sans", sans-serif;
@@ -27,12 +29,12 @@
 html {
     /* Keep wheel/trackpad native — smooth only on explicit in-page nav (JS). */
     scroll-behavior: auto;
-    scroll-padding-top: 5.5rem;
+    scroll-padding-top: var(--header-offset);
 }
 
 @media (prefers-reduced-motion: reduce) {
     html {
-        scroll-padding-top: 5.5rem;
+        scroll-padding-top: var(--header-offset);
     }
 }
 
@@ -294,7 +296,6 @@ body {
     padding: clamp(4.5rem, 12vh, 8rem) var(--pad);
     position: relative;
     z-index: 1;
-    scroll-margin-top: 5.5rem;
 }
 
 .section-head {
