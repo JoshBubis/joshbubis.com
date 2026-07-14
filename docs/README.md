@@ -8,7 +8,8 @@ Static GitHub Pages portfolio and hireable studio site for `joshbubis.com`.
 - `contact.html` + `contact.js` — Turnstile-protected contact form (posts to Hub)
 - `style.css` — atelier design system (Syne + Instrument Sans, light paper stage)
 - `script.js` — hero field (quiet), scroll reveals, work-rail auto-cycle + drag
-- `favicon.svg`, `robots.txt`, `sitemap.xml` — basic SEO hygiene
+- `images/work/*.jpg` — homepage captures for work-card hover peeks
+- `scripts/capture-work.mjs` — regenerate those captures with Playwright
 - `CNAME` — custom domain for GitHub Pages
 - `AGENTS.md` — agent folder boundaries
 
