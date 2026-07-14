@@ -1,54 +1,37 @@
 # AGENTS.md — joshbubis.com
 
-Static GitHub Pages portfolio / hireable site. Local path:
+Static GitHub Pages portfolio / hireable site.
 `/Users/jbair/Projects/joshbubis.com`.
 
-**Hybrid with Hub:** this site is the public face; Hub owns Studio, contracts,
-contact verify, Vault, and Access. Cursor often has Hub open as the workspace —
-still edit **this** folder for portfolio UI. Full map:
-`/Users/jbair/Projects/hub/docs/portfolio-hybrid.md`.
+## Hybrid with Hub (keep this in mind)
 
-## What belongs here
+This site is the **public face**. Hub owns Studio, contracts, contact verify,
+Vault, and Access. Cursor often has Hub open as the workspace — still edit
+**this** folder for portfolio UI. Do not merge the two repos unless Josh asks.
 
-- Public marketing HTML/CSS/JS (`index.html`, `contact.html`, `style.css`, `script.js`)
-- Work-rail UI (static homepage JPEGs, arrows/dots/drag, clickable shot links)
-- Copy, layout, and client-side contact form UX that **posts to Hub**
-
-## What does **not** belong here
-
-| Concern | Work in instead |
+| Host | Owns it |
 |---|---|
-| Client Work / Studio, PDF, accept links, `contracts.joshbubis.com`, `studio.joshbubis.com` | `/Users/jbair/Projects/hub` |
-| Contact form Turnstile **secret**, SES send, Vault keys | `/Users/jbair/Projects/hub` (`/webhooks/contact`) |
-| Catamist, HackyChat, Relayra, CalledFrom product code | Their own project folders |
+| `joshbubis.com` | **This repo** (Pages) |
+| `hub.joshbubis.com` / `studio.joshbubis.com` / `contracts.joshbubis.com` | Hub |
 
-Do not merge this repo into Hub unless Josh explicitly asks.
+| Change | Folder |
+|---|---|
+| HTML/CSS/JS, work rail, screenshots, contact form UI | this repo |
+| Turnstile secret, SES, Vault, Studio/Client Work | `/Users/jbair/Projects/hub` |
+| Product apps | Their own folders |
 
-## Shipping checklist (every user-visible change)
+## Shipping (user-visible)
 
-1. Edit files in **this** repo only (for UI).
-2. Bump `?v=` on `style.css` / `script.js` (and image URLs if JPEGs changed).
-3. Sync `studio.css` from `style.css` if you changed shared styles (`cp style.css studio.css`).
-4. Push `main` → GitHub Pages. Expect up to ~10 minutes of CDN/HTML cache lag
-   unless Hub purges Cloudflare for `joshbubis.com`.
-5. Update `docs/README.md` when behavior or structure changes.
+1. Bump `?v=` on `style.css` / `script.js` (and images if JPEGs changed).
+2. `cp style.css studio.css` when styles change.
+3. Push `main`. CDN/HTML can lag ~10 minutes.
+4. Update `docs/README.md` when structure/behavior changes.
 
-## Work screenshots
+## Easy foot-guns
 
-- Static files: `images/work/{slug}.jpg` — **not** live captures per page view.
-- Refresh: `npm install && npm run capture-work`, then commit the JPEGs.
-- Capture waits for real content (HackyChat needs `.story-card-title`). Rejects
-  suspiciously small/blank files.
-- Work panels must **not** use scroll-reveal opacity — off-screen rail cards
-  would stay invisible.
+- Work shots are **static JPEGs** (`images/work/`), not live. Refresh with
+  `npm install && npm run capture-work`, then commit.
+- Do **not** put scroll-reveal opacity on work panels (off-screen rail cards stay invisible).
+- Nav jumps: `scroll-padding-top` only — never also `scroll-margin-top` on sections.
 
-## Scroll / nav
-
-- Wheel/trackpad: native (`scroll-behavior: auto`).
-- Hash links: JS `scrollIntoView` + `scroll-padding-top: var(--header-offset)` only.
-- Never stack `scroll-margin-top` on sections on top of that padding.
-
-## See also
-
-- Hub `docs/portfolio-hybrid.md`, `docs/portfolio-contact.md`, `docs/studio.md`
-- Hub `AGENTS.md` § Sibling projects
+Hub details: `/Users/jbair/Projects/hub/AGENTS.md`, `docs/portfolio-contact.md`, `docs/studio.md`.

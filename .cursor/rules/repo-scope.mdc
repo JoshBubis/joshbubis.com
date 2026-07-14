@@ -1,16 +1,12 @@
 ---
-description: This repo is static portfolio only — Hub owns Studio, contracts, and contact backend
+description: Static portfolio only — Hub owns Studio, contracts, and contact backend
 alwaysApply: true
 ---
 
 # joshbubis.com scope
 
-Edit only static public site files here. Studio/Client Work, Vault, SES, Turnstile
-verify, and Access automation live in `/Users/jbair/Projects/hub`.
+Edit static public site files here only. Studio/Client Work, Vault, SES, and
+Turnstile verify live in `/Users/jbair/Projects/hub`. See `AGENTS.md`.
 
-Hybrid map (hostnames, ownership, screenshot/cache gotchas):
-`/Users/jbair/Projects/hub/docs/portfolio-hybrid.md`. Also see `AGENTS.md`.
-
-Screenshots under `images/work/` are static — never treat them as live iframes.
-Bump `?v=` on CSS/JS/images when shipping. Do not add scroll-margin on sections
-on top of `scroll-padding-top` (nav jumps will overshoot).
+Work shots are static JPEGs (not live). Bump `?v=` when shipping. Do not stack
+`scroll-margin-top` on sections with `scroll-padding-top`.
