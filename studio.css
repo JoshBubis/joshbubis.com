@@ -483,6 +483,14 @@ body {
     border-bottom-color: var(--accent);
 }
 
+.work-link-ghost {
+    color: var(--ink);
+    font-weight: 600;
+    font-size: 0.92rem;
+    opacity: 0.55;
+    pointer-events: none;
+}
+
 .work-dots {
     display: flex;
     align-items: center;

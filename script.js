@@ -253,10 +253,22 @@
       originals.forEach(function (panel) {
         var clone = panel.cloneNode(true);
         clone.classList.remove("reveal", "is-in");
+        clone.classList.add("work-panel--clone");
         clone.setAttribute("aria-hidden", "true");
         clone.setAttribute("inert", "");
+        clone.removeAttribute("data-reveal");
+        /* Decorative loop copies must not show up as extra headings/links */
+        clone.querySelectorAll("h3").forEach(function (h) {
+          var p = document.createElement("p");
+          p.className = h.className;
+          p.textContent = h.textContent;
+          h.replaceWith(p);
+        });
         clone.querySelectorAll("a").forEach(function (a) {
-          a.setAttribute("tabindex", "-1");
+          var span = document.createElement("span");
+          span.className = "work-link-ghost";
+          span.textContent = a.textContent.replace(/\s+/g, " ").trim().split(" ")[0];
+          a.replaceWith(span);
         });
         track.appendChild(clone);
       });
