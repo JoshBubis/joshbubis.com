@@ -6,16 +6,39 @@
   var yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = String(new Date().getFullYear());
 
-  /* Header border on scroll */
+  /* Header border on scroll — rAF-throttle to avoid scroll-handler churn */
   var header = document.querySelector(".site-header");
+  var headerQueued = false;
   function onScrollHeader() {
-    if (!header) return;
-    header.classList.toggle("is-scrolled", window.scrollY > 12);
+    if (!header || headerQueued) return;
+    headerQueued = true;
+    requestAnimationFrame(function () {
+      headerQueued = false;
+      header.classList.toggle("is-scrolled", window.scrollY > 12);
+    });
   }
   onScrollHeader();
   window.addEventListener("scroll", onScrollHeader, { passive: true });
 
-  /* Scroll reveals */
+  /* In-page nav: smooth only on click (wheel/trackpad stay native) */
+  document.querySelectorAll('a[href^="#"]').forEach(function (link) {
+    link.addEventListener("click", function (e) {
+      var hash = link.getAttribute("href");
+      if (!hash || hash === "#") return;
+      var target = document.querySelector(hash);
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({
+        behavior: reduceMotion ? "auto" : "smooth",
+        block: "start"
+      });
+      if (history.replaceState) {
+        history.replaceState(null, "", hash);
+      }
+    });
+  });
+
+  /* Scroll reveals — fire once, never reverse (avoids jolt on scroll-up) */
   if (!reduceMotion) {
     var reveals = document.querySelectorAll("[data-reveal]");
     if ("IntersectionObserver" in window) {
@@ -28,7 +51,7 @@
             }
           });
         },
-        { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+        { rootMargin: "0px 0px -4% 0px", threshold: 0.08 }
       );
       reveals.forEach(function (el) {
         io.observe(el);
@@ -44,7 +67,7 @@
     });
   }
 
-  /* Hero canvas — soft mesh field */
+  /* Hero canvas — pause when offscreen so page scroll stays smooth */
   var canvas = document.getElementById("hero-canvas");
   if (canvas && canvas.getContext && !reduceMotion) {
     var ctx = canvas.getContext("2d");
@@ -52,6 +75,7 @@
     var nodes = [];
     var raf = 0;
     var t0 = performance.now();
+    var canvasVisible = true;
 
     function resize() {
       var w = canvas.clientWidth;
@@ -63,7 +87,7 @@
     }
 
     function seed(w, h) {
-      var count = Math.max(16, Math.floor((w * h) / 38000));
+      var count = Math.max(12, Math.floor((w * h) / 48000));
       nodes = [];
       for (var i = 0; i < count; i++) {
         nodes.push({
@@ -78,6 +102,9 @@
     }
 
     function frame(now) {
+      raf = 0;
+      if (!canvasVisible) return;
+
       var w = canvas.clientWidth;
       var h = canvas.clientHeight;
       var t = (now - t0) / 1000;
@@ -107,13 +134,14 @@
       }
 
       ctx.lineWidth = 1.1;
+      var linkDist = 120;
       for (var a = 0; a < nodes.length; a++) {
         for (var b = a + 1; b < nodes.length; b++) {
           var dx = nodes[a].x - nodes[b].x;
           var dy = nodes[a].y - nodes[b].y;
           var dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 130) {
-            var alpha = (1 - dist / 130) * 0.16;
+          if (dist < linkDist) {
+            var alpha = (1 - dist / linkDist) * 0.16;
             ctx.strokeStyle = "rgba(11, 11, 12, " + alpha + ")";
             ctx.beginPath();
             ctx.moveTo(nodes[a].x, nodes[a].y);
@@ -134,14 +162,37 @@
       raf = requestAnimationFrame(frame);
     }
 
+    function startCanvas() {
+      if (!raf) raf = requestAnimationFrame(frame);
+    }
+
+    function stopCanvas() {
+      if (raf) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      }
+    }
+
     resize();
     window.addEventListener("resize", resize);
-    raf = requestAnimationFrame(frame);
+    if ("IntersectionObserver" in window) {
+      var canvasIo = new IntersectionObserver(
+        function (entries) {
+          canvasVisible = entries.some(function (e) {
+            return e.isIntersecting;
+          });
+          if (canvasVisible) startCanvas();
+          else stopCanvas();
+        },
+        { rootMargin: "10% 0px", threshold: 0 }
+      );
+      canvasIo.observe(canvas);
+    } else {
+      startCanvas();
+    }
   } else if (canvas && reduceMotion) {
     canvas.style.display = "none";
   }
-
-  /* Magnetic CTAs removed — motion craft lives in reveals + work rail */
 
   /* Work rail: GPU track drift + working dots */
   var rail = document.getElementById("work-rail");
@@ -160,8 +211,10 @@
     var lastTs = 0;
     var activeIndex = 0;
     var dots = [];
+    var railVisible = true;
+    var railRaf = 0;
     /* Steady crawl — transform avoids scrollLeft jank */
-    var SPEED = 32;
+    var SPEED = 28;
     var SETTLE = 0.12;
 
     function measure() {
@@ -228,6 +281,7 @@
       }
       settling = true;
       paused = true;
+      startRail();
     }
 
     function buildDots() {
@@ -275,6 +329,12 @@
     }
 
     function tick(ts) {
+      railRaf = 0;
+      if (!railVisible && !dragging && !settling) {
+        lastTs = 0;
+        return;
+      }
+
       if (!lastTs) lastTs = ts;
       var dt = Math.min(40, ts - lastTs);
       lastTs = ts;
@@ -296,7 +356,22 @@
       x = settling ? x : wrapX(x);
       apply();
       syncDots();
-      requestAnimationFrame(tick);
+      railRaf = requestAnimationFrame(tick);
+    }
+
+    function startRail() {
+      if (!railRaf) {
+        lastTs = 0;
+        railRaf = requestAnimationFrame(tick);
+      }
+    }
+
+    function stopRail() {
+      if (railRaf) {
+        cancelAnimationFrame(railRaf);
+        railRaf = 0;
+      }
+      lastTs = 0;
     }
 
     cloneForLoop();
@@ -311,6 +386,22 @@
       apply();
     });
 
+    if ("IntersectionObserver" in window) {
+      var railIo = new IntersectionObserver(
+        function (entries) {
+          railVisible = entries.some(function (e) {
+            return e.isIntersecting;
+          });
+          if (railVisible || dragging || settling) startRail();
+          else stopRail();
+        },
+        { rootMargin: "12% 0px", threshold: 0 }
+      );
+      railIo.observe(rail);
+    } else {
+      startRail();
+    }
+
     var startX = 0;
     var startOffset = 0;
 
@@ -323,6 +414,7 @@
       startOffset = x;
       rail.classList.add("is-dragging");
       rail.setPointerCapture(e.pointerId);
+      startRail();
     });
     rail.addEventListener("pointermove", function (e) {
       if (!dragging) return;
@@ -340,6 +432,7 @@
       } catch (_) {}
       paused = false;
       lastTs = 0;
+      if (railVisible) startRail();
     }
     rail.addEventListener("pointerup", endDrag);
     rail.addEventListener("pointercancel", endDrag);
@@ -355,7 +448,10 @@
       }
     });
 
-    requestAnimationFrame(tick);
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stopRail();
+      else if (railVisible) startRail();
+    });
   }
 
   /* Approach accordion (keyboard / touch; hover handled in CSS) */

@@ -25,12 +25,14 @@
 }
 
 html {
-    scroll-behavior: smooth;
+    /* Keep wheel/trackpad native — smooth only on explicit in-page nav (JS). */
+    scroll-behavior: auto;
+    scroll-padding-top: 5.5rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
     html {
-        scroll-behavior: auto;
+        scroll-padding-top: 5.5rem;
     }
 }
 
@@ -292,6 +294,7 @@ body {
     padding: clamp(4.5rem, 12vh, 8rem) var(--pad);
     position: relative;
     z-index: 1;
+    scroll-margin-top: 5.5rem;
 }
 
 .section-head {
@@ -371,8 +374,8 @@ body {
 
 .work-panel:hover {
     border-color: rgba(11, 11, 12, 0.16);
-    transform: translateY(-4px);
-    box-shadow: 0 22px 44px rgba(11, 11, 12, 0.08);
+    transform: translateY(-3px);
+    box-shadow: 0 18px 36px rgba(11, 11, 12, 0.07);
 }
 
 .work-rail.is-dragging .work-panel:hover {
@@ -706,7 +709,7 @@ body {
     color: var(--ink);
 }
 
-/* —— Reveals —— */
+/* —— Reveals (subtle; once — never reverse on scroll-up) —— */
 .reveal {
     opacity: 1;
     transform: none;
@@ -714,12 +717,19 @@ body {
 
 .js-ready .reveal {
     opacity: 0;
-    transform: translateY(1.25rem);
-    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    transform: translateY(0.55rem);
+    transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+    will-change: opacity, transform;
 }
 
 .js-ready .reveal.is-in {
     opacity: 1;
+    transform: none;
+    will-change: auto;
+}
+
+/* Horizontal rail panels: opacity only — vertical lift fights page scroll */
+.js-ready .work-panel.reveal {
     transform: none;
 }
 
