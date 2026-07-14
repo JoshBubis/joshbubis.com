@@ -319,6 +319,13 @@
           h.replaceWith(p);
         });
         clone.querySelectorAll("a").forEach(function (a) {
+          if (a.classList.contains("work-shot-link")) {
+            var div = document.createElement("div");
+            div.className = "work-shot-link work-shot-link--ghost";
+            while (a.firstChild) div.appendChild(a.firstChild);
+            a.replaceWith(div);
+            return;
+          }
           var span = document.createElement("span");
           span.className = "work-link-ghost";
           span.textContent = a.textContent.replace(/\s+/g, " ").trim().split(" ")[0];
@@ -406,6 +413,7 @@
     var startOffset = 0;
     var pointerId = null;
     var dragCandidate = false;
+    var suppressShotClick = false;
     var DRAG_THRESHOLD = 8;
 
     function clearSelection() {
@@ -419,6 +427,7 @@
       dragCandidate = false;
       settling = false;
       paused = true;
+      suppressShotClick = true;
       clearSelection();
       rail.classList.add("is-dragging");
       try {
@@ -429,12 +438,13 @@
 
     rail.addEventListener("pointerdown", function (e) {
       if (e.button != null && e.button !== 0) return;
-      if (e.target.closest && e.target.closest("a,button")) return;
-      /* Only drag from the screenshot chrome — body text stays selectable */
-      if (!(e.target.closest && e.target.closest(".work-shot"))) return;
-      /* Pending drag — allow click until the pointer moves enough */
+      /* Allow drag from screenshot Visit wrapper; ignore other links/buttons */
+      if (e.target.closest && e.target.closest("a:not(.work-shot-link),button")) return;
+      if (!(e.target.closest && e.target.closest(".work-shot, .work-shot-link"))) return;
+      /* Pending drag — plain click still opens the site */
       dragCandidate = true;
       dragging = false;
+      suppressShotClick = false;
       pointerId = e.pointerId;
       startX = e.clientX;
       startOffset = x;
@@ -487,6 +497,14 @@
     rail.addEventListener("selectstart", function (e) {
       if (dragging) e.preventDefault();
     });
+    rail.addEventListener("click", function (e) {
+      if (!suppressShotClick) return;
+      if (e.target.closest && e.target.closest(".work-shot-link")) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      suppressShotClick = false;
+    }, true);
 
     function step(dir) {
       goTo(activeIndex + dir);
