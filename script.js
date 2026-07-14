@@ -63,15 +63,15 @@
     }
 
     function seed(w, h) {
-      var count = Math.max(28, Math.floor((w * h) / 22000));
+      var count = Math.max(16, Math.floor((w * h) / 38000));
       nodes = [];
       for (var i = 0; i < count; i++) {
         nodes.push({
           x: Math.random() * w,
           y: Math.random() * h,
-          r: 1.4 + Math.random() * 3.2,
-          vx: (Math.random() - 0.5) * 0.28,
-          vy: (Math.random() - 0.5) * 0.28,
+          r: 1.1 + Math.random() * 2.2,
+          vx: (Math.random() - 0.5) * 0.16,
+          vy: (Math.random() - 0.5) * 0.16,
           phase: Math.random() * Math.PI * 2
         });
       }
@@ -112,8 +112,8 @@
           var dx = nodes[a].x - nodes[b].x;
           var dy = nodes[a].y - nodes[b].y;
           var dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 160) {
-            var alpha = (1 - dist / 160) * 0.32;
+          if (dist < 130) {
+            var alpha = (1 - dist / 130) * 0.16;
             ctx.strokeStyle = "rgba(11, 11, 12, " + alpha + ")";
             ctx.beginPath();
             ctx.moveTo(nodes[a].x, nodes[a].y);
@@ -126,7 +126,7 @@
       for (var j = 0; j < nodes.length; j++) {
         var p = nodes[j];
         ctx.beginPath();
-        ctx.fillStyle = "rgba(11, 11, 12, 0.42)";
+        ctx.fillStyle = "rgba(11, 11, 12, 0.28)";
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         ctx.fill();
       }
@@ -141,22 +141,7 @@
     canvas.style.display = "none";
   }
 
-  /* Magnetic CTAs */
-  if (!reduceMotion) {
-    document.querySelectorAll("[data-magnetic]").forEach(function (btn) {
-      var strength = 18;
-      btn.addEventListener("pointermove", function (e) {
-        var rect = btn.getBoundingClientRect();
-        var x = e.clientX - rect.left - rect.width / 2;
-        var y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform =
-          "translate(" + (x / rect.width) * strength + "px, " + (y / rect.height) * strength + "px)";
-      });
-      btn.addEventListener("pointerleave", function () {
-        btn.style.transform = "translate(0, 0)";
-      });
-    });
-  }
+  /* Magnetic CTAs removed — motion craft lives in reveals + work rail */
 
   /* Work rail: GPU track drift + working dots */
   var rail = document.getElementById("work-rail");
@@ -269,6 +254,7 @@
         var clone = panel.cloneNode(true);
         clone.classList.remove("reveal", "is-in");
         clone.setAttribute("aria-hidden", "true");
+        clone.setAttribute("inert", "");
         clone.querySelectorAll("a").forEach(function (a) {
           a.setAttribute("tabindex", "-1");
         });

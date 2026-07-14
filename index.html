@@ -7,6 +7,19 @@
     <title>Josh Bubis — Commissioned websites</title>
     <meta name="description"
         content="Josh Bubis designs and builds commissioned websites and web products — portfolios, small-business sites, product landings, and custom systems.">
+    <link rel="canonical" href="https://joshbubis.com/">
+    <meta name="theme-color" content="#f3f4f6">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://joshbubis.com/">
+    <meta property="og:title" content="Josh Bubis — Commissioned websites">
+    <meta property="og:description"
+        content="Commissioned websites with craft — and full product systems when the work needs to grow.">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Josh Bubis — Commissioned websites">
+    <meta name="twitter:description"
+        content="Commissioned websites with craft — and full product systems when the work needs to grow.">
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,14 +27,15 @@
         href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Syne:wght@600;700;800&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=atelier5">
+    <link rel="stylesheet" href="style.css?v=atelier6">
 </head>
 
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <div class="grain" aria-hidden="true"></div>
 
     <header class="site-header">
-        <a class="wordmark" href="#top">Josh Bubis</a>
+        <a class="wordmark" href="/">Josh Bubis</a>
         <nav class="site-nav" aria-label="Primary">
             <a href="#work">Work</a>
             <a href="#approach">Approach</a>
@@ -30,7 +44,7 @@
         </nav>
     </header>
 
-    <main id="top">
+    <main id="main">
         <section class="hero" aria-label="Introduction">
             <canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
             <div class="hero-inner">
@@ -45,7 +59,7 @@
                     Commissioned websites shipped clean — and full systems when the work needs to become a product.
                 </p>
                 <div class="hero-actions reveal" data-reveal>
-                    <a href="#work" class="btn btn-primary magnetic" data-magnetic>See the work</a>
+                    <a href="#work" class="btn btn-primary">See the work</a>
                     <a href="contact.html" class="btn btn-ghost">Start a project</a>
                 </div>
             </div>
@@ -55,54 +69,75 @@
             <div class="section-head reveal" data-reveal>
                 <p class="eyebrow">Selected systems</p>
                 <h2 class="section-title">Proof I can own the stack.</h2>
+                <p class="section-lead">Live products I designed, built, and still run — not mockups.</p>
             </div>
 
             <div class="work-rail-wrap">
                 <div class="work-rail" id="work-rail" tabindex="0" aria-label="Shipped systems">
                     <div class="work-track" id="work-track">
-                        <article class="work-panel reveal" data-reveal>
+                        <article class="work-panel reveal" data-reveal data-project="catamist">
+                            <div class="work-visual" aria-hidden="true">
+                                <span class="work-visual__mark">Ca</span>
+                                <span class="work-visual__url">catamist.com</span>
+                            </div>
                             <p class="work-index">01</p>
                             <h3 class="work-name">Catamist</h3>
                             <p class="work-desc">AI news platform — aggregation, neutral summaries, and a product surface people return to.</p>
                             <div class="work-links">
-                                <a href="https://catamist.com" target="_blank" rel="noopener noreferrer">Live</a>
-                                <a href="https://github.com/JoshBubis/catamist" target="_blank" rel="noopener noreferrer">Code</a>
+                                <a href="https://catamist.com" target="_blank" rel="noopener noreferrer">Visit<span class="sr-only"> Catamist (opens in new tab)</span></a>
+                                <a href="https://github.com/JoshBubis/catamist" target="_blank" rel="noopener noreferrer">Source<span class="sr-only"> on GitHub (opens in new tab)</span></a>
                             </div>
                         </article>
-                        <article class="work-panel reveal" data-reveal>
+                        <article class="work-panel reveal" data-reveal data-project="hackychat">
+                            <div class="work-visual" aria-hidden="true">
+                                <span class="work-visual__mark">HC</span>
+                                <span class="work-visual__url">hacky.chat</span>
+                            </div>
                             <p class="work-index">02</p>
                             <h3 class="work-name">HackyChat</h3>
                             <p class="work-desc">Real-time chat with a Rails API, React client, and Chrome extension — live systems, not demos.</p>
                             <div class="work-links">
-                                <a href="https://hacky.chat" target="_blank" rel="noopener noreferrer">Live</a>
-                                <a href="https://github.com/JoshBubis/hackychat" target="_blank" rel="noopener noreferrer">Code</a>
+                                <a href="https://hacky.chat" target="_blank" rel="noopener noreferrer">Visit<span class="sr-only"> HackyChat (opens in new tab)</span></a>
+                                <a href="https://github.com/JoshBubis/hackychat" target="_blank" rel="noopener noreferrer">Source<span class="sr-only"> on GitHub (opens in new tab)</span></a>
                             </div>
                         </article>
-                        <article class="work-panel reveal" data-reveal>
+                        <article class="work-panel reveal" data-reveal data-project="relayra">
+                            <div class="work-visual" aria-hidden="true">
+                                <span class="work-visual__mark">Re</span>
+                                <span class="work-visual__url">relayra.com</span>
+                            </div>
                             <p class="work-index">03</p>
                             <h3 class="work-name">Relayra</h3>
                             <p class="work-desc">AI phone receptionist — inbound calls, appointments, and billing wired end to end.</p>
                             <div class="work-links">
-                                <a href="https://relayra.com" target="_blank" rel="noopener noreferrer">Live</a>
-                                <a href="https://github.com/JoshBubis/relayra" target="_blank" rel="noopener noreferrer">Code</a>
+                                <a href="https://relayra.com" target="_blank" rel="noopener noreferrer">Visit<span class="sr-only"> Relayra (opens in new tab)</span></a>
+                                <a href="https://github.com/JoshBubis/relayra" target="_blank" rel="noopener noreferrer">Source<span class="sr-only"> on GitHub (opens in new tab)</span></a>
                             </div>
                         </article>
-                        <article class="work-panel reveal" data-reveal>
+                        <article class="work-panel reveal" data-reveal data-project="joshmenu">
+                            <div class="work-visual" aria-hidden="true">
+                                <span class="work-visual__mark">jm</span>
+                                <span class="work-visual__url">josh.menu</span>
+                            </div>
                             <p class="work-index">04</p>
                             <h3 class="work-name">josh.menu</h3>
                             <p class="work-desc">Live GPU deal rankings from partner APIs — an honest score vs each card’s history, no ads or pay-to-rank.</p>
                             <div class="work-links">
-                                <a href="https://josh.menu" target="_blank" rel="noopener noreferrer">Live</a>
-                                <a href="https://github.com/JoshBubis/josh.menu" target="_blank" rel="noopener noreferrer">Code</a>
+                                <a href="https://josh.menu" target="_blank" rel="noopener noreferrer">Visit<span class="sr-only"> josh.menu (opens in new tab)</span></a>
+                                <a href="https://github.com/JoshBubis/josh.menu" target="_blank" rel="noopener noreferrer">Source<span class="sr-only"> on GitHub (opens in new tab)</span></a>
                             </div>
                         </article>
-                        <article class="work-panel reveal" data-reveal>
+                        <article class="work-panel reveal" data-reveal data-project="calledfrom">
+                            <div class="work-visual" aria-hidden="true">
+                                <span class="work-visual__mark">CF</span>
+                                <span class="work-visual__url">calledfrom.com</span>
+                            </div>
                             <p class="work-index">05</p>
                             <h3 class="work-name">CalledFrom</h3>
                             <p class="work-desc">US phone-number lookup and crowdsourced spam reports — search a number, see what people are saying.</p>
                             <div class="work-links">
-                                <a href="https://calledfrom.com" target="_blank" rel="noopener noreferrer">Live</a>
-                                <a href="https://github.com/JoshBubis/calledfrom" target="_blank" rel="noopener noreferrer">Code</a>
+                                <a href="https://calledfrom.com" target="_blank" rel="noopener noreferrer">Visit<span class="sr-only"> CalledFrom (opens in new tab)</span></a>
+                                <a href="https://github.com/JoshBubis/calledfrom" target="_blank" rel="noopener noreferrer">Source<span class="sr-only"> on GitHub (opens in new tab)</span></a>
                             </div>
                         </article>
                     </div>
@@ -176,8 +211,8 @@
 
         <section id="close" class="section close-section reveal" data-reveal>
             <h2 class="close-title">Tell me what you’re building.</h2>
-            <p class="close-sub">Scope, timeline, examples you like — I’ll reply with next steps.</p>
-            <a href="contact.html" class="btn btn-primary magnetic" data-magnetic>Start a project</a>
+            <p class="close-sub">Scope, timeline, examples you like — I’ll reply from josh@joshbubis.com.</p>
+            <a href="contact.html" class="btn btn-primary">Start a project</a>
         </section>
     </main>
 
@@ -186,11 +221,11 @@
         <div class="footer-links">
             <a href="https://github.com/JoshBubis" target="_blank" rel="noopener noreferrer">GitHub</a>
             <a href="https://linkedin.com/in/joshbubis" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-            <a href="mailto:joshbubis@gmail.com">joshbubis@gmail.com</a>
+            <a href="mailto:josh@joshbubis.com">josh@joshbubis.com</a>
         </div>
     </footer>
 
-    <script src="script.js?v=atelier5"></script>
+    <script src="script.js?v=atelier6"></script>
 </body>
 
 </html>
