@@ -9,10 +9,16 @@ Static GitHub Pages portfolio and hireable studio site for `joshbubis.com`.
 - `style.css` — atelier design system (Syne + Instrument Sans, light paper stage)
 - `script.js` — hero field (quiet), scroll reveals, work-rail auto-cycle + drag
 - `images/work/*.jpg` — homepage captures for work cards (**manual** refresh only)
-- `scripts/capture-work.mjs` — regenerate captures with Playwright (`node scripts/capture-work.mjs`), then commit + push
+- `scripts/capture-work.mjs` — regenerate captures with Playwright (`npm install && npm run capture-work`), then commit + push
+- `package.json` — Playwright devDependency for captures only
 
 Screenshots do **not** auto-update on a schedule. They only change when someone re-runs
 the capture script and deploys. Do that when a product homepage changes meaningfully.
+
+The capture script waits for real content (not just DOM ready). HackyChat especially needs
+this — its homepage pulls a large `trending_grouped` payload (~2MB / ~150 groups) before cards
+fill in. If a shot still looks empty, bump that site’s `timeoutMs` / `ready` selector in the
+script. Speeding HackyChat itself means shrinking that API response (product work, separate repo).
 - `CNAME` — custom domain for GitHub Pages
 - `AGENTS.md` — agent folder boundaries
 

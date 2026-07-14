@@ -1,0 +1,11 @@
+{
+  "name": "joshbubis-com",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "capture-work": "node scripts/capture-work.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.61.1"
+  }
+}
