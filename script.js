@@ -158,120 +158,180 @@
     });
   }
 
-  /* Work rail: slow continuous drift + dots */
+  /* Work rail: GPU track drift + working dots */
   var rail = document.getElementById("work-rail");
+  var track = document.getElementById("work-track");
   var dotsHost = document.getElementById("work-dots");
-  if (rail) {
-    var panels = function () {
-      return Array.prototype.slice.call(rail.querySelectorAll(".work-panel"));
-    };
+  if (rail && track) {
+    var originals = Array.prototype.slice.call(track.querySelectorAll(".work-panel"));
+    var count = originals.length;
+    var x = 0;
+    var setWidth = 0;
+    var offsets = [];
     var paused = false;
     var dragging = false;
-    var rafId = 0;
+    var settling = false;
+    var settleTarget = 0;
     var lastTs = 0;
-    /* ~28px/s — a full panel drifts past in ~15–18s */
-    var SPEED = 28;
     var activeIndex = 0;
     var dots = [];
+    /* Steady crawl — transform avoids scrollLeft jank */
+    var SPEED = 32;
+    var SETTLE = 0.12;
 
-    function maxScroll() {
-      return Math.max(0, rail.scrollWidth - rail.clientWidth);
+    function measure() {
+      var origin = originals[0].offsetLeft;
+      offsets = originals.map(function (panel) {
+        return panel.offsetLeft - origin;
+      });
+      var last = originals[count - 1];
+      var gap = 20;
+      if (count > 1) {
+        gap = originals[1].offsetLeft - originals[0].offsetLeft - originals[0].offsetWidth;
+      }
+      /* One full set including the gap before the cloned first panel */
+      setWidth = last.offsetLeft - origin + last.offsetWidth + gap;
     }
 
-    function nearestIndex() {
-      var list = panels();
-      if (!list.length) return 0;
-      var left = rail.scrollLeft + rail.clientWidth * 0.28;
-      var best = 0;
-      var bestDist = Infinity;
-      for (var i = 0; i < list.length; i++) {
-        var center = list[i].offsetLeft + list[i].offsetWidth / 2;
-        var dist = Math.abs(center - left);
-        if (dist < bestDist) {
-          bestDist = dist;
-          best = i;
-        }
-      }
-      return best;
+    function wrapX(v) {
+      if (setWidth <= 0) return 0;
+      v = v % setWidth;
+      if (v < 0) v += setWidth;
+      return v;
+    }
+
+    function apply() {
+      track.style.transform = "translate3d(" + (-x).toFixed(2) + "px,0,0)";
     }
 
     function syncDots() {
-      var next = nearestIndex();
-      if (next === activeIndex) return;
-      activeIndex = next;
-      for (var i = 0; i < dots.length; i++) {
-        dots[i].classList.toggle("is-active", i === activeIndex);
-        dots[i].setAttribute("aria-selected", i === activeIndex ? "true" : "false");
+      if (!count || setWidth <= 0) return;
+      var probe = wrapX(x + rail.clientWidth * 0.22);
+      var best = 0;
+      var bestDist = Infinity;
+      for (var i = 0; i < count; i++) {
+        var dist = Math.abs(offsets[i] - probe);
+        var distWrap = Math.abs(offsets[i] + setWidth - probe);
+        var d = Math.min(dist, distWrap);
+        if (d < bestDist) {
+          bestDist = d;
+          best = i;
+        }
       }
+      if (best === activeIndex) return;
+      activeIndex = best;
+      for (var d = 0; d < dots.length; d++) {
+        dots[d].classList.toggle("is-active", d === activeIndex);
+        dots[d].setAttribute("aria-selected", d === activeIndex ? "true" : "false");
+      }
+    }
+
+    function goTo(i) {
+      if (!count) return;
+      i = ((i % count) + count) % count;
+      settleTarget = offsets[i];
+      /* Pick shortest wrap direction toward target */
+      var a = wrapX(x);
+      var forward = settleTarget - a;
+      if (forward < 0) forward += setWidth;
+      var backward = a - settleTarget;
+      if (backward < 0) backward += setWidth;
+      if (backward < forward) {
+        settleTarget = a - backward;
+      } else {
+        settleTarget = a + forward;
+      }
+      settling = true;
+      paused = true;
     }
 
     function buildDots() {
       if (!dotsHost) return;
       dotsHost.innerHTML = "";
-      dots = panels().map(function (panel, i) {
+      dots = originals.map(function (panel, i) {
         var btn = document.createElement("button");
         btn.type = "button";
         btn.className = "work-dot" + (i === 0 ? " is-active" : "");
         btn.setAttribute("role", "tab");
-        btn.setAttribute("aria-label", (panel.querySelector(".work-name") || {}).textContent || ("Project " + (i + 1)));
+        var nameEl = panel.querySelector(".work-name");
+        btn.setAttribute("aria-label", (nameEl && nameEl.textContent) || ("Project " + (i + 1)));
         btn.setAttribute("aria-selected", i === 0 ? "true" : "false");
         btn.addEventListener("click", function () {
-          paused = true;
-          var delta = panel.getBoundingClientRect().left - rail.getBoundingClientRect().left;
-          rail.scrollTo({
-            left: rail.scrollLeft + delta,
-            behavior: reduceMotion ? "auto" : "smooth"
-          });
-          setTimeout(function () {
-            paused = false;
-            lastTs = 0;
-          }, 2400);
+          goTo(i);
         });
         dotsHost.appendChild(btn);
         return btn;
       });
     }
 
-    function tick(ts) {
-      if (!lastTs) lastTs = ts;
-      var dt = Math.min(48, ts - lastTs);
-      lastTs = ts;
-
-      if (!paused && !dragging && !document.hidden && !reduceMotion) {
-        var max = maxScroll();
-        if (max > 4) {
-          var next = rail.scrollLeft + SPEED * (dt / 1000);
-          if (next >= max - 0.5) {
-            rail.scrollLeft = 0;
-          } else {
-            rail.scrollLeft = next;
-          }
-        }
-      }
-
-      syncDots();
-      rafId = requestAnimationFrame(tick);
+    function cloneForLoop() {
+      originals.forEach(function (panel) {
+        var clone = panel.cloneNode(true);
+        clone.classList.remove("reveal", "is-in");
+        clone.setAttribute("aria-hidden", "true");
+        clone.querySelectorAll("a").forEach(function (a) {
+          a.setAttribute("tabindex", "-1");
+        });
+        track.appendChild(clone);
+      });
     }
 
+    function tick(ts) {
+      if (!lastTs) lastTs = ts;
+      var dt = Math.min(40, ts - lastTs);
+      lastTs = ts;
+
+      if (settling) {
+        var dx = settleTarget - x;
+        x += dx * (reduceMotion ? 1 : SETTLE);
+        if (Math.abs(dx) < 0.6) {
+          x = wrapX(settleTarget);
+          settling = false;
+          paused = false;
+          lastTs = ts;
+        }
+      } else if (!paused && !dragging && !document.hidden && !reduceMotion && setWidth > 0) {
+        x += SPEED * (dt / 1000);
+        if (x >= setWidth) x -= setWidth;
+      }
+
+      x = settling ? x : wrapX(x);
+      apply();
+      syncDots();
+      requestAnimationFrame(tick);
+    }
+
+    cloneForLoop();
+    measure();
     buildDots();
-    rail.addEventListener("scroll", syncDots, { passive: true });
+    apply();
+
+    window.addEventListener("resize", function () {
+      var idx = activeIndex;
+      measure();
+      x = offsets[idx] || 0;
+      apply();
+    });
 
     var startX = 0;
-    var startScroll = 0;
+    var startOffset = 0;
 
     rail.addEventListener("pointerdown", function (e) {
-      if (e.pointerType === "touch") return;
       if (e.target.closest && e.target.closest("a,button")) return;
       dragging = true;
+      settling = false;
       paused = true;
       startX = e.clientX;
-      startScroll = rail.scrollLeft;
+      startOffset = x;
       rail.classList.add("is-dragging");
       rail.setPointerCapture(e.pointerId);
     });
     rail.addEventListener("pointermove", function (e) {
       if (!dragging) return;
-      rail.scrollLeft = startScroll - (e.clientX - startX);
+      x = startOffset - (e.clientX - startX);
+      x = wrapX(x);
+      apply();
+      syncDots();
     });
     function endDrag(e) {
       if (!dragging) return;
@@ -287,10 +347,10 @@
     rail.addEventListener("pointercancel", endDrag);
 
     rail.addEventListener("mouseenter", function () {
-      paused = true;
+      if (!dragging && !settling) paused = true;
     });
     rail.addEventListener("mouseleave", function () {
-      if (!dragging) {
+      if (!dragging && !settling) {
         paused = false;
         lastTs = 0;
       }
@@ -299,24 +359,13 @@
       paused = true;
     });
     rail.addEventListener("focusout", function () {
-      if (!rail.contains(document.activeElement) && !dragging) {
+      if (!rail.contains(document.activeElement) && !dragging && !settling) {
         paused = false;
         lastTs = 0;
       }
     });
-    rail.addEventListener("touchstart", function () {
-      paused = true;
-    }, { passive: true });
-    rail.addEventListener("touchend", function () {
-      paused = false;
-      lastTs = 0;
-    }, { passive: true });
 
-    if (!reduceMotion) {
-      rafId = requestAnimationFrame(tick);
-    } else {
-      syncDots();
-    }
+    requestAnimationFrame(tick);
   }
 
   /* Approach accordion (keyboard / touch; hover handled in CSS) */

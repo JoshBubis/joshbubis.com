@@ -298,23 +298,23 @@ body {
 }
 
 .work-rail {
-    display: flex;
-    gap: 1.25rem;
-    overflow-x: auto;
-    scroll-snap-type: none;
-    scroll-padding-left: var(--pad);
-    padding: 0.25rem var(--pad) 1.5rem;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    overflow: hidden;
+    padding: 0.25rem 0 1.5rem;
     cursor: grab;
-}
-
-.work-rail::-webkit-scrollbar {
-    display: none;
+    touch-action: pan-y;
 }
 
 .work-rail.is-dragging {
     cursor: grabbing;
+}
+
+.work-track {
+    display: flex;
+    gap: 1.25rem;
+    width: max-content;
+    padding-left: var(--pad);
+    will-change: transform;
+    transform: translate3d(0, 0, 0);
 }
 
 .work-panel {
@@ -332,6 +332,10 @@ body {
 .work-panel:hover {
     border-left-color: var(--accent);
     transform: translateY(-3px);
+}
+
+.work-rail.is-dragging .work-panel:hover {
+    transform: none;
 }
 
 .work-index {
@@ -395,7 +399,7 @@ body {
     border-radius: 999px;
     background: rgba(26, 24, 20, 0.22);
     cursor: pointer;
-    transition: width 0.45s var(--ease), background 0.35s ease, transform 0.35s var(--ease);
+    transition: width 0.45s var(--ease), background 0.35s ease;
 }
 
 .work-dot:hover {
@@ -411,7 +415,11 @@ body {
     .work-dot {
         transition: none;
     }
+    .work-panel {
+        transition: border-color 0.2s ease;
+    }
 }
+
 /* —— Approach —— */
 .approach-list {
     list-style: none;
