@@ -301,19 +301,12 @@ body {
     display: flex;
     gap: 1.25rem;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: none;
     scroll-padding-left: var(--pad);
     padding: 0.25rem var(--pad) 1.5rem;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     cursor: grab;
-    scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .work-rail {
-        scroll-behavior: auto;
-    }
 }
 
 .work-rail::-webkit-scrollbar {
@@ -322,12 +315,10 @@ body {
 
 .work-rail.is-dragging {
     cursor: grabbing;
-    scroll-snap-type: none;
 }
 
 .work-panel {
     flex: 0 0 min(78vw, 28rem);
-    scroll-snap-align: start;
     min-height: 24rem;
     padding: 1.75rem 1.75rem 1.5rem;
     background: linear-gradient(165deg, #fff 0%, var(--paper-deep) 140%);
@@ -388,22 +379,39 @@ body {
     border-bottom-color: var(--accent);
 }
 
-.work-progress {
-    height: 2px;
-    margin: 0 var(--pad);
-    background: var(--line);
-    border-radius: 1px;
-    overflow: hidden;
+.work-dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.55rem;
+    padding: 0.15rem var(--pad) 0.35rem;
 }
 
-.work-progress__bar {
-    height: 100%;
-    width: 0%;
-    background: var(--ink);
-    transform-origin: left;
-    transition: width 0.1s linear;
+.work-dot {
+    width: 0.4rem;
+    height: 0.4rem;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: rgba(26, 24, 20, 0.22);
+    cursor: pointer;
+    transition: width 0.45s var(--ease), background 0.35s ease, transform 0.35s var(--ease);
 }
 
+.work-dot:hover {
+    background: rgba(26, 24, 20, 0.45);
+}
+
+.work-dot.is-active {
+    width: 1.35rem;
+    background: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .work-dot {
+        transition: none;
+    }
+}
 /* —— Approach —— */
 .approach-list {
     list-style: none;
