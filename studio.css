@@ -728,9 +728,12 @@ body {
     will-change: auto;
 }
 
-/* Horizontal rail panels: opacity only — vertical lift fights page scroll */
-.js-ready .work-panel.reveal {
-    transform: none;
+/* Horizontal rail panels never use reveal opacity — off-screen cards
+   would stay invisible because IntersectionObserver can't see them. */
+.js-ready .work-panel.reveal,
+.js-ready .work-panel {
+    opacity: 1;
+    will-change: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
