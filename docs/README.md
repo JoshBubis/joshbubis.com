@@ -8,8 +8,11 @@ Static GitHub Pages portfolio and hireable studio site for `joshbubis.com`.
 - `contact.html` + `contact.js` — Turnstile-protected contact form (posts to Hub)
 - `style.css` — atelier design system (Syne + Instrument Sans, light paper stage)
 - `script.js` — hero field (quiet), scroll reveals, work-rail auto-cycle + drag
-- `images/work/*.jpg` — homepage captures for work-card hover peeks
-- `scripts/capture-work.mjs` — regenerate those captures with Playwright
+- `images/work/*.jpg` — homepage captures for work cards (manual refresh)
+- `scripts/capture-work.mjs` — regenerate captures with Playwright, then commit + push
+
+Screenshots do **not** auto-update. Re-run the capture script when a product homepage
+changes meaningfully, then push.
 - `CNAME` — custom domain for GitHub Pages
 - `AGENTS.md` — agent folder boundaries
 

@@ -344,15 +344,7 @@
     rail.addEventListener("pointerup", endDrag);
     rail.addEventListener("pointercancel", endDrag);
 
-    rail.addEventListener("mouseenter", function () {
-      if (!dragging && !settling) paused = true;
-    });
-    rail.addEventListener("mouseleave", function () {
-      if (!dragging && !settling) {
-        paused = false;
-        lastTs = 0;
-      }
-    });
+    /* Hover should not freeze the rail — only drag/focus/settle pause motion */
     rail.addEventListener("focusin", function () {
       paused = true;
     });
