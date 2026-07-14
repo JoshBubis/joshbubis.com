@@ -158,16 +158,78 @@
     });
   }
 
-  /* Work rail: progress + drag */
+  /* Work rail: progress + drag + slow auto-cycle */
   var rail = document.getElementById("work-rail");
   var progress = document.getElementById("work-progress-bar");
   if (rail) {
+    var panels = function () {
+      return Array.prototype.slice.call(rail.querySelectorAll(".work-panel"));
+    };
+    var cycleIndex = 0;
+    var cycleTimer = null;
+    var paused = false;
+    var CYCLE_MS = 5200;
+
     function updateProgress() {
       if (!progress) return;
       var max = rail.scrollWidth - rail.clientWidth;
       var pct = max > 0 ? (rail.scrollLeft / max) * 100 : 0;
       progress.style.width = pct + "%";
     }
+
+    function nearestIndex() {
+      var list = panels();
+      if (!list.length) return 0;
+      var left = rail.scrollLeft;
+      var best = 0;
+      var bestDist = Infinity;
+      for (var i = 0; i < list.length; i++) {
+        var dist = Math.abs(list[i].offsetLeft - left);
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = i;
+        }
+      }
+      return best;
+    }
+
+    function goTo(i, behavior) {
+      var list = panels();
+      if (!list.length) return;
+      cycleIndex = ((i % list.length) + list.length) % list.length;
+      list[cycleIndex].scrollIntoView({
+        behavior: behavior || (reduceMotion ? "auto" : "smooth"),
+        inline: "start",
+        block: "nearest"
+      });
+    }
+
+    function stopCycle() {
+      if (cycleTimer) {
+        clearInterval(cycleTimer);
+        cycleTimer = null;
+      }
+    }
+
+    function startCycle() {
+      stopCycle();
+      if (reduceMotion) return;
+      if (panels().length < 2) return;
+      cycleTimer = setInterval(function () {
+        if (paused || document.hidden) return;
+        goTo(cycleIndex + 1);
+      }, CYCLE_MS);
+    }
+
+    function pauseCycle() {
+      paused = true;
+    }
+
+    function resumeCycle() {
+      paused = false;
+      cycleIndex = nearestIndex();
+    }
+
     rail.addEventListener("scroll", updateProgress, { passive: true });
     updateProgress();
 
@@ -177,7 +239,9 @@
 
     rail.addEventListener("pointerdown", function (e) {
       if (e.pointerType === "touch") return;
+      if (e.target.closest && e.target.closest("a")) return;
       dragging = true;
+      pauseCycle();
       startX = e.clientX;
       startScroll = rail.scrollLeft;
       rail.classList.add("is-dragging");
@@ -191,12 +255,35 @@
       if (!dragging) return;
       dragging = false;
       rail.classList.remove("is-dragging");
+      cycleIndex = nearestIndex();
       try {
         rail.releasePointerCapture(e.pointerId);
       } catch (_) {}
+      resumeCycle();
     }
     rail.addEventListener("pointerup", endDrag);
     rail.addEventListener("pointercancel", endDrag);
+
+    rail.addEventListener("mouseenter", pauseCycle);
+    rail.addEventListener("mouseleave", function () {
+      if (!dragging) resumeCycle();
+    });
+    rail.addEventListener("focusin", pauseCycle);
+    rail.addEventListener("focusout", function () {
+      if (!rail.contains(document.activeElement)) resumeCycle();
+    });
+    rail.addEventListener("touchstart", pauseCycle, { passive: true });
+    rail.addEventListener("touchend", function () {
+      cycleIndex = nearestIndex();
+      resumeCycle();
+    }, { passive: true });
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) pauseCycle();
+      else resumeCycle();
+    });
+
+    startCycle();
   }
 
   /* Approach accordion (keyboard / touch; hover handled in CSS) */
