@@ -11,7 +11,7 @@ and Hub [`AGENTS.md`](/Users/jbair/Projects/hub/AGENTS.md) § Sibling projects.
 - `index.html` — hero, work rail (static shots + arrows/dots/drag), approach, about, CTA
 - `contact.html` + `contact.js` — form UI → Hub `/webhooks/contact`
 - `style.css` / `studio.css` — keep `studio.css` a copy of `style.css`
-- `script.js` — reveals, work-rail drift/drag/arrows
+- `script.js` — reveals (hero + section-head cascades), work-rail drift/drag/arrows (hover eases drift to ~30%, never freezes)
 - `images/work/*.jpg` — manual Playwright captures (`npm run capture-work`)
 - `AGENTS.md` — agent routing + shipping rules
 

@@ -216,6 +216,9 @@
     /* Steady crawl — transform avoids scrollLeft jank */
     var SPEED = 28;
     var SETTLE = 0.12;
+    /* Ease toward a slower drift while hovered so cards are easy to read/click */
+    var speedFactor = 1;
+    var speedTarget = 1;
 
     function measure() {
       var origin = originals[0].offsetLeft;
@@ -356,7 +359,8 @@
           lastTs = ts;
         }
       } else if (!paused && !dragging && !document.hidden && !reduceMotion && setWidth > 0) {
-        x += SPEED * (dt / 1000);
+        speedFactor += (speedTarget - speedFactor) * 0.05;
+        x += SPEED * speedFactor * (dt / 1000);
         if (x >= setWidth) x -= setWidth;
       }
 
@@ -525,7 +529,13 @@
       }
     });
 
-    /* Hover should not freeze the rail — only drag/focus/settle pause motion */
+    /* Hover slows the drift (never freezes); drag/focus/settle pause it */
+    rail.addEventListener("mouseenter", function () {
+      speedTarget = 0.3;
+    });
+    rail.addEventListener("mouseleave", function () {
+      speedTarget = 1;
+    });
     rail.addEventListener("focusin", function () {
       paused = true;
     });

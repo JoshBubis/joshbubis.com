@@ -122,6 +122,7 @@ body {
 
 .site-header.is-scrolled {
     border-bottom-color: var(--line);
+    box-shadow: 0 10px 30px rgba(11, 11, 12, 0.05);
 }
 
 .wordmark {
@@ -181,16 +182,26 @@ body {
     border: 1px solid transparent;
     border-radius: 2px;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.25s var(--ease);
+    transition: background 0.2s, color 0.2s, border-color 0.2s, transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: translateY(0);
 }
 
 .btn-primary {
     background: var(--ink);
     color: var(--paper);
+    box-shadow: 0 8px 20px rgba(11, 11, 12, 0.16);
 }
 
 .btn-primary:hover {
     background: var(--accent);
+    box-shadow: 0 12px 26px rgba(200, 30, 30, 0.24);
 }
 
 .btn-ghost {
@@ -201,6 +212,21 @@ body {
 
 .btn-ghost:hover {
     border-color: var(--ink);
+    background: rgba(255, 255, 255, 0.6);
+}
+
+/* Arrow slides forward on hover for primary CTAs */
+.btn-arrow::after {
+    content: "→";
+    margin-left: 0.5rem;
+    opacity: 0.75;
+    transform: translateX(-1px);
+    transition: transform 0.25s var(--ease), opacity 0.25s;
+}
+
+.btn-arrow:hover::after {
+    opacity: 1;
+    transform: translateX(3px);
 }
 
 .btn:disabled {
@@ -304,12 +330,24 @@ body {
 }
 
 .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--accent);
     margin-bottom: 0.75rem;
+}
+
+.eyebrow::before {
+    content: "";
+    width: 1.6rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--accent);
+    flex-shrink: 0;
 }
 
 .section-title {
@@ -386,9 +424,9 @@ body {
 }
 
 .work-panel:hover {
-    border-color: rgba(11, 11, 12, 0.16);
-    transform: translateY(-3px);
-    box-shadow: 0 18px 36px rgba(11, 11, 12, 0.07);
+    border-color: rgba(11, 11, 12, 0.18);
+    transform: translateY(-5px);
+    box-shadow: 0 24px 48px rgba(11, 11, 12, 0.1);
 }
 
 .work-rail.is-dragging .work-panel:hover {
@@ -504,6 +542,9 @@ body {
 }
 
 .work-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
     color: var(--ink);
     font-weight: 600;
     font-size: 0.92rem;
@@ -512,9 +553,22 @@ body {
     transition: color 0.2s, border-color 0.2s;
 }
 
+.work-links a::after {
+    content: "↗";
+    font-size: 0.8em;
+    opacity: 0.55;
+    transform: translate(0, 0);
+    transition: transform 0.25s var(--ease), opacity 0.2s;
+}
+
 .work-links a:hover {
     color: var(--accent);
     border-bottom-color: var(--accent);
+}
+
+.work-links a:hover::after {
+    opacity: 1;
+    transform: translate(2px, -2px);
 }
 
 .work-link-ghost {
@@ -559,8 +613,10 @@ body {
 }
 
 .work-arrow:hover {
-    border-color: rgba(11, 11, 12, 0.28);
+    border-color: rgba(11, 11, 12, 0.3);
     background: #fff;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 18px rgba(11, 11, 12, 0.08);
 }
 
 .work-arrow:active {
@@ -580,6 +636,7 @@ body {
 
 .work-dot:hover {
     background: rgba(26, 24, 20, 0.45);
+    transform: scale(1.25);
 }
 
 .work-dot.is-active {
@@ -627,6 +684,20 @@ body {
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--muted);
+    transition: color 0.25s;
+}
+
+.approach-trigger:hover .approach-num,
+.approach-item.is-open .approach-num {
+    color: var(--accent);
+}
+
+.approach-label {
+    transition: transform 0.3s var(--ease);
+}
+
+.approach-trigger:hover .approach-label {
+    transform: translateX(4px);
 }
 
 .approach-label {
@@ -775,8 +846,8 @@ body {
 
 .js-ready .reveal {
     opacity: 0;
-    transform: translateY(0.55rem);
-    transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+    transform: translateY(0.65rem);
+    transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
     will-change: opacity, transform;
 }
 
@@ -785,6 +856,37 @@ body {
     transform: none;
     will-change: auto;
 }
+
+/* Hero children cascade in on load */
+.js-ready .hero-inner > .reveal { transition-duration: 0.75s; }
+.js-ready .hero-inner > .reveal:nth-child(2) { transition-delay: 0.1s; }
+.js-ready .hero-inner > .reveal:nth-child(3) { transition-delay: 0.18s; }
+.js-ready .hero-inner > .reveal:nth-child(4) { transition-delay: 0.26s; }
+
+/* Section heads: parent stays put, eyebrow → title → lead cascade instead */
+.js-ready .section-head.reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+}
+
+.js-ready .section-head .eyebrow,
+.js-ready .section-head .section-title,
+.js-ready .section-head .section-lead {
+    opacity: 0;
+    transform: translateY(0.55rem);
+    transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+}
+
+.js-ready .section-head.is-in .eyebrow,
+.js-ready .section-head.is-in .section-title,
+.js-ready .section-head.is-in .section-lead {
+    opacity: 1;
+    transform: none;
+}
+
+.js-ready .section-head.is-in .section-title { transition-delay: 0.08s; }
+.js-ready .section-head.is-in .section-lead { transition-delay: 0.16s; }
 
 /* Horizontal rail panels never use reveal opacity — off-screen cards
    would stay invisible because IntersectionObserver can't see them. */
@@ -795,7 +897,10 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .js-ready .reveal {
+    .js-ready .reveal,
+    .js-ready .section-head .eyebrow,
+    .js-ready .section-head .section-title,
+    .js-ready .section-head .section-lead {
         opacity: 1;
         transform: none;
         transition: none;
