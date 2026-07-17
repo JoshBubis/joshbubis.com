@@ -76,7 +76,7 @@
     .then(function (cfg) {
       if (!cfg || !cfg.configured || !cfg.sitekey) {
         if (statusEl) {
-          statusEl.textContent = "Contact form isn’t ready yet — email joshbubis@gmail.com for now.";
+          statusEl.textContent = "Contact form isn’t ready yet — email josh@joshbubis.com for now.";
         }
         return;
       }
@@ -85,7 +85,7 @@
     })
     .catch(function () {
       if (statusEl) {
-        statusEl.textContent = "Couldn’t reach bot protection — email joshbubis@gmail.com.";
+        statusEl.textContent = "Couldn’t reach bot protection — email josh@joshbubis.com.";
       }
     });
 

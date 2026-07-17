@@ -39,10 +39,7 @@ html {
 }
 
 body {
-    background:
-        radial-gradient(ellipse 90% 60% at 80% -10%, rgba(200, 30, 30, 0.06), transparent 55%),
-        radial-gradient(ellipse 70% 50% at 0% 40%, rgba(11, 11, 12, 0.04), transparent 50%),
-        var(--paper);
+    background: var(--paper);
     color: var(--ink);
     font-family: var(--font-body);
     font-size: 1.0625rem;
@@ -250,27 +247,116 @@ body {
     overflow: hidden;
 }
 
+/* Drafting-table backdrop: ruled baselines instead of glow */
 .hero::before {
     content: "";
     position: absolute;
-    right: -12%;
-    top: 8%;
-    width: min(58vw, 36rem);
-    height: min(58vw, 36rem);
-    border-radius: 50%;
-    background:
-        radial-gradient(circle at 35% 35%, rgba(200, 30, 30, 0.16), transparent 58%),
-        radial-gradient(circle at 70% 70%, rgba(11, 11, 12, 0.06), transparent 55%);
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(11, 11, 12, 0.05) 0,
+        rgba(11, 11, 12, 0.05) 1px,
+        transparent 1px,
+        transparent 4rem
+    );
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 82%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 82%, transparent);
+}
+
+/* One red margin rule, drawn in on load */
+.hero::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 72%;
+    width: 1px;
+    z-index: 0;
+    pointer-events: none;
+    background: rgba(200, 30, 30, 0.3);
+    transform-origin: top;
+    animation: hero-rule-draw 1.2s var(--ease) 0.15s backwards;
+}
+
+@keyframes hero-rule-draw {
+    from {
+        transform: scaleY(0);
+    }
+
+    to {
+        transform: scaleY(1);
+    }
+}
+
+.hero-plate {
+    position: absolute;
+    inset: 0;
     z-index: 0;
     pointer-events: none;
 }
 
-.hero-canvas {
+/* Print registration crosshairs */
+.hero-reg {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
+    width: 0.85rem;
+    height: 0.85rem;
+}
+
+.hero-reg::before,
+.hero-reg::after {
+    content: "";
+    position: absolute;
+    background: rgba(200, 30, 30, 0.55);
+}
+
+.hero-reg::before {
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+}
+
+.hero-reg::after {
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+}
+
+.hero-reg--tl {
+    top: calc(var(--header-offset) + 1.25rem);
+    left: var(--pad);
+}
+
+.hero-reg--br {
+    right: var(--pad);
+    bottom: 4.25rem;
+}
+
+/* Specimen label — type-foundry caption along the hero's bottom margin */
+.hero-specimen {
+    position: absolute;
+    left: var(--pad);
+    right: var(--pad);
+    bottom: 1.4rem;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+}
+
+.hero-specimen__no {
+    color: var(--accent);
+    margin-right: 0.65rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero::after {
+        animation: none;
+    }
 }
 
 .hero-inner {
@@ -322,6 +408,11 @@ body {
     padding: clamp(4.5rem, 12vh, 8rem) var(--pad);
     position: relative;
     z-index: 1;
+}
+
+/* Hairline rules delineate sections — print margins, not glow washes */
+main > .section {
+    border-top: 1px solid var(--line);
 }
 
 .section-head {
@@ -378,16 +469,28 @@ body {
 }
 
 .work-rail {
-    overflow: hidden;
+    /* Positioned so absolute descendants (sr-only spans) anchor to the rail
+       and stay inside its scroll containment instead of widening the page. */
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
     padding: 0.25rem 0 1.5rem;
     cursor: grab;
-    touch-action: pan-y;
+    scroll-snap-type: x proximity;
+    scroll-padding-left: var(--pad);
+    scrollbar-width: none;
+}
+
+.work-rail::-webkit-scrollbar {
+    display: none;
 }
 
 .work-rail.is-dragging {
     cursor: grabbing;
     user-select: none;
     -webkit-user-select: none;
+    /* Snap re-engages on release; off mid-drag so it doesn't fight the pointer */
+    scroll-snap-type: none;
 }
 
 .work-rail.is-dragging * {
@@ -405,8 +508,7 @@ body {
     gap: 1.25rem;
     width: max-content;
     padding-left: var(--pad);
-    will-change: transform;
-    transform: translate3d(0, 0, 0);
+    padding-right: var(--pad);
 }
 
 .work-panel {
@@ -418,15 +520,16 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
-    border-radius: 16px;
-    box-shadow: 0 12px 32px rgba(11, 11, 12, 0.045);
+    border-radius: 2px;
+    scroll-snap-align: start;
     transition: border-color 0.4s var(--ease), transform 0.5s var(--ease), box-shadow 0.5s var(--ease);
 }
 
 .work-panel:hover {
-    border-color: rgba(11, 11, 12, 0.18);
-    transform: translateY(-5px);
-    box-shadow: 0 24px 48px rgba(11, 11, 12, 0.1);
+    border-color: rgba(11, 11, 12, 0.3);
+    transform: translateY(-2px);
+    /* Red top rule on hover — the plate's index color, not a glow */
+    box-shadow: inset 0 2px 0 var(--accent), 0 10px 24px rgba(11, 11, 12, 0.06);
 }
 
 .work-rail.is-dragging .work-panel:hover {
@@ -448,27 +551,29 @@ body {
     background: linear-gradient(165deg, #f7f8fa 0%, #eceef2 100%);
 }
 
-.work-shot__chrome {
+/* Plate label — printed index line above each screenshot */
+.work-plate__label {
     display: flex;
-    align-items: center;
-    gap: 0.35rem;
-    padding: 0.48rem 0.8rem;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.5rem 0.85rem;
     border: 1px solid rgba(11, 11, 12, 0.07);
-    border-bottom: 0;
-    border-radius: 12px 12px 0 0;
-    background: linear-gradient(180deg, #fcfcfd, #f3f4f7);
+    border-bottom: 1px solid var(--line);
+    background: #fcfcfd;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
 }
 
-.work-shot__chrome span {
-    width: 0.38rem;
-    height: 0.38rem;
-    border-radius: 50%;
-    background: rgba(11, 11, 12, 0.14);
+.work-plate__no {
+    color: var(--accent);
 }
 
-.work-shot__chrome span:nth-child(1) { background: #ff5f57; }
-.work-shot__chrome span:nth-child(2) { background: #febc2e; }
-.work-shot__chrome span:nth-child(3) { background: #28c840; }
+.work-plate__domain {
+    color: var(--muted);
+}
 
 .work-shot__frame {
     position: relative;
@@ -482,7 +587,7 @@ body {
     overflow: hidden;
     border: 1px solid rgba(11, 11, 12, 0.07);
     border-top: 0;
-    border-radius: 0 0 12px 12px;
+    border-radius: 0;
     background:
         linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent 40%),
         #d9dce2;
@@ -494,7 +599,7 @@ body {
     height: 100%;
     object-fit: contain;
     object-position: top center;
-    border-radius: 4px;
+    border-radius: 2px;
     background: #fff;
     box-shadow:
         0 0 0 1px rgba(11, 11, 12, 0.06),
@@ -569,14 +674,6 @@ body {
 .work-links a:hover::after {
     opacity: 1;
     transform: translate(2px, -2px);
-}
-
-.work-link-ghost {
-    color: var(--ink);
-    font-weight: 600;
-    font-size: 0.92rem;
-    opacity: 0.55;
-    pointer-events: none;
 }
 
 .work-controls {
@@ -1052,6 +1149,10 @@ body {
         padding-bottom: 0.85rem;
     }
 
+    .hero-reg {
+        display: none;
+    }
+
     .site-nav {
         width: 100%;
         justify-content: flex-start;
@@ -1065,5 +1166,267 @@ body {
     .work-panel {
         flex-basis: min(88vw, 24rem);
         min-height: auto;
+    }
+}
+
+/* —— Studio chat widget —— */
+.chat-fab {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    z-index: 150;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.05rem;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--ink);
+    border-radius: 2px;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 0 10px 24px rgba(11, 11, 12, 0.18);
+    transition: background 0.2s, transform 0.25s var(--ease);
+}
+
+.chat-fab:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+}
+
+.chat-fab__no {
+    color: var(--accent);
+    font-family: var(--font-display);
+}
+
+.chat-fab:hover .chat-fab__no {
+    color: var(--paper);
+}
+
+.chat-panel {
+    position: fixed;
+    right: 1.25rem;
+    bottom: 4.5rem;
+    z-index: 151;
+    display: flex;
+    flex-direction: column;
+    width: min(24rem, calc(100vw - 2.5rem));
+    max-height: min(34rem, calc(100dvh - 7rem));
+    background: var(--paper);
+    border: 1px solid var(--ink);
+    border-radius: 2px;
+    box-shadow: 0 24px 56px rgba(11, 11, 12, 0.22);
+}
+
+/* display:flex above would otherwise defeat the hidden attribute */
+.chat-panel[hidden] {
+    display: none;
+}
+
+.chat-panel--in {
+    animation: chat-panel-in 0.3s var(--ease);
+}
+
+@keyframes chat-panel-in {
+    from {
+        opacity: 0;
+        transform: translateY(0.6rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.chat-panel__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.8rem 1rem 0.5rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.chat-panel__title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+}
+
+.chat-panel__no {
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    margin-right: 0.55rem;
+    vertical-align: 0.12em;
+}
+
+.chat-panel__close {
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0.1rem 0.3rem;
+}
+
+.chat-panel__close:hover {
+    color: var(--ink);
+}
+
+.chat-panel__status {
+    padding: 0.4rem 1rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+}
+
+.chat-panel__status--live {
+    color: var(--accent);
+}
+
+.chat-log {
+    flex: 1;
+    min-height: 6rem;
+    overflow-y: auto;
+    padding: 0.9rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.chat-msg__who {
+    display: block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.15rem;
+}
+
+.chat-msg--josh .chat-msg__who {
+    color: var(--accent);
+}
+
+.chat-msg__body {
+    font-size: 0.92rem;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    max-width: 90%;
+}
+
+.chat-msg--visitor .chat-msg__body {
+    margin-left: auto;
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.5rem 0.75rem;
+    border-radius: 2px;
+}
+
+.chat-msg--assistant .chat-msg__body,
+.chat-msg--josh .chat-msg__body {
+    background: #fff;
+    border: 1px solid var(--line);
+    padding: 0.5rem 0.75rem;
+    border-radius: 2px;
+}
+
+.chat-msg--josh .chat-msg__body {
+    border-top: 2px solid var(--accent);
+}
+
+.chat-msg--system .chat-msg__body {
+    color: var(--muted);
+    font-style: italic;
+    font-size: 0.85rem;
+}
+
+.chat-prechat {
+    padding: 0.9rem 1rem 0;
+}
+
+.chat-prechat__lead {
+    font-size: 0.92rem;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+}
+
+.chat-turnstile {
+    min-height: 0;
+}
+
+.chat-note {
+    padding: 0.35rem 1rem;
+    font-size: 0.82rem;
+    color: var(--muted);
+}
+
+.chat-note a {
+    color: var(--ink);
+    font-weight: 600;
+}
+
+.chat-restart {
+    margin: 0.25rem 0 0.5rem;
+}
+
+.chat-form {
+    display: flex;
+    gap: 0.5rem;
+    align-items: flex-end;
+    padding: 0.75rem 1rem 0.9rem;
+    border-top: 1px solid var(--line);
+}
+
+.chat-input {
+    flex: 1;
+    resize: none;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: #fff;
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+}
+
+.chat-input:focus {
+    outline: none;
+    border-color: var(--ink);
+}
+
+.chat-send {
+    padding: 0.55rem 1rem;
+    font-size: 0.85rem;
+}
+
+.chat-hp {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .chat-panel--in {
+        animation: none;
+    }
+
+    .chat-fab {
+        transition: background 0.2s;
     }
 }

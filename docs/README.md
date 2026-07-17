@@ -8,12 +8,16 @@ and Hub [`AGENTS.md`](/Users/jbair/Projects/hub/AGENTS.md) § Sibling projects.
 
 ### Structure
 
-- `index.html` — hero, work rail (static shots + arrows/dots/drag), approach, about, CTA
+- `index.html` — hero (print-registration treatment: ruled grid, red margin rule, crosshairs, specimen label — no canvas), work rail (native scroll-snap; arrows/dots/keyboard/drag are user-initiated, no auto-drift), approach, about, CTA
 - `contact.html` + `contact.js` — form UI → Hub `/webhooks/contact`
+- `chat.js` — concierge chat widget → Hub `/webhooks/chat` (polling, no websockets). **Beta-gated:** renders only when `localStorage.jb_chat_beta === "1"`; flip `BETA_GATE` to false in `chat.js` to open it to everyone
 - `style.css` / `studio.css` — keep `studio.css` a copy of `style.css`
-- `script.js` — reveals (hero + section-head cascades), work-rail drift/drag/arrows (hover eases drift to ~30%, never freezes)
+- `script.js` — reveals (hero + section-head cascades), work-rail scroll/dots/drag
 - `images/work/*.jpg` — manual Playwright captures (`npm run capture-work`)
 - `AGENTS.md` — agent routing + shipping rules
+
+Work-rail panels use flat "plate" labels (`Nº 01 · domain`) instead of browser
+chrome; screenshots stay clickable through `.work-shot-link`.
 
 ### Boundaries
 
