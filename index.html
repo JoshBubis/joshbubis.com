@@ -22,7 +22,7 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
     <link rel="stylesheet" href="fonts.css">
-    <link rel="stylesheet" href="style.css?v=atelier18">
+    <link rel="stylesheet" href="style.css?v=atelier19">
 </head>
 
 <body>
@@ -34,6 +34,7 @@
         <nav class="site-nav" aria-label="Primary">
             <a href="#work">Work</a>
             <a href="#approach">Approach</a>
+            <a href="#process">Process</a>
             <a href="#about">About</a>
             <a href="contact.html" class="nav-cta">Start a project</a>
         </nav>
@@ -47,12 +48,12 @@
                 <p class="hero-specimen"><span class="jb-mark"><span class="jb-mark__j">J</span>B</span><span>Custom websites — designed &amp; built by hand</span></p>
             </div>
             <div class="hero-inner">
-                <h1 class="brand reveal" data-reveal>
-                    <span class="brand-line">Josh</span>
-                    <span class="brand-line">Bubis</span>
+                <h1 class="brand reveal" data-reveal aria-label="Josh Bubis">
+                    <span class="brand-line" aria-hidden="true"><span class="brand-ch">J</span><span class="brand-ch">o</span><span class="brand-ch">s</span><span class="brand-ch">h</span></span>
+                    <span class="brand-line" aria-hidden="true"><span class="brand-ch">B</span><span class="brand-ch">u</span><span class="brand-ch">b</span><span class="brand-ch">i</span><span class="brand-ch">s</span></span>
                 </h1>
                 <p class="hero-headline reveal" data-reveal>
-                    Sites with craft you can feel.
+                    Sites with craft you can <em class="hero-feel">feel</em>.
                 </p>
                 <p class="hero-sub reveal" data-reveal>
                     Custom websites for people and small businesses — shipped clean, fast, and built to last.
@@ -229,6 +230,55 @@
             </ul>
         </section>
 
+        <section id="process" class="section process-section">
+            <div class="section-head reveal" data-reveal>
+                <p class="eyebrow">How it goes down</p>
+                <h2 class="section-title">From “hi” to live, in five steps.</h2>
+                <p class="section-lead">No mystery, no agency runaround. Here’s exactly what working together looks like.</p>
+            </div>
+
+            <div class="process-flow">
+                <div class="process-rail" aria-hidden="true"><span class="process-rail-fill" id="process-rail-fill"></span></div>
+                <ol class="process-list">
+                    <li class="process-step reveal" data-reveal>
+                        <span class="process-num" aria-hidden="true">01</span>
+                        <div class="process-body">
+                            <h3 class="process-title">Say hi</h3>
+                            <p>Use the form, the chat, or plain email. You’re talking to me — the person who designs and builds it — and you’ll usually hear back the same day.</p>
+                        </div>
+                    </li>
+                    <li class="process-step reveal" data-reveal>
+                        <span class="process-num" aria-hidden="true">02</span>
+                        <div class="process-body">
+                            <h3 class="process-title">We scope it together</h3>
+                            <p>A short conversation about what you need and what it’s for. You get one fixed price and a real timeline — no hourly meter, no surprise invoices.</p>
+                        </div>
+                    </li>
+                    <li class="process-step reveal" data-reveal>
+                        <span class="process-num" aria-hidden="true">03</span>
+                        <div class="process-body">
+                            <h3 class="process-title">Sign online, kick off</h3>
+                            <p>I send a plain-English contract you sign right in your browser, and a deposit locks in your slot. The whole thing takes about five minutes.</p>
+                        </div>
+                    </li>
+                    <li class="process-step reveal" data-reveal>
+                        <span class="process-num" aria-hidden="true">04</span>
+                        <div class="process-body">
+                            <h3 class="process-title">I build, you watch</h3>
+                            <p>Days, not months. You get a private preview link while it takes shape, and a round of revisions once the draft is ready — so launch day has zero surprises.</p>
+                        </div>
+                    </li>
+                    <li class="process-step reveal" data-reveal>
+                        <span class="process-num" aria-hidden="true">05</span>
+                        <div class="process-body">
+                            <h3 class="process-title">Launch — and you own it</h3>
+                            <p>Your site goes live on your domain, in your own hosting account, with the source files handed over. No platform fees, no monthly ransom to keep your own website.</p>
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
         <section id="about" class="section about-section">
             <div class="about-grid reveal" data-reveal>
                 <p class="eyebrow">About</p>
@@ -242,6 +292,7 @@
         </section>
 
         <section id="close" class="section close-section reveal" data-reveal>
+            <span class="jb-mark jb-mark--lg" aria-hidden="true"><span class="jb-mark__j">J</span>B</span>
             <h2 class="close-title">Tell me what you’re building.</h2>
             <p class="close-sub">Scope, timeline, examples you like — I’ll reply personally from josh@joshbubis.com.</p>
             <a href="contact.html" class="btn btn-primary btn-arrow">Start a project</a>
@@ -257,8 +308,8 @@
         </div>
     </footer>
 
-    <script src="script.js?v=atelier18"></script>
-    <script src="chat.js?v=atelier18" defer></script>
+    <script src="script.js?v=atelier19"></script>
+    <script src="chat.js?v=atelier19" defer></script>
 </body>
 
 </html>

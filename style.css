@@ -264,6 +264,10 @@ body {
     color: var(--accent);
 }
 
+.jb-mark--lg {
+    font-size: 1.15rem;
+}
+
 /* —— Hero —— */
 .hero {
     position: relative;
@@ -403,6 +407,24 @@ body {
 
 .brand-line {
     display: block;
+}
+
+/* "Craft you can feel", literally — letters lift under the cursor */
+.brand-ch {
+    display: inline-block;
+    transition: transform 0.3s var(--ease), color 0.3s var(--ease);
+}
+
+@media (hover: hover) {
+    .brand-ch:hover {
+        transform: translateY(-0.07em);
+        color: var(--accent);
+    }
+}
+
+.hero-feel {
+    font-style: normal;
+    color: var(--accent);
 }
 
 .hero-headline {
@@ -875,6 +897,87 @@ main > .section {
     .approach-item:hover .approach-chevron {
         transform: rotate(225deg);
     }
+}
+
+/* —— Process (how it goes down) —— */
+.process-flow {
+    position: relative;
+    max-width: 44rem;
+}
+
+/* The spine: a rule that inks in as you scroll the steps */
+.process-rail {
+    position: absolute;
+    left: 1.2rem;
+    top: 1.1rem;
+    bottom: 2.4rem;
+    width: 1px;
+    background: var(--line);
+}
+
+.process-rail-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: scaleY(0);
+    transform-origin: top;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .process-rail-fill {
+        transform: none;
+    }
+}
+
+.process-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.process-step {
+    display: grid;
+    grid-template-columns: 2.4rem 1fr;
+    gap: 1.5rem;
+    padding: 1.4rem 0;
+}
+
+/* Step chip sits on the rail like a station on a line */
+.process-num {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: var(--muted);
+    transition: border-color 0.4s var(--ease), color 0.4s var(--ease);
+}
+
+.process-step.is-in .process-num {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.process-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.15rem, 2.2vw, 1.45rem);
+    letter-spacing: -0.02em;
+    margin: 0.35rem 0 0.4rem;
+}
+
+.process-body p {
+    color: var(--muted);
+    max-width: 52ch;
+    margin: 0;
 }
 
 /* —— About —— */

@@ -20,6 +20,33 @@
   onScrollHeader();
   window.addEventListener("scroll", onScrollHeader, { passive: true });
 
+  /* Process spine inks in as the steps pass — plain scroll math, rAF-throttled */
+  var processFlow = document.querySelector(".process-flow");
+  var processFill = document.getElementById("process-rail-fill");
+  if (processFlow && processFill) {
+    if (reduceMotion) {
+      processFill.style.transform = "none";
+    } else {
+      var processQueued = false;
+      var applyProcessFill = function () {
+        processQueued = false;
+        var rect = processFlow.getBoundingClientRect();
+        var viewLine = window.innerHeight * 0.72;
+        var progress = (viewLine - rect.top) / rect.height;
+        progress = Math.max(0, Math.min(1, progress));
+        processFill.style.transform = "scaleY(" + progress.toFixed(4) + ")";
+      };
+      var onScrollProcess = function () {
+        if (processQueued) return;
+        processQueued = true;
+        requestAnimationFrame(applyProcessFill);
+      };
+      onScrollProcess();
+      window.addEventListener("scroll", onScrollProcess, { passive: true });
+      window.addEventListener("resize", onScrollProcess, { passive: true });
+    }
+  }
+
   /* In-page nav: smooth only on click (wheel/trackpad stay native) */
   document.querySelectorAll('a[href^="#"]').forEach(function (link) {
     link.addEventListener("click", function (e) {
