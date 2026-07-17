@@ -1,8 +1,8 @@
 /* Studio chat widget — talks to hub.joshbubis.com concierge endpoints.
-   Beta gate: renders only when localStorage jb_chat_beta === "1".
-   Remove the gate check below to open it to everyone. */
+   Beta gate (off = public): when true, renders only when
+   localStorage jb_chat_beta === "1". */
 (function () {
-  var BETA_GATE = true;
+  var BETA_GATE = false;
   try {
     if (BETA_GATE && window.localStorage.getItem("jb_chat_beta") !== "1") return;
   } catch (_) {
