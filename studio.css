@@ -329,42 +329,33 @@ body {
     pointer-events: none;
 }
 
-/* Print registration crosshairs */
-.hero-reg {
+/* The maker's stamp — one confident object, pressed onto the red rule */
+.hero-stamp {
     position: absolute;
-    width: 0.85rem;
-    height: 0.85rem;
+    left: 72%;
+    top: 26%;
+    font-size: 3rem;
+    transform: translateX(-50%) rotate(-8deg);
+    box-shadow: 0 18px 44px rgba(11, 11, 12, 0.16);
+    animation: hero-stamp-press 0.45s var(--ease) 0.95s backwards;
 }
 
-.hero-reg::before,
-.hero-reg::after {
-    content: "";
-    position: absolute;
-    background: rgba(200, 30, 30, 0.55);
+@keyframes hero-stamp-press {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) rotate(-8deg) scale(1.14);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) rotate(-8deg) scale(1);
+    }
 }
 
-.hero-reg::before {
-    left: 50%;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-}
-
-.hero-reg::after {
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-}
-
-.hero-reg--tl {
-    top: calc(var(--header-offset) + 1.25rem);
-    left: var(--pad);
-}
-
-.hero-reg--br {
-    right: var(--pad);
-    bottom: 4.25rem;
+@media (max-width: 900px) {
+    .hero-stamp {
+        display: none;
+    }
 }
 
 /* Maker's line — signature along the hero's bottom margin */
@@ -385,6 +376,10 @@ body {
 
 @media (prefers-reduced-motion: reduce) {
     .hero::after {
+        animation: none;
+    }
+
+    .hero-stamp {
         animation: none;
     }
 }
@@ -1272,10 +1267,6 @@ main > .section {
         flex-direction: column;
         align-items: flex-start;
         padding-bottom: 0.85rem;
-    }
-
-    .hero-reg {
-        display: none;
     }
 
     .site-nav {
