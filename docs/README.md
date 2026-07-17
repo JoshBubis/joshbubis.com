@@ -16,8 +16,10 @@ and Hub [`AGENTS.md`](/Users/jbair/Projects/hub/AGENTS.md) § Sibling projects.
 - `images/work/*.jpg` — manual Playwright captures (`npm run capture-work`)
 - `AGENTS.md` — agent routing + shipping rules
 
-Work-rail panels use flat "plate" labels (`Nº 01 · domain`) instead of browser
-chrome; screenshots stay clickable through `.work-shot-link`.
+Work-rail panels use flat "plate" labels (JB maker's mark + domain) instead of
+browser chrome; screenshots stay clickable through `.work-shot-link`. The
+`.jb-mark` chip (ink block, red J — the favicon in type) is the brand mark;
+reuse it rather than inventing new label motifs.
 
 ### Boundaries
 

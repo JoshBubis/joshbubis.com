@@ -236,6 +236,34 @@ body {
     will-change: transform;
 }
 
+/* —— JB maker's mark —— */
+/* The favicon set in type: ink block, red J stroke. One mark, used everywhere
+   a signature belongs — hero, work plates, chat. */
+.jb-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 2em;
+    height: 2em;
+    padding: 0 0.45em;
+    flex-shrink: 0;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 2px;
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 1em;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-transform: none;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.jb-mark__j {
+    color: var(--accent);
+}
+
 /* —— Hero —— */
 .hero {
     position: relative;
@@ -335,22 +363,20 @@ body {
     bottom: 4.25rem;
 }
 
-/* Specimen label — type-foundry caption along the hero's bottom margin */
+/* Maker's line — signature along the hero's bottom margin */
 .hero-specimen {
     position: absolute;
     left: var(--pad);
     right: var(--pad);
     bottom: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
     font-size: 0.68rem;
     font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--muted);
-}
-
-.hero-specimen__no {
-    color: var(--accent);
-    margin-right: 0.65rem;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -551,13 +577,13 @@ main > .section {
     background: linear-gradient(165deg, #f7f8fa 0%, #eceef2 100%);
 }
 
-/* Plate label — printed index line above each screenshot */
+/* Plate label — maker's mark + domain above each screenshot */
 .work-plate__label {
     display: flex;
-    align-items: baseline;
+    align-items: center;
     justify-content: space-between;
     gap: 0.75rem;
-    padding: 0.5rem 0.85rem;
+    padding: 0.45rem 0.85rem;
     border: 1px solid rgba(11, 11, 12, 0.07);
     border-bottom: 1px solid var(--line);
     background: #fcfcfd;
@@ -565,10 +591,6 @@ main > .section {
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-}
-
-.work-plate__no {
-    color: var(--accent);
 }
 
 .work-plate__domain {
@@ -1177,10 +1199,10 @@ main > .section {
     z-index: 150;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.7rem 1.05rem;
-    background: var(--ink);
-    color: var(--paper);
+    gap: 0.55rem;
+    padding: 0.55rem 0.9rem 0.55rem 0.55rem;
+    background: var(--paper);
+    color: var(--ink);
     border: 1px solid var(--ink);
     border-radius: 2px;
     font-family: var(--font-body);
@@ -1190,22 +1212,12 @@ main > .section {
     text-transform: uppercase;
     cursor: pointer;
     box-shadow: 0 10px 24px rgba(11, 11, 12, 0.18);
-    transition: background 0.2s, transform 0.25s var(--ease);
+    transition: border-color 0.2s, transform 0.25s var(--ease);
 }
 
 .chat-fab:hover {
-    background: var(--accent);
     border-color: var(--accent);
     transform: translateY(-2px);
-}
-
-.chat-fab__no {
-    color: var(--accent);
-    font-family: var(--font-display);
-}
-
-.chat-fab:hover .chat-fab__no {
-    color: var(--paper);
 }
 
 .chat-panel {
@@ -1254,19 +1266,17 @@ main > .section {
 }
 
 .chat-panel__title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
     font-family: var(--font-display);
     font-weight: 700;
     font-size: 1rem;
     letter-spacing: -0.01em;
 }
 
-.chat-panel__no {
-    color: var(--accent);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.14em;
-    margin-right: 0.55rem;
-    vertical-align: 0.12em;
+.chat-panel__title .jb-mark {
+    font-size: 0.72rem;
 }
 
 .chat-panel__close {
