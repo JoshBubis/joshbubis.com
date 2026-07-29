@@ -19,8 +19,8 @@ without heavy date ranges, and skills spanning build / ship / IT tooling.
 - `fonts/` + `fonts.css` — self-hosted Instrument Sans + Syne.
 - `favicon.svg` — the JB maker's mark (ink block, red J, paper B).
 
-Experience dates are intentionally light on the page; the PDF résumé Josh
-attaches to applications can carry the full timeline.
+Experience is date-light and employer-anonymous on the page; the PDF résumé
+Josh attaches to applications can carry employers and the full timeline.
 
 ### Boundaries
 

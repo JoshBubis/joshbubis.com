@@ -24,9 +24,10 @@ does not belong on this site.
 
 ## Content notes
 
-- Experience is **date-light on purpose** (roles + outcomes). Full dates live
-  on the PDF résumé Josh attaches to applications; the page says he’s happy
-  to walk through timing in an interview.
+- Experience is **date-light and employer-anonymous on purpose** (capability
+  clusters + outcomes, no company names). Full employers/dates live on the
+  PDF résumé Josh attaches to applications; the page says he’s happy to walk
+  through timing in an interview.
 - Do **not** invent employers, titles, or education. Stick to what Josh has
   confirmed (current source of truth was his 2026 PDF + this page).
 - Phone number: keep off the public page unless he asks — email + LinkedIn +
