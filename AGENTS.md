@@ -1,37 +1,49 @@
 # AGENTS.md — joshbubis.com
 
-Static GitHub Pages portfolio / hireable site.
-`/Users/jbair/Projects/joshbubis.com`.
+Static GitHub Pages **résumé one-pager**. `/Users/jbair/Projects/joshbubis.com`.
 
-## Hybrid with Hub (keep this in mind)
+## What this site is (and is not)
 
-This site is the **public face**. Hub owns Studio, contracts, contact verify,
-Vault, and Access. Cursor often has Hub open as the workspace — still edit
-**this** folder for portfolio UI. Do not merge the two repos unless Josh asks.
+As of the 2026-07-29 rebrand this is a plain professional résumé for job
+applications. It is **not** the studio. The "I sell custom websites" site moved to
+`josh.menu` — see `/Users/jbair/Projects/josh.menu`.
 
-| Host | Owns it |
-|---|---|
-| `joshbubis.com` | **This repo** (Pages) |
-| `hub.joshbubis.com` / `studio.joshbubis.com` / `contracts.joshbubis.com` | Hub |
+**Do not add, and remove on sight:**
+
+- Selling copy, pricing, packages, or calls to action to hire a studio.
+- The concierge chat widget or any contact form. Contact is a plain `mailto:`.
+- Any link to `josh.menu`, `contracts.josh.menu`, or `studio.josh.menu`.
+
+That separation is the whole point: an employer who finds this page should see a
+software engineer, not a side business. The studio site likewise never links here.
+
+Contact address here is `josh@joshbubis.com`. The studio's `josh@josh.menu` does
+not belong on this site.
+
+## Content that only Josh can fill in
+
+The page ships without employment history or education because those were not
+mine to invent. If he wants them, add sections in the same shape as
+`Selected work` — the CSS already covers them.
+
+## Structure
+
+- `index.html` — the whole page. No JS beyond a one-line copyright year.
+- `resume.css` — self-contained. Deliberately not the studio's `style.css`;
+  that stylesheet lives in the `josh.menu` repo now. Includes a print stylesheet.
+- `fonts/` + `fonts.css` — self-hosted Instrument Sans + Syne.
+- `favicon.svg` — the JB maker's mark. This is Josh's personal mark and is
+  correct here; the studio uses a JM variant.
+
+## Shipping
+
+1. Bump `?v=` on `resume.css` when styles change.
+2. Push `main` → GitHub Pages. CDN can lag ~10 minutes.
+3. Update `docs/README.md` when structure changes.
 
 | Change | Folder |
 |---|---|
-| HTML/CSS/JS, work rail, screenshots, contact form UI | this repo |
-| Turnstile secret, SES, Vault, Studio/Client Work | `/Users/jbair/Projects/hub` |
+| This résumé page | this repo |
+| Studio sales site | `/Users/jbair/Projects/josh.menu` |
+| Vault, SES, Access, Studio backend | `/Users/jbair/Projects/hub` |
 | Product apps | Their own folders |
-
-## Shipping (user-visible)
-
-1. Bump `?v=` on `style.css` / `script.js` (and images if JPEGs changed).
-2. `cp style.css studio.css` when styles change.
-3. Push `main`. CDN/HTML can lag ~10 minutes.
-4. Update `docs/README.md` when structure/behavior changes.
-
-## Easy foot-guns
-
-- Work shots are **static JPEGs** (`images/work/`), not live. Refresh with
-  `npm install && npm run capture-work`, then commit.
-- Do **not** put scroll-reveal opacity on work panels (off-screen rail cards stay invisible).
-- Nav jumps: `scroll-padding-top` only — never also `scroll-margin-top` on sections.
-
-Hub details: `/Users/jbair/Projects/hub/AGENTS.md`, `docs/portfolio-contact.md`, `docs/studio.md`.

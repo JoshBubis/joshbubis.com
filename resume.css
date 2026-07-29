@@ -1,0 +1,268 @@
+/* joshbubis.com — résumé one-pager.
+   Same paper-and-ink language as the studio site (hairline rules, one red accent),
+   but deliberately none of its sales apparatus. Self-contained on purpose: the
+   marketing stylesheet lives in the josh.menu repo now. */
+
+:root {
+    --paper: #f3f4f6;
+    --paper-deep: #e8eaee;
+    --ink: #0b0b0c;
+    --muted: #4a4f56;
+    --accent: #c81e1e;
+    --line: rgba(11, 11, 12, 0.12);
+    --focus: rgba(200, 30, 30, 0.45);
+
+    --font-display: "Syne", sans-serif;
+    --font-body: "Instrument Sans", sans-serif;
+
+    --pad: clamp(1.25rem, 5vw, 2.5rem);
+    --max: 48rem;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    /* Long-form reading: keep the measure narrow even on wide screens. */
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: var(--ink);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    transition: border-color 140ms ease, color 140ms ease;
+}
+
+a:hover,
+a:focus-visible {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+
+:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+}
+
+.skip-link {
+    position: absolute;
+    left: -9999px;
+}
+
+.skip-link:focus {
+    left: var(--pad);
+    top: var(--pad);
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.5rem 0.85rem;
+    border: 0;
+    z-index: 10;
+}
+
+.wrap {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: clamp(2.5rem, 8vw, 5rem) var(--pad) clamp(3rem, 8vw, 5rem);
+}
+
+/* —— Maker's mark: ink block, red J, paper B —— */
+.jb-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.02em;
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.7rem;
+    letter-spacing: 0.02em;
+    line-height: 1;
+    padding: 0.32em 0.4em;
+    border-radius: 2px;
+}
+
+.jb-mark__j {
+    color: var(--accent);
+}
+
+/* —— Header —— */
+.masthead {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.masthead__name {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: clamp(2rem, 7vw, 3rem);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.masthead__role {
+    margin: 0;
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    color: var(--muted);
+    max-width: 34rem;
+}
+
+.masthead__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem 1rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.masthead__meta a {
+    color: var(--muted);
+}
+
+/* —— Sections —— */
+.section {
+    margin-top: clamp(2rem, 6vw, 2.75rem);
+}
+
+.section__title {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 1rem;
+}
+
+.prose p {
+    margin: 0 0 0.85rem;
+    max-width: 40rem;
+}
+
+.prose p:last-child {
+    margin-bottom: 0;
+}
+
+/* —— Work list —— */
+.work {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.1rem;
+}
+
+.work__item {
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.work__item:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.work__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 0.75rem;
+}
+
+.work__name {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin: 0;
+}
+
+.work__domain {
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.work__desc {
+    margin: 0.35rem 0 0;
+    color: var(--muted);
+    max-width: 40rem;
+}
+
+/* —— Stack —— */
+.stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.stack li {
+    font-size: 0.85rem;
+    color: var(--muted);
+    background: var(--paper-deep);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 0.22rem 0.5rem;
+}
+
+/* —— Footer —— */
+.foot {
+    margin-top: clamp(2.5rem, 7vw, 3.5rem);
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+}
+
+.foot a {
+    color: var(--muted);
+}
+
+@media print {
+    :root {
+        --paper: #fff;
+    }
+
+    body {
+        font-size: 11pt;
+    }
+
+    .skip-link,
+    .foot {
+        display: none;
+    }
+
+    a {
+        border-bottom: 0;
+    }
+
+    .wrap {
+        padding: 0;
+        max-width: none;
+    }
+}

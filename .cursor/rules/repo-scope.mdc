@@ -1,12 +1,17 @@
 ---
-description: Static portfolio only — Hub owns Studio, contracts, and contact backend
+description: Résumé one-pager only — the studio sales site lives in the josh.menu repo
 alwaysApply: true
 ---
 
 # joshbubis.com scope
 
-Edit static public site files here only. Studio/Client Work, Vault, SES, and
-Turnstile verify live in `/Users/jbair/Projects/hub`. See `AGENTS.md`.
+This repo is a plain professional **résumé** page for job applications. The studio
+("I sell custom websites") moved to `/Users/jbair/Projects/josh.menu` on 2026-07-29.
 
-Work shots are static JPEGs (not live). Bump `?v=` when shipping. Do not stack
-`scroll-margin-top` on sections with `scroll-padding-top`.
+Do not add — and remove on sight — selling copy, pricing, packages, hire-me calls
+to action, the concierge chat widget, or any contact form. Contact is a `mailto:` to
+`josh@joshbubis.com`. Never link to `josh.menu` or any studio hostname; the studio
+never links here either. That separation is the point.
+
+Styles live in self-contained `resume.css` (not the studio's `style.css`). Bump
+`?v=` when shipping.

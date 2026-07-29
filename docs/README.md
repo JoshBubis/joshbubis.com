@@ -1,35 +1,38 @@
 # joshbubis.com
 
-Static GitHub Pages portfolio for `joshbubis.com`.
+Static GitHub Pages **résumé one-pager** for job applications.
 
-**Hub hybrid:** public marketing lives here; Studio, contracts, contact verify,
-and Vault live in `/Users/jbair/Projects/hub`. See root [`AGENTS.md`](../AGENTS.md)
-and Hub [`AGENTS.md`](/Users/jbair/Projects/hub/AGENTS.md) § Sibling projects.
+Until 2026-07-29 this repo was the "I sell custom websites" marketing site. That
+site moved to [`josh.menu`](/Users/jbair/Projects/josh.menu) so the studio brand
+could stand on its own and stay separate from Josh's employment. What is left here
+is deliberately plain.
+
+**Hard rule:** no selling copy, no chat widget, no contact form, and no links to
+`josh.menu` or any studio hostname. See root [`AGENTS.md`](../AGENTS.md).
 
 ### Structure
 
-- `index.html` — hero (print-registration treatment: ruled grid, red margin rule, crosshairs, maker's line — no canvas; brand letters lift on hover), work rail (native scroll-snap; arrows/dots/keyboard/drag are user-initiated, no auto-drift), approach, process (5-step "how it goes down" timeline; red spine inks in on scroll via #process-rail-fill), about, CTA
-- `contact.html` + `contact.js` — form UI → Hub `/webhooks/contact`
-- `chat.js` — concierge chat widget → Hub `/webhooks/chat` (polling, no websockets). **Beta-gated:** renders only when `localStorage.jb_chat_beta === "1"`; flip `BETA_GATE` to false in `chat.js` to open it to everyone
-- `style.css` / `studio.css` — keep `studio.css` a copy of `style.css`
-- `script.js` — reveals (hero + section-head cascades), work-rail scroll/dots/drag
-- `images/work/*.jpg` — manual Playwright captures (`npm run capture-work`)
-- `AGENTS.md` — agent routing + shipping rules
+- `index.html` — the entire page: masthead, about, selected work, stack,
+  engineering practice, footer. The only script is a one-line copyright year.
+- `resume.css` — self-contained, same paper-and-ink language as the studio site
+  (hairline rules, one red accent) without its sales apparatus. Ends with a print
+  stylesheet so the page prints as a clean résumé.
+- `fonts/` + `fonts.css` — self-hosted Instrument Sans + Syne.
+- `favicon.svg` — the JB maker's mark (ink block, red J, paper B). Josh's personal
+  mark; the studio uses a JM variant in its own repo.
 
-Work-rail panels use flat "plate" labels (JB maker's mark + domain) instead of
-browser chrome; screenshots stay clickable through `.work-shot-link`. The
-`.jb-mark` chip (ink block, red J — the favicon in type) is the brand mark;
-reuse it rather than inventing new label motifs.
+Employment history and education are intentionally absent — see `AGENTS.md`.
 
 ### Boundaries
 
 | Concern | Folder |
 |---|---|
-| This marketing UI | `/Users/jbair/Projects/joshbubis.com` |
-| Contact verify, SES, Vault, Studio | `/Users/jbair/Projects/hub` |
+| This résumé page | `/Users/jbair/Projects/joshbubis.com` |
+| Studio sales site (`josh.menu`) | `/Users/jbair/Projects/josh.menu` |
+| Vault, SES, Access, Studio backend | `/Users/jbair/Projects/hub` |
 | Product apps | Their own folders |
 
 ### Deploy
 
-Push `main` → GitHub Pages. Bump `?v=` on CSS/JS/images when shipping so visitors
-are not stuck on stale assets.
+Push `main` → GitHub Pages. Bump `?v=` on `resume.css` when shipping so visitors
+are not stuck on a stale stylesheet.
