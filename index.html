@@ -4,259 +4,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josh Bubis — Software &amp; systems</title>
+    <title>Josh Bubis</title>
     <meta name="description"
-        content="Josh Bubis — software engineer and systems specialist. Ships Rails products end to end, and brings IT ops, support tooling, and automation experience from enterprise and MSP environments.">
+        content="Josh Bubis — software engineer and systems specialist. Ships Rails products end to end; comfortable in IT ops, support tooling, and automation.">
     <link rel="canonical" href="https://joshbubis.com/">
-    <meta name="theme-color" content="#f3f4f6">
+    <meta name="theme-color" content="#f6f7f9">
     <meta property="og:type" content="profile">
     <meta property="og:url" content="https://joshbubis.com/">
-    <meta property="og:title" content="Josh Bubis — Software &amp; systems">
+    <meta property="og:title" content="Josh Bubis">
     <meta property="og:description"
-        content="Software engineer and systems specialist. Rails products in production, plus IT ops and automation experience.">
+        content="Software engineer and systems specialist. Rails products in production; IT ops and automation in the mix.">
     <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Josh Bubis — Software &amp; systems">
+    <meta name="twitter:title" content="Josh Bubis">
     <meta name="twitter:description"
-        content="Software engineer and systems specialist. Rails products in production, plus IT ops and automation experience.">
-    <link rel="icon" href="/favicon.svg?v=jb2" type="image/svg+xml">
+        content="Software engineer and systems specialist. Rails products in production; IT ops and automation in the mix.">
+    <link rel="icon" href="/favicon.svg?v=jb3" type="image/svg+xml">
 
     <link rel="stylesheet" href="fonts.css">
-    <link rel="stylesheet" href="resume.css?v=r3">
+    <link rel="stylesheet" href="resume.css?v=r4">
 </head>
 
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <div class="wrap">
-        <header class="masthead">
-            <h1 class="masthead__name">Josh Bubis</h1>
-            <p class="masthead__role">
-                Software engineer and systems specialist. I build and operate full web
-                products — and I’ve spent years in IT, support, and ops environments
-                where the work only counts if people can actually use it.
-            </p>
-            <div class="masthead__meta">
+    <div class="atmosphere" aria-hidden="true"></div>
+
+    <div class="shell">
+        <header class="hero">
+            <div class="hero__mark reveal" style="--d: 0ms">
                 <span class="jb-mark" aria-hidden="true"><span class="jb-mark__j">J</span>B</span>
-                <a href="mailto:josh@joshbubis.com">josh@joshbubis.com</a>
+            </div>
+            <h1 class="hero__name reveal" style="--d: 80ms">Josh Bubis</h1>
+            <p class="hero__line reveal" style="--d: 160ms">
+                Software &amp; systems — I build products people use,
+                and keep the machinery under them running.
+            </p>
+            <nav class="hero__links reveal" style="--d: 240ms" aria-label="Contact">
+                <a href="mailto:josh@joshbubis.com">Email</a>
                 <a href="https://linkedin.com/in/joshbubis" rel="me">LinkedIn</a>
                 <a href="https://github.com/JoshBubis" rel="me">GitHub</a>
-            </div>
+            </nav>
         </header>
 
         <main id="main">
-            <section class="section">
-                <h2 class="section__title">About</h2>
-                <div class="prose">
-                    <p>
-                        Most of what I know comes from owning the whole path: application
-                        code, background jobs, databases, deploys, DNS, mail, monitoring —
-                        and being the person who gets the page when something breaks.
-                    </p>
-                    <p>
-                        Before and alongside that product work, I’ve supported users and
-                        systems at scale — enterprise product orgs and MSP-style shops —
-                        so I’m comfortable in ticketing, inventory, PSA tools, and the
-                        unglamorous automation that saves a team hours every month.
-                    </p>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2 class="section__title">Products I’ve shipped</h2>
-                <ul class="work">
-                    <li class="work__item">
-                        <div class="work__head">
-                            <h3 class="work__name"><a href="https://catamist.com" rel="noopener">Catamist</a></h3>
-                            <span class="work__domain">catamist.com</span>
-                        </div>
-                        <p class="work__desc">
-                            AI news platform — ingestion, neutral summarisation, and article
-                            surfaces with live chat. Rails 8, PostgreSQL, Redis, Hotwire,
-                            Gemini, Imagen, AWS S3/SES.
-                        </p>
-                    </li>
-                    <li class="work__item">
-                        <div class="work__head">
-                            <h3 class="work__name"><a href="https://relayra.com" rel="noopener">Relayra</a></h3>
-                            <span class="work__domain">relayra.com</span>
-                        </div>
-                        <p class="work__desc">
-                            Agentic AI answering service for small businesses — inbound calls,
-                            bookings, and usage-based billing. Rails, Node/TypeScript, Twilio,
-                            Deepgram, Stripe, PostgreSQL.
-                        </p>
-                    </li>
-                    <li class="work__item">
-                        <div class="work__head">
-                            <h3 class="work__name"><a href="https://hacky.chat" rel="noopener">HackyChat</a></h3>
-                            <span class="work__domain">hacky.chat</span>
-                        </div>
-                        <p class="work__desc">
-                            Real-time chat rooms for live news topics with AI topic-matching.
-                            Rails API, React, Vite, Tailwind, Action Cable, PostgreSQL, Redis.
-                        </p>
-                    </li>
-                    <li class="work__item">
-                        <div class="work__head">
-                            <h3 class="work__name"><a href="https://calledfrom.com" rel="noopener">CalledFrom</a></h3>
-                            <span class="work__domain">calledfrom.com</span>
-                        </div>
-                        <p class="work__desc">
-                            US phone-number lookup with crowdsourced spam reporting —
-                            a smaller product I still run and keep honest in production.
-                        </p>
-                    </li>
-                </ul>
-            </section>
-
-            <section class="section">
-                <h2 class="section__title">Experience</h2>
-                <p class="section__lede">
-                    What I’ve done — not where, and not a timeline. Happy to share
-                    employers and dates in an interview or on a tailored résumé.
+            <section class="band reveal" style="--d: 320ms">
+                <p class="lede">
+                    Full-stack Ruby on Rails, infrastructure, and AI-backed features —
+                    shipped and operated myself. Also years in IT and product support:
+                    ticketing, automation, and the ops work that makes teams faster.
                 </p>
-                <ul class="exp">
-                    <li class="exp__item">
-                        <div class="exp__head">
-                            <h3 class="exp__role">Systems &amp; automation (telecom / MSP)</h3>
-                        </div>
-                        <ul class="exp__points">
-                            <li>Automated invoicing workflows that used to mean hours of monthly emailing.</li>
-                            <li>Wired CRM and enrichment tools into a sharper lead-gen path.</li>
-                            <li>Built HTML templates for corporate invoicing and PSA support communications.</li>
-                            <li>Shipped internal AI/automation tools (CSR generator, product roadmap generator).</li>
-                            <li>Architecting automated DID provisioning and porting with carrier APIs and vendors.</li>
-                        </ul>
+                <p class="lede lede--muted">
+                    Résumé available on request. This page is the short version.
+                </p>
+            </section>
+
+            <section class="band reveal" style="--d: 400ms" aria-labelledby="work-title">
+                <h2 id="work-title" class="label">Selected work</h2>
+                <ul class="projects">
+                    <li>
+                        <a class="project" href="https://catamist.com" rel="noopener">
+                            <span class="project__name">Catamist</span>
+                            <span class="project__blurb">AI news — ingest, summarize, publish</span>
+                            <span class="project__go" aria-hidden="true">→</span>
+                        </a>
                     </li>
-                    <li class="exp__item">
-                        <div class="exp__head">
-                            <h3 class="exp__role">IT systems support</h3>
-                        </div>
-                        <ul class="exp__points">
-                            <li>Tier 1–2 support via ticketing and chat for end users across the org.</li>
-                            <li>Hardware inventory and lifecycle for hundreds of systems with MDM tooling.</li>
-                            <li>Partnered with IT to identify, triage, and close technical issues end to end.</li>
-                        </ul>
+                    <li>
+                        <a class="project" href="https://relayra.com" rel="noopener">
+                            <span class="project__name">Relayra</span>
+                            <span class="project__blurb">AI phone receptionist for small business</span>
+                            <span class="project__go" aria-hidden="true">→</span>
+                        </a>
                     </li>
-                    <li class="exp__item">
-                        <div class="exp__head">
-                            <h3 class="exp__role">Product support &amp; data quality</h3>
-                        </div>
-                        <ul class="exp__points">
-                            <li>Curated and QC’d location data for a large consumer maps product; trained new hires on the full workflow.</li>
-                            <li>Kept records accurate in internal tools with Slack as the day-to-day channel.</li>
-                        </ul>
+                    <li>
+                        <a class="project" href="https://hacky.chat" rel="noopener">
+                            <span class="project__name">HackyChat</span>
+                            <span class="project__blurb">Live topic chat with AI matching</span>
+                            <span class="project__go" aria-hidden="true">→</span>
+                        </a>
                     </li>
-                    <li class="exp__item">
-                        <div class="exp__head">
-                            <h3 class="exp__role">Product coordination (enterprise)</h3>
-                        </div>
-                        <ul class="exp__points">
-                            <li>Onboarded 100+ users — accounts, permissions, troubleshooting across product systems.</li>
-                            <li>Admin for finance, design, contracts, e-sign, and legal case tooling; ITSM for tasks and team analytics.</li>
-                            <li>Produced allocation decks looking three months out for the product team.</li>
-                        </ul>
-                    </li>
-                    <li class="exp__item">
-                        <div class="exp__head">
-                            <h3 class="exp__role">Cross-functional product coordination</h3>
-                        </div>
-                        <ul class="exp__points">
-                            <li>Coordinated across Marketing, Media Production, DevOps, and HR.</li>
-                            <li>Led tool migrations (chat, wiki, video) while projects stayed on an existing PM stack.</li>
-                            <li>Built project-management wiki spaces from scratch; oversaw schedules for ~20–25 technicians, client managers, and engineers.</li>
-                        </ul>
+                    <li>
+                        <a class="project" href="https://calledfrom.com" rel="noopener">
+                            <span class="project__name">CalledFrom</span>
+                            <span class="project__blurb">US number lookup &amp; spam reports</span>
+                            <span class="project__go" aria-hidden="true">→</span>
+                        </a>
                     </li>
                 </ul>
             </section>
 
-            <section class="section">
-                <h2 class="section__title">Skills</h2>
-                <div class="skill-groups">
-                    <div class="skill-group">
-                        <h3 class="skill-group__label">Build</h3>
-                        <ul class="stack">
-                            <li>Ruby</li>
-                            <li>Ruby on Rails</li>
-                            <li>JavaScript</li>
-                            <li>HTML &amp; CSS</li>
-                            <li>SQL</li>
-                            <li>PostgreSQL</li>
-                            <li>Redis</li>
-                            <li>REST APIs</li>
-                            <li>Webhooks</li>
-                            <li>GitHub</li>
-                            <li>LLM APIs</li>
-                        </ul>
-                    </div>
-                    <div class="skill-group">
-                        <h3 class="skill-group__label">Ship &amp; run</h3>
-                        <ul class="stack">
-                            <li>Docker</li>
-                            <li>Linux</li>
-                            <li>Cloudflare</li>
-                            <li>AWS (S3 / SES)</li>
-                            <li>CI/CD</li>
-                            <li>Stripe</li>
-                            <li>Twilio</li>
-                            <li>Playwright</li>
-                        </ul>
-                    </div>
-                    <div class="skill-group">
-                        <h3 class="skill-group__label">IT &amp; ops</h3>
-                        <ul class="stack">
-                            <li>HaloPSA</li>
-                            <li>ServiceNow</li>
-                            <li>ConnectWise</li>
-                            <li>Zendesk</li>
-                            <li>IT Glue</li>
-                            <li>BrightGauge</li>
-                            <li>Jira</li>
-                            <li>Confluence</li>
-                            <li>Workspace ONE</li>
-                            <li>Microsoft 365</li>
-                            <li>DocuSign</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2 class="section__title">Education</h2>
-                <ul class="edu">
-                    <li>
-                        <strong>General Assembly</strong>
-                        <span class="edu__detail">Back-End Web Development graduate</span>
-                    </li>
-                    <li>
-                        <strong>University of Hartford</strong>
-                        <span class="edu__detail">Coursework in Psychology</span>
-                    </li>
+            <section class="band reveal" style="--d: 480ms" aria-labelledby="focus-title">
+                <h2 id="focus-title" class="label">Focus</h2>
+                <ul class="chips">
+                    <li>Ruby on Rails</li>
+                    <li>Product engineering</li>
+                    <li>Self-hosted infra</li>
+                    <li>IT &amp; systems ops</li>
+                    <li>Automation</li>
+                    <li>AI features</li>
                 </ul>
-            </section>
-
-            <section class="section">
-                <h2 class="section__title">How I work</h2>
-                <div class="prose">
-                    <p>
-                        Tests around the paths that matter, review before merge, and deploys
-                        that go out on a push. Secrets stay in managed stores — never in a repo.
-                        Production stays observable: health checks, structured logs, and alerts
-                        that page a human only when something genuinely needs one.
-                    </p>
-                </div>
             </section>
         </main>
 
-        <footer class="foot">
-            <span>© <span id="year">2026</span> Josh Bubis</span>
+        <footer class="foot reveal" style="--d: 560ms">
             <a href="mailto:josh@joshbubis.com">josh@joshbubis.com</a>
+            <span class="foot__copy">© <span id="year">2026</span></span>
         </footer>
     </div>
 
     <script>
         document.getElementById("year").textContent = new Date().getFullYear();
+        document.documentElement.classList.add("is-ready");
     </script>
 </body>
 

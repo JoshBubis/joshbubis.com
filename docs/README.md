@@ -1,38 +1,29 @@
 # joshbubis.com
 
-Static GitHub Pages **résumé site** for job applications (software + IT/ops).
+Designed personal landing for job applications — short on purpose. Employers get
+the full résumé as a PDF; this page is name, positioning, products, and contact.
 
-Until 2026-07-29 this repo was the "I sell custom websites" marketing site.
-That site moved to [`josh.menu`](/Users/jbair/Projects/josh.menu). What lives
-here now is a professional page for employers — products shipped, experience
-without heavy date ranges, and skills spanning build / ship / IT tooling.
-
-**Hard rule:** no selling copy, no chat widget, no contact form, and no links to
-`josh.menu` or any studio hostname. See root [`AGENTS.md`](../AGENTS.md).
+**Hard rule:** no selling copy, no chat/form, no employer/task lists, no links to
+`josh.menu` or studio hostnames. See root [`AGENTS.md`](../AGENTS.md).
 
 ### Structure
 
-- `index.html` — masthead, about, products, experience, skills, education,
-  how I work, footer. The only script is a one-line copyright year.
-- `resume.css` — self-contained paper-and-ink look (hairline rules, one red
-  accent) without sales apparatus. Ends with a print stylesheet.
-- `fonts/` + `fonts.css` — self-hosted Instrument Sans + Syne.
-- `favicon.svg` — the JB maker's mark (ink block, red J, paper B).
-
-Experience is date-light and employer-anonymous on the page; the PDF résumé
-Josh attaches to applications can carry employers and the full timeline.
+- `index.html` — hero (JB mark + name + one line + links), short about, selected
+  work (four products), focus tags, footer.
+- `resume.css` — cool paper atmosphere, large Syne type, red accent, enter
+  stagger + project hover motion. Print and reduced-motion friendly.
+- `fonts/` + `fonts.css` — Instrument Sans + Syne.
+- `favicon.svg` — JB mark.
 
 ### Boundaries
 
 | Concern | Folder |
 |---|---|
-| This résumé page | `/Users/jbair/Projects/joshbubis.com` |
-| Studio sales site (`josh.menu`) | `/Users/jbair/Projects/josh.menu` |
-| Vault, SES, Access, Studio backend | `/Users/jbair/Projects/hub` |
-| Commissioned client sites | `/Users/jbair/Projects/clients/<domain>` |
-| Product apps | Their own folders |
+| This page | `/Users/jbair/Projects/joshbubis.com` |
+| Studio (`josh.menu`) | `/Users/jbair/Projects/josh.menu` |
+| Hub / Studio backend | `/Users/jbair/Projects/hub` |
+| Client sites | `/Users/jbair/Projects/clients/<domain>` |
 
 ### Deploy
 
-Push `main` → GitHub Pages. Bump `?v=` on `resume.css` when shipping so visitors
-are not stuck on a stale stylesheet.
+Push `main` → GitHub Pages. Bump `resume.css?v=` on style changes.
