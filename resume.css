@@ -154,6 +154,13 @@ a:focus-visible {
     margin: 0 0 1rem;
 }
 
+.section__lede {
+    margin: -0.35rem 0 1.15rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    max-width: 36rem;
+}
+
 .prose p {
     margin: 0 0 0.85rem;
     max-width: 40rem;
@@ -207,7 +214,83 @@ a:focus-visible {
     max-width: 40rem;
 }
 
-/* —— Stack —— */
+.work__name a {
+    border-bottom: 0;
+}
+
+.work__name a:hover,
+.work__name a:focus-visible {
+    color: var(--accent);
+}
+
+/* —— Experience —— */
+.exp {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1.35rem;
+}
+
+.exp__item {
+    padding-bottom: 1.35rem;
+    border-bottom: 1px solid var(--line);
+}
+
+.exp__item:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+}
+
+.exp__head {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    margin-bottom: 0.45rem;
+}
+
+.exp__role {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+.exp__org {
+    font-size: 0.9rem;
+    color: var(--muted);
+}
+
+.exp__points {
+    margin: 0;
+    padding: 0 0 0 1.1rem;
+    color: var(--muted);
+    max-width: 40rem;
+}
+
+.exp__points li {
+    margin: 0.25rem 0;
+}
+
+.exp__points li::marker {
+    color: var(--accent);
+}
+
+/* —— Skills —— */
+.skill-groups {
+    display: grid;
+    gap: 1.15rem;
+}
+
+.skill-group__label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin: 0 0 0.45rem;
+    color: var(--ink);
+}
+
 .stack {
     display: flex;
     flex-wrap: wrap;
@@ -224,6 +307,27 @@ a:focus-visible {
     border: 1px solid var(--line);
     border-radius: 2px;
     padding: 0.22rem 0.5rem;
+}
+
+/* —— Education —— */
+.edu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.65rem;
+}
+
+.edu li {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.35rem 0.75rem;
+}
+
+.edu__detail {
+    font-size: 0.9rem;
+    color: var(--muted);
 }
 
 /* —— Footer —— */

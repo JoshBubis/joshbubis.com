@@ -4,23 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Josh Bubis — Software engineer</title>
+    <title>Josh Bubis — Software &amp; systems</title>
     <meta name="description"
-        content="Josh Bubis — software engineer. Ruby on Rails, self-hosted infrastructure, and AI-backed product work, shipped and operated end to end.">
+        content="Josh Bubis — software engineer and systems specialist. Ships Rails products end to end, and brings IT ops, support tooling, and automation experience from Apple, the NFL, and MSP environments.">
     <link rel="canonical" href="https://joshbubis.com/">
     <meta name="theme-color" content="#f3f4f6">
     <meta property="og:type" content="profile">
     <meta property="og:url" content="https://joshbubis.com/">
-    <meta property="og:title" content="Josh Bubis — Software engineer">
-    <meta property="og:description" content="Ruby on Rails, self-hosted infrastructure, and AI-backed product work.">
+    <meta property="og:title" content="Josh Bubis — Software &amp; systems">
+    <meta property="og:description"
+        content="Software engineer and systems specialist. Rails products in production, plus IT ops and automation experience.">
     <meta property="og:locale" content="en_US">
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Josh Bubis — Software engineer">
-    <meta name="twitter:description" content="Ruby on Rails, self-hosted infrastructure, and AI-backed product work.">
+    <meta name="twitter:title" content="Josh Bubis — Software &amp; systems">
+    <meta name="twitter:description"
+        content="Software engineer and systems specialist. Rails products in production, plus IT ops and automation experience.">
     <link rel="icon" href="/favicon.svg?v=jb2" type="image/svg+xml">
 
     <link rel="stylesheet" href="fonts.css">
-    <link rel="stylesheet" href="resume.css?v=r1">
+    <link rel="stylesheet" href="resume.css?v=r2">
 </head>
 
 <body>
@@ -30,8 +32,9 @@
         <header class="masthead">
             <h1 class="masthead__name">Josh Bubis</h1>
             <p class="masthead__role">
-                Software engineer. I build and operate full web systems — Ruby on Rails
-                applications, the infrastructure they run on, and the AI features layered on top.
+                Software engineer and systems specialist. I build and operate full web
+                products — and I’ve spent years in IT, support, and ops environments
+                where the work only counts if people can actually use it.
             </p>
             <div class="masthead__meta">
                 <span class="jb-mark" aria-hidden="true"><span class="jb-mark__j">J</span>B</span>
@@ -46,94 +49,206 @@
                 <h2 class="section__title">About</h2>
                 <div class="prose">
                     <p>
-                        I work across the whole stack and past the usual edges of it: application
-                        code, background jobs, databases, deploys, DNS, TLS, mail deliverability,
-                        and the monitoring that tells me when any of it breaks.
+                        Most of what I know comes from owning the whole path: application
+                        code, background jobs, databases, deploys, DNS, mail, monitoring —
+                        and being the person who gets the page when something breaks.
                     </p>
                     <p>
-                        Most of what I know comes from running my own products in production — where
-                        I am also the person on call. That has made me pragmatic about complexity
-                        and careful about the paths that quietly cost you customers.
+                        Before and alongside that product work, I’ve supported users and
+                        systems at scale — Apple HQ, the NFL’s product org, and MSP-style
+                        environments — so I’m comfortable in ticketing, inventory, PSA
+                        tools, and the unglamorous automation that saves a team hours every month.
                     </p>
                 </div>
             </section>
 
             <section class="section">
-                <h2 class="section__title">Selected work</h2>
+                <h2 class="section__title">Products I’ve shipped</h2>
                 <ul class="work">
                     <li class="work__item">
                         <div class="work__head">
-                            <h3 class="work__name">Catamist</h3>
+                            <h3 class="work__name"><a href="https://catamist.com" rel="noopener">Catamist</a></h3>
                             <span class="work__domain">catamist.com</span>
                         </div>
                         <p class="work__desc">
-                            AI news platform — ingestion, neutral summarisation, and a product
-                            surface people return to.
+                            AI news platform — ingestion, neutral summarisation, and article
+                            surfaces with live chat. Rails 8, PostgreSQL, Redis, Hotwire,
+                            Gemini, Imagen, AWS S3/SES.
                         </p>
                     </li>
                     <li class="work__item">
                         <div class="work__head">
-                            <h3 class="work__name">Relayra</h3>
+                            <h3 class="work__name"><a href="https://relayra.com" rel="noopener">Relayra</a></h3>
                             <span class="work__domain">relayra.com</span>
                         </div>
                         <p class="work__desc">
-                            AI phone receptionist — inbound call handling, appointment booking, and
-                            usage-based billing wired end to end.
+                            Agentic AI answering service for small businesses — inbound calls,
+                            bookings, and usage-based billing. Rails, Node/TypeScript, Twilio,
+                            Deepgram, Stripe, PostgreSQL.
                         </p>
                     </li>
                     <li class="work__item">
                         <div class="work__head">
-                            <h3 class="work__name">HackyChat</h3>
+                            <h3 class="work__name"><a href="https://hacky.chat" rel="noopener">HackyChat</a></h3>
                             <span class="work__domain">hacky.chat</span>
                         </div>
                         <p class="work__desc">
-                            Real-time group chat with rooms, stories, and a browser extension.
+                            Real-time chat rooms for live news topics with AI topic-matching.
+                            Rails API, React, Vite, Tailwind, Action Cable, PostgreSQL, Redis.
                         </p>
                     </li>
                     <li class="work__item">
                         <div class="work__head">
-                            <h3 class="work__name">CalledFrom</h3>
+                            <h3 class="work__name"><a href="https://calledfrom.com" rel="noopener">CalledFrom</a></h3>
                             <span class="work__domain">calledfrom.com</span>
                         </div>
                         <p class="work__desc">
-                            US phone-number lookup with crowdsourced spam reporting.
+                            US phone-number lookup with crowdsourced spam reporting —
+                            a smaller product I still run and keep honest in production.
                         </p>
                     </li>
                 </ul>
             </section>
 
             <section class="section">
-                <h2 class="section__title">Stack</h2>
-                <ul class="stack">
-                    <li>Ruby</li>
-                    <li>Ruby on Rails</li>
-                    <li>JavaScript</li>
-                    <li>PostgreSQL</li>
-                    <li>SQLite</li>
-                    <li>Redis</li>
-                    <li>HTML &amp; CSS</li>
-                    <li>Docker</li>
-                    <li>Linux</li>
-                    <li>Cloudflare</li>
-                    <li>AWS</li>
-                    <li>CI/CD</li>
-                    <li>Stripe</li>
-                    <li>LLM APIs</li>
-                    <li>Playwright</li>
+                <h2 class="section__title">Experience</h2>
+                <p class="section__lede">
+                    Roles and outcomes — not a timeline. Happy to walk through dates
+                    in an interview or on a tailored résumé.
+                </p>
+                <ul class="exp">
+                    <li class="exp__item">
+                        <div class="exp__head">
+                            <h3 class="exp__role">Senior Customer Care &amp; Systems Specialist</h3>
+                            <span class="exp__org">BestLine Solutions · Austin</span>
+                        </div>
+                        <ul class="exp__points">
+                            <li>Automated invoicing workflows that used to mean hours of monthly emailing.</li>
+                            <li>Wired sales data (Intelligence 360) with Lusha and LinkedIn into a sharper lead-gen path.</li>
+                            <li>Built HTML templates for corporate invoicing and HaloPSA support communications.</li>
+                            <li>Shipped internal AI/automation tools (CSR generator, product roadmap generator).</li>
+                            <li>Architecting automated DID provisioning and porting with Bandwidth and carrier vendors.</li>
+                        </ul>
+                    </li>
+                    <li class="exp__item">
+                        <div class="exp__head">
+                            <h3 class="exp__role">Systems Support Specialist</h3>
+                            <span class="exp__org">DFI Resources · Austin</span>
+                        </div>
+                        <ul class="exp__points">
+                            <li>Tier 1–2 support via Zendesk and Slack for end users across the org.</li>
+                            <li>Hardware inventory and lifecycle for hundreds of systems with Workspace ONE.</li>
+                            <li>Partnered with IT to identify, triage, and close technical issues end to end.</li>
+                        </ul>
+                    </li>
+                    <li class="exp__item">
+                        <div class="exp__head">
+                            <h3 class="exp__role">Product Support Analyst</h3>
+                            <span class="exp__org">Apple (Austin HQ) · via Movate</span>
+                        </div>
+                        <ul class="exp__points">
+                            <li>Curated places of interest for Apple Maps; trained new hires on curation and QC.</li>
+                            <li>Kept records and workflows accurate in internal tools (Apollo, Quip) with Slack as the day-to-day channel.</li>
+                        </ul>
+                    </li>
+                    <li class="exp__item">
+                        <div class="exp__head">
+                            <h3 class="exp__role">Product Coordinator</h3>
+                            <span class="exp__org">National Football League · New York · via Hyatt Leader</span>
+                        </div>
+                        <ul class="exp__points">
+                            <li>Onboarded 100+ users — accounts, permissions, troubleshooting across product systems.</li>
+                            <li>Admin for finance, design, contracts, DocuSign, and legal case tooling; ServiceNow for tasks and team analytics.</li>
+                            <li>Produced allocation decks looking three months out for the product team.</li>
+                        </ul>
+                    </li>
+                    <li class="exp__item">
+                        <div class="exp__head">
+                            <h3 class="exp__role">Product Coordinator</h3>
+                            <span class="exp__org">BDSential · New York · via Planted</span>
+                        </div>
+                        <ul class="exp__points">
+                            <li>Coordinated across Marketing, Media Production, DevOps, and HR.</li>
+                            <li>Led the company migration onto Slack, Confluence, and Zoom while projects stayed on Basecamp.</li>
+                            <li>Built Confluence project management from scratch and a Trello board for DevOps; oversaw schedules for ~20–25 technicians, client managers, and engineers.</li>
+                        </ul>
+                    </li>
                 </ul>
             </section>
 
             <section class="section">
-                <h2 class="section__title">Engineering practice</h2>
+                <h2 class="section__title">Skills</h2>
+                <div class="skill-groups">
+                    <div class="skill-group">
+                        <h3 class="skill-group__label">Build</h3>
+                        <ul class="stack">
+                            <li>Ruby</li>
+                            <li>Ruby on Rails</li>
+                            <li>JavaScript</li>
+                            <li>HTML &amp; CSS</li>
+                            <li>SQL</li>
+                            <li>PostgreSQL</li>
+                            <li>Redis</li>
+                            <li>REST APIs</li>
+                            <li>Webhooks</li>
+                            <li>GitHub</li>
+                            <li>LLM APIs</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group">
+                        <h3 class="skill-group__label">Ship &amp; run</h3>
+                        <ul class="stack">
+                            <li>Docker</li>
+                            <li>Linux</li>
+                            <li>Cloudflare</li>
+                            <li>AWS (S3 / SES)</li>
+                            <li>CI/CD</li>
+                            <li>Stripe</li>
+                            <li>Twilio</li>
+                            <li>Playwright</li>
+                        </ul>
+                    </div>
+                    <div class="skill-group">
+                        <h3 class="skill-group__label">IT &amp; ops</h3>
+                        <ul class="stack">
+                            <li>HaloPSA</li>
+                            <li>ServiceNow</li>
+                            <li>ConnectWise</li>
+                            <li>Zendesk</li>
+                            <li>IT Glue</li>
+                            <li>BrightGauge</li>
+                            <li>Jira</li>
+                            <li>Confluence</li>
+                            <li>Workspace ONE</li>
+                            <li>Microsoft 365</li>
+                            <li>DocuSign</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section__title">Education</h2>
+                <ul class="edu">
+                    <li>
+                        <strong>General Assembly</strong>
+                        <span class="edu__detail">Back-End Web Development graduate</span>
+                    </li>
+                    <li>
+                        <strong>University of Hartford</strong>
+                        <span class="edu__detail">Coursework in Psychology</span>
+                    </li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <h2 class="section__title">How I work</h2>
                 <div class="prose">
                     <p>
-                        Automated tests around the paths that matter, code review before merge, and
-                        deploys that go out on a push rather than a ritual. Secrets stay in managed
-                        stores, never in a repository.
-                    </p>
-                    <p>
-                        I keep production observable — health checks, structured logs, and alerting
-                        that pages a human only when something genuinely needs one.
+                        Tests around the paths that matter, review before merge, and deploys
+                        that go out on a push. Secrets stay in managed stores — never in a repo.
+                        Production stays observable: health checks, structured logs, and alerts
+                        that page a human only when something genuinely needs one.
                     </p>
                 </div>
             </section>
