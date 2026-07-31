@@ -14,12 +14,13 @@ It is **not** the studio. Selling websites lives at `josh.menu`
 
 **Do not add, and remove on sight:**
 
-- Selling copy, pricing, packages, or CTAs to hire a studio.
+- Selling copy, pricing, packages, or “hire me to build your site” CTAs.
 - Concierge chat, contact forms, or lead capture.
 - Employer names, date ranges, or résumé task bullet lists.
-- Any link to `josh.menu`, `contracts.josh.menu`, or `studio.josh.menu`.
 
-Contact: `josh@joshbubis.com` only (not `josh@josh.menu`).
+**OK / expected:** a Selected work row for **Josh.Menu** (the studio) linking to
+`https://josh.menu`. Contact stays `josh@joshbubis.com` for employment; the
+studio uses `josh@josh.menu` on its own site.
 
 ## Structure
 

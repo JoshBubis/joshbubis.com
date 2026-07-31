@@ -8,7 +8,7 @@
     <meta name="description"
         content="Josh Bubis — product engineer across web, mobile, AI, and systems. Ships and runs the stack end to end.">
     <link rel="canonical" href="https://joshbubis.com/">
-    <meta name="theme-color" content="#f6f7f9">
+    <meta name="theme-color" content="#0c0e12">
     <meta property="og:type" content="profile">
     <meta property="og:url" content="https://joshbubis.com/">
     <meta property="og:title" content="Josh Bubis">
@@ -19,36 +19,49 @@
     <meta name="twitter:title" content="Josh Bubis">
     <meta name="twitter:description"
         content="Product engineer across web, mobile, AI, and systems — ships and runs the stack end to end.">
-    <link rel="icon" href="/favicon.svg?v=jb3" type="image/svg+xml">
+    <link rel="icon" href="/favicon.svg?v=jb4" type="image/svg+xml">
 
     <link rel="stylesheet" href="fonts.css">
-    <link rel="stylesheet" href="resume.css?v=r5">
+    <link rel="stylesheet" href="resume.css?v=r6">
 </head>
 
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
-    <div class="atmosphere" aria-hidden="true"></div>
+    <div class="atmosphere" aria-hidden="true">
+        <div class="atmosphere__wash"></div>
+        <div class="atmosphere__orb atmosphere__orb--a"></div>
+        <div class="atmosphere__orb atmosphere__orb--b"></div>
+        <div class="atmosphere__grid"></div>
+        <div class="atmosphere__grain"></div>
+    </div>
+    <div class="cursor-glow" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true"></div>
 
     <div class="shell">
         <header class="hero">
             <div class="hero__mark reveal" style="--d: 0ms">
                 <span class="jb-mark" aria-hidden="true"><span class="jb-mark__j">J</span>B</span>
+                <span class="hero__status"><i></i> Shipping</span>
             </div>
-            <h1 class="hero__name reveal" style="--d: 80ms">Josh Bubis</h1>
-            <p class="hero__line reveal" style="--d: 160ms">
+            <h1 class="hero__name reveal-mask" style="--d: 60ms" aria-label="Josh Bubis">
+                <span class="mask-line"><span>Josh</span></span>
+                <span class="mask-line"><span>Bubis</span></span>
+            </h1>
+            <p class="hero__line reveal" style="--d: 220ms">
                 Product engineer — web, mobile, voice, AI, infra.
                 I ship the thing and keep it alive in production.
             </p>
-            <nav class="hero__links reveal" style="--d: 240ms" aria-label="Contact">
+            <nav class="hero__links reveal" style="--d: 320ms" aria-label="Contact">
                 <a href="mailto:josh@joshbubis.com">Email</a>
                 <a href="https://linkedin.com/in/joshbubis" rel="me">LinkedIn</a>
                 <a href="https://github.com/JoshBubis" rel="me">GitHub</a>
+                <a class="hero__studio" href="https://josh.menu" rel="noopener">Josh.Menu</a>
             </nav>
         </header>
 
         <main id="main">
-            <section class="band reveal" style="--d: 320ms">
+            <section class="band reveal" style="--d: 400ms">
                 <p class="lede">
                     I bounce between backends, real-time UIs, native apps, agentic
                     voice, and the boring ops that make all of it reliable — DNS,
@@ -59,9 +72,16 @@
                 </p>
             </section>
 
-            <section class="band reveal" style="--d: 400ms" aria-labelledby="work-title">
+            <section class="band reveal" style="--d: 480ms" aria-labelledby="work-title">
                 <h2 id="work-title" class="label">Selected work</h2>
                 <ul class="projects">
+                    <li>
+                        <a class="project project--studio" href="https://josh.menu" rel="noopener">
+                            <span class="project__name">Josh.Menu</span>
+                            <span class="project__blurb">Studio — custom sites &amp; systems for businesses</span>
+                            <span class="project__go" aria-hidden="true">→</span>
+                        </a>
+                    </li>
                     <li>
                         <a class="project" href="https://catamist.com" rel="noopener">
                             <span class="project__name">Catamist</span>
@@ -93,7 +113,7 @@
                 </ul>
             </section>
 
-            <section class="band reveal" style="--d: 480ms" aria-labelledby="focus-title">
+            <section class="band reveal" style="--d: 560ms" aria-labelledby="focus-title">
                 <h2 id="focus-title" class="label">In the mix</h2>
                 <ul class="chips">
                     <li>Product engineering</li>
@@ -118,15 +138,79 @@
             </section>
         </main>
 
-        <footer class="foot reveal" style="--d: 560ms">
+        <footer class="foot reveal" style="--d: 640ms">
             <a href="mailto:josh@joshbubis.com">josh@joshbubis.com</a>
+            <a class="foot__studio" href="https://josh.menu" rel="noopener">Studio → josh.menu</a>
             <span class="foot__copy">© <span id="year">2026</span></span>
         </footer>
     </div>
 
     <script>
-        document.getElementById("year").textContent = new Date().getFullYear();
-        document.documentElement.classList.add("is-ready");
+        (function () {
+            var year = document.getElementById("year");
+            if (year) year.textContent = new Date().getFullYear();
+            document.documentElement.classList.add("is-ready");
+
+            var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            var glow = document.querySelector(".cursor-glow");
+            var bar = document.querySelector(".scroll-progress");
+
+            if (!reduce && glow) {
+                var x = window.innerWidth / 2;
+                var y = window.innerHeight * 0.28;
+                var tx = x;
+                var ty = y;
+                var ticking = false;
+
+                function paint() {
+                    x += (tx - x) * 0.12;
+                    y += (ty - y) * 0.12;
+                    glow.style.transform = "translate3d(" + x + "px, " + y + "px, 0)";
+                    ticking = false;
+                }
+
+                window.addEventListener("pointermove", function (e) {
+                    tx = e.clientX;
+                    ty = e.clientY;
+                    if (!ticking) {
+                        ticking = true;
+                        requestAnimationFrame(paint);
+                    }
+                }, { passive: true });
+
+                paint();
+            }
+
+            if (bar) {
+                function onScroll() {
+                    var max = document.documentElement.scrollHeight - window.innerHeight;
+                    var p = max > 0 ? window.scrollY / max : 0;
+                    bar.style.transform = "scaleX(" + Math.min(1, Math.max(0, p)) + ")";
+                }
+                window.addEventListener("scroll", onScroll, { passive: true });
+                onScroll();
+            }
+
+            if (!reduce && "IntersectionObserver" in window) {
+                var chips = document.querySelectorAll(".chips li");
+                chips.forEach(function (el, i) {
+                    el.style.setProperty("--i", String(i));
+                });
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add("is-in");
+                            io.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15 });
+                document.querySelectorAll(".chips").forEach(function (el) { io.observe(el); });
+            } else {
+                document.querySelectorAll(".chips").forEach(function (el) {
+                    el.classList.add("is-in");
+                });
+            }
+        })();
     </script>
 </body>
 
