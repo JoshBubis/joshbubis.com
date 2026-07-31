@@ -14,6 +14,7 @@ the full résumé as a PDF; this page is name, positioning, products, and contac
   stagger + project hover motion. Print and reduced-motion friendly.
 - `fonts/` + `fonts.css` — Instrument Sans + Syne.
 - `favicon.svg` — JB mark.
+- `404.html` — branded Pages 404 (self-contained; no studio links).
 
 ### Boundaries
 
