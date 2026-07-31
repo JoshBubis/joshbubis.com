@@ -24,10 +24,10 @@ studio uses `josh@josh.menu` on its own site.
 
 ## Structure
 
-- `index.html` — hero, short about, selected products, focus tags, footer.
-  Minimal JS: copyright year + `is-ready` for enter animation.
-- `resume.css` — self-contained. Cool paper wash, Syne display, red accent,
-  staggered reveal + project-row hover. Print + `prefers-reduced-motion` covered.
+- `index.html` — hero, short about, selected products (incl. Josh.Menu), focus
+  tags, footer. JS: enter animation, cursor glow, scroll progress, chip stagger.
+- `resume.css` — self-contained. Dark ground, red accent, atmosphere orbs/grid,
+  mask name reveal. Print + `prefers-reduced-motion` covered.
 - `fonts/` + `fonts.css` — Instrument Sans + Syne.
 - `favicon.svg` — JB maker’s mark (personal; studio uses JM).
 
