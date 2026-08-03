@@ -94,22 +94,14 @@ body {
     animation: orb-b 24s ease-in-out infinite alternate;
 }
 
-.atmosphere__grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(238, 241, 245, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(238, 241, 245, 0.03) 1px, transparent 1px);
-    background-size: 64px 64px;
-    mask-image: radial-gradient(ellipse 70% 60% at 50% 20%, #000 20%, transparent 75%);
-    opacity: 0.7;
-}
-
 .atmosphere__grain {
     position: absolute;
     inset: 0;
-    opacity: 0.07;
+    opacity: 0.055;
+    /* One stretched sheet — repeating a 200×200 SVG noise tile shows a grid of seams. */
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 @keyframes wash {
@@ -188,23 +180,33 @@ a {
     padding: 0.5rem 0.85rem;
 }
 
-/* —— Enter motion —— */
-.reveal {
-    opacity: 0;
-    transform: translateY(1.1rem);
-    transition:
-        opacity 0.75s var(--ease),
-        transform 0.75s var(--ease);
-    transition-delay: var(--d, 0ms);
+/* —— Enter motion ——
+   Content stays visible without JS (CSP / script fail must never blank the page).
+   Animation only plays when resume.js adds html.is-ready. */
+@keyframes reveal-in {
+    from {
+        opacity: 0;
+        transform: translateY(1.1rem);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
 }
 
-html.is-ready .reveal {
+@keyframes mask-up {
+    from { transform: translateY(110%); }
+    to { transform: none; }
+}
+
+.reveal {
     opacity: 1;
     transform: none;
 }
 
-.reveal-mask {
-    transition-delay: var(--d, 0ms);
+html.is-ready .reveal {
+    animation: reveal-in 0.75s var(--ease) both;
+    animation-delay: var(--d, 0ms);
 }
 
 .reveal-mask .mask-line {
@@ -214,16 +216,15 @@ html.is-ready .reveal {
 
 .reveal-mask .mask-line > span {
     display: block;
-    transform: translateY(110%);
-    transition: transform 0.9s var(--ease);
-}
-
-html.is-ready .reveal-mask .mask-line > span {
     transform: none;
 }
 
+html.is-ready .reveal-mask .mask-line > span {
+    animation: mask-up 0.9s var(--ease) both;
+}
+
 html.is-ready .reveal-mask .mask-line:nth-child(2) > span {
-    transition-delay: 0.1s;
+    animation-delay: 0.1s;
 }
 
 /* —— Mark —— */
@@ -504,8 +505,8 @@ html.is-ready .reveal-mask .mask-line:nth-child(2) > span {
     border: 1px solid var(--line);
     border-radius: 2px;
     background: rgba(20, 24, 31, 0.65);
-    opacity: 0;
-    transform: translateY(0.4rem);
+    opacity: 1;
+    transform: none;
     transition:
         color 0.2s ease,
         border-color 0.2s ease,
@@ -513,6 +514,11 @@ html.is-ready .reveal-mask .mask-line:nth-child(2) > span {
         opacity 0.45s var(--ease),
         transform 0.45s var(--ease);
     transition-delay: calc(var(--i, 0) * 28ms);
+}
+
+html.is-ready .chips:not(.is-in) li {
+    opacity: 0;
+    transform: translateY(0.4rem);
 }
 
 .chips.is-in li {
@@ -571,15 +577,9 @@ html.is-ready .reveal-mask .mask-line:nth-child(2) > span {
         display: none;
     }
 
-    .reveal {
-        opacity: 1;
-        transform: none;
-        transition: none;
-    }
-
-    .reveal-mask .mask-line > span {
-        transform: none;
-        transition: none;
+    html.is-ready .reveal,
+    html.is-ready .reveal-mask .mask-line > span {
+        animation: none;
     }
 
     .chips li {
