@@ -10,8 +10,8 @@ in Selected work is expected. See root [`AGENTS.md`](../AGENTS.md).
 
 - `index.html` — cinematic hero (mask name reveal, status chip, links including
   Josh.Menu), about, selected work (Josh.Menu + four products), focus tags, footer.
-- `resume.css` — dark ground, red accent, cursor glow, scroll progress, orb/grid
-  atmosphere. Print and reduced-motion friendly.
+- `resume.css` — dark ground, red accent, cursor glow, scroll progress, soft
+  orb wash (no film grain). Print and reduced-motion friendly.
 - `fonts/` + `fonts.css` — Instrument Sans + Syne.
 - `favicon.svg` — JB mark.
 - `404.html` — branded Pages 404 (self-contained; no studio links).

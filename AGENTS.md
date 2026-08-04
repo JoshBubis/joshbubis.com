@@ -26,7 +26,8 @@ studio uses `josh@josh.menu` on its own site.
 
 - `index.html` — hero, short about, selected products (incl. Josh.Menu), focus
   tags, footer. JS: enter animation, cursor glow, scroll progress, chip stagger.
-- `resume.css` — self-contained. Dark ground, red accent, atmosphere orbs/grain,
+- `resume.css` — self-contained. Dark ground, red accent, soft atmosphere orbs
+  (no film grain — it read as monitor smudge),
   mask name reveal. Sections use spacing + short accent ticks (no full-width
   hairline “page breaks”). Print + `prefers-reduced-motion` covered.
 - `fonts/` + `fonts.css` — Instrument Sans + Syne.

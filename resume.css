@@ -94,16 +94,6 @@ body {
     animation: orb-b 24s ease-in-out infinite alternate;
 }
 
-.atmosphere__grain {
-    position: absolute;
-    inset: 0;
-    opacity: 0.055;
-    /* One stretched sheet — repeating a 200×200 SVG noise tile shows a grid of seams. */
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
 @keyframes wash {
     from { transform: scale(1) translate3d(0, 0, 0); }
     to { transform: scale(1.04) translate3d(-1.2%, 1%, 0); }
