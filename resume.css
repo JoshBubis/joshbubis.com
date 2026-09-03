@@ -14,7 +14,7 @@
     --catamist: #f6d05c;
     --relayra: #62edd6;
     --hacky: #7db7ff;
-    --hacky-2: #9b8dff;
+    --hacky-2: #c8bcff;
     --called: #c5e32c;
 
     --font-display: "Syne", sans-serif;
@@ -716,10 +716,10 @@ html.is-ready .reveal-mask .mask-line:nth-child(2) > span {
         linear-gradient(180deg, #17302a 0%, #101820 60%, #0b1016 100%);
 }
 
-.bldg--slim,
 .bldg--annex,
 .bldg--press,
-.bldg--bunker {
+.bldg--bunker,
+.bldg--step {
     opacity: 0.95;
 }
 
@@ -781,6 +781,66 @@ html.is-ready .reveal-mask .mask-line:nth-child(2) > span {
 .bldg--comms {
     background:
         linear-gradient(180deg, #152428 0%, #101820 100%);
+}
+
+.bldg--silo {
+    border-radius: 1.15rem 1.15rem 0 0;
+}
+
+.ledge {
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    height: 0.3rem;
+    z-index: 2;
+    background: #121820;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.04);
+}
+
+.ledge--a { top: 16%; }
+.ledge--b { top: 34%; }
+
+.peak {
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    top: -0.72rem;
+    height: 0.72rem;
+    background: #161c26;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.saw {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -0.55rem;
+    height: 0.55rem;
+    background: #2a2418;
+    clip-path: polygon(0 100%, 18% 0, 36% 100%, 54% 0, 72% 100%, 90% 0, 100% 100%);
+}
+
+.tank {
+    position: absolute;
+    left: 50%;
+    top: -1.2rem;
+    width: 1.35rem;
+    height: 1.15rem;
+    transform: translateX(-50%);
+    background: #1a2230;
+    border-radius: 0.12rem 0.12rem 0 0;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+.tank::before {
+    content: "";
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    top: -0.22rem;
+    height: 0.28rem;
+    border-radius: 50%;
+    background: #243044;
 }
 
 .yard {
@@ -850,7 +910,7 @@ html.is-ready .reveal-mask .mask-line:nth-child(2) > span {
 }
 
 .sign--violet {
-    --neon: var(--hacky-2, #9b8dff);
+    --neon: var(--hacky-2, #c8bcff);
 }
 
 .sign--live {
@@ -915,34 +975,97 @@ html.is-ready .reveal-mask .mask-line:nth-child(2) > span {
     to { transform: translateX(-50%); }
 }
 
-.mast {
+.globe {
     position: absolute;
-    left: 12%;
-    top: -3.4rem;
-    width: 2px;
-    height: 1.5rem;
-    background: #3a4250;
+    left: 50%;
+    top: -5.15rem;
+    z-index: 5;
+    width: 2.35rem;
+    height: 2.35rem;
+    transform: translateX(-50%);
+    pointer-events: none;
 }
 
-.mast::after {
+.globe__stand {
+    position: absolute;
+    left: 50%;
+    bottom: -0.5rem;
+    width: 2px;
+    height: 0.5rem;
+    background: #6a5428;
+    transform: translateX(-50%);
+}
+
+.globe__orb {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 32% 28%, #fff6d2, #f6d05c 45%, #b88628 78%);
+    box-shadow:
+        0 0 14px color-mix(in srgb, var(--neon) 50%, transparent),
+        inset -6px -4px 10px rgba(80, 50, 8, 0.28);
+}
+
+.globe__orb::before {
     content: "";
     position: absolute;
-    top: -4px;
-    left: -3px;
-    width: 8px;
-    height: 8px;
+    inset: -10%;
     border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 8px var(--accent);
+    background:
+        repeating-linear-gradient(
+            90deg,
+            transparent 0 19%,
+            rgba(70, 48, 10, 0.32) 19% 21%
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent 0 30%,
+            rgba(70, 48, 10, 0.22) 30% 32%
+        );
+    animation: globe-spin 28s linear infinite;
+}
+
+.globe__orb::after {
+    content: "";
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    top: 46%;
+    height: 1px;
+    background: rgba(70, 48, 10, 0.4);
+    box-shadow: 0 0 0 1px rgba(255, 230, 160, 0.15);
+}
+
+@keyframes globe-spin {
+    to { transform: rotate(360deg); }
 }
 
 .antenna {
     position: absolute;
     left: 50%;
-    top: -1.6rem;
+    top: -1.85rem;
     width: 2px;
-    height: 1.6rem;
-    background: #4a5564;
+    height: 1.85rem;
+    background: linear-gradient(180deg, var(--neon), #4a5564);
+    transform: translateX(-50%);
+}
+
+.antenna::after {
+    content: "";
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow:
+        0 0 8px #fff,
+        0 0 18px var(--neon),
+        0 0 32px var(--neon);
     transform: translateX(-50%);
 }
 
@@ -950,21 +1073,22 @@ html.is-ready .reveal-mask .mask-line:nth-child(2) > span {
     position: absolute;
     left: 50%;
     top: 0;
-    width: 1.4rem;
-    height: 1.4rem;
-    border: 1px solid color-mix(in srgb, var(--neon) 55%, transparent);
+    width: 1.6rem;
+    height: 1.6rem;
+    border: 2px solid color-mix(in srgb, var(--neon) 80%, #fff);
     border-radius: 50%;
+    box-shadow: 0 0 12px var(--neon);
     transform: translate(-50%, -40%);
-    animation: ping 2.8s ease-out infinite;
+    animation: ping 2.2s ease-out infinite;
     opacity: 0;
 }
 
-.ring--2 { animation-delay: 0.9s; width: 1.9rem; height: 1.9rem; }
-.ring--3 { animation-delay: 1.8s; width: 2.4rem; height: 2.4rem; }
+.ring--2 { animation-delay: 0.7s; width: 2.35rem; height: 2.35rem; }
+.ring--3 { animation-delay: 1.4s; width: 3.2rem; height: 3.2rem; }
 
 @keyframes ping {
-    0% { opacity: 0.7; transform: translate(-50%, -40%) scale(0.4); }
-    100% { opacity: 0; transform: translate(-50%, -40%) scale(1.15); }
+    0% { opacity: 0.95; transform: translate(-50%, -40%) scale(0.22); }
+    100% { opacity: 0; transform: translate(-50%, -40%) scale(1.55); }
 }
 
 .skybridge {
@@ -1323,9 +1447,22 @@ html.is-ready .chips:not(.is-in) li {
         top: 0.4rem;
     }
 
-    .mast,
-    .antenna {
+    .antenna,
+    .tank {
+        top: 0.2rem;
+    }
+
+    .globe {
         top: 0.15rem;
+        left: 14%;
+        transform: none;
+        width: 1.7rem;
+        height: 1.7rem;
+    }
+
+    .peak,
+    .saw {
+        top: 0;
     }
 
     .city__world.is-inspecting .district:not(.is-lit) {
@@ -1342,6 +1479,7 @@ html.is-ready .chips:not(.is-in) li {
     .ring,
     .dish,
     .sign--live,
+    .globe__orb::before,
     .bldg__crown--beacon::after {
         animation: none;
     }

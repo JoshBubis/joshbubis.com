@@ -12,7 +12,8 @@ in Selected work is expected. See root [`AGENTS.md`](../AGENTS.md).
 ### Structure
 
 - `index.html` — full-bleed night-city hero (name in the sky, product districts
-  as signed buildings), then charter lede, focus tags, footer.
+  as signed buildings: roof names, Catamist globe, Relayra antenna), then
+  charter lede, focus tags, footer.
 - `resume.css` — self-contained city + type. Dark ground, red accent, per-product
   neon, wet street, print + reduced-motion + mobile “avenue” reflow. No film grain.
 - `resume.js` — enter animation, cursor glow, scroll progress, chip stagger,
