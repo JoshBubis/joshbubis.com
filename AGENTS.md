@@ -29,10 +29,10 @@ studio uses `josh@josh.menu` on its own site.
 
 ## Structure
 
-- `index.html` — HUD (name, status, contact), night-city of product districts
-  (Josh.Menu + four products), charter lede, focus tags, footer. JS: enter
-  animation, cursor glow, scroll progress, chip stagger, skyline parallax,
-  tap-to-inspect on coarse pointers.
+- `index.html` — HUD (name, status, email / LinkedIn / GitHub), night-city of
+  product districts (Josh.Menu + four products), charter lede, focus tags,
+  footer. JS: enter animation, cursor glow, scroll progress, chip stagger,
+  skyline parallax, tap-to-inspect on coarse pointers.
 - `resume.css` — self-contained city + type. Dark ground, red accent, per-product
   neon signs, wet street, mask name reveal. Print, reduced-motion, and a mobile
   avenue reflow (no film grain).

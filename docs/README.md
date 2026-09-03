@@ -23,9 +23,10 @@ in Selected work is expected. See root [`AGENTS.md`](../AGENTS.md).
 
 ### City interaction
 
-Desktop: hover or focus a district to light the block, raise a holo dossier,
-and reveal the stack as floor plates on the building. Click the district to
-open the product.
+Desktop: product names stay readable on the buildings at rest. Hover or
+keyboard focus lights that district the same way, shows a dossier at the
+*foot* of the block (never over the sign), and the stack as floor plates.
+Click the district to open the product.
 
 Mobile: districts stack as a walkable avenue; dossier + stack stay visible.
 Coarse pointers on a wide viewport get tap-to-inspect, then a second tap
