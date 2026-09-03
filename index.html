@@ -8,7 +8,8 @@
     <meta name="description"
         content="Josh Bubis — product engineer across web, mobile, AI, and systems. Ships and runs the stack end to end.">
     <link rel="canonical" href="https://joshbubis.com/">
-    <meta name="theme-color" content="#0c0e12">
+    <meta name="theme-color" content="#07080c">
+    <meta name="color-scheme" content="dark">
     <meta property="og:type" content="profile">
     <meta property="og:url" content="https://joshbubis.com/">
     <meta property="og:title" content="Josh Bubis">
@@ -22,44 +23,249 @@
     <link rel="icon" href="/favicon.svg?v=jb4" type="image/svg+xml">
 
     <link rel="stylesheet" href="fonts.css">
-    <link rel="stylesheet" href="resume.css?v=r9">
+    <link rel="stylesheet" href="resume.css?v=c3">
 </head>
 
 <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#charter">Skip to content</a>
 
     <div class="atmosphere" aria-hidden="true">
         <div class="atmosphere__wash"></div>
-        <div class="atmosphere__orb atmosphere__orb--a"></div>
-        <div class="atmosphere__orb atmosphere__orb--b"></div>
+        <div class="atmosphere__stars"></div>
+        <div class="atmosphere__moon"></div>
+        <div class="atmosphere__haze"></div>
+        <span class="atmosphere__craft atmosphere__craft--a"></span>
+        <span class="atmosphere__craft atmosphere__craft--b"></span>
     </div>
     <div class="cursor-glow" aria-hidden="true"></div>
     <div class="scroll-progress" aria-hidden="true"></div>
 
-    <div class="shell">
-        <header class="hero">
-            <div class="hero__mark reveal" style="--d: 0ms">
+    <section class="city-hero" aria-labelledby="work-title">
+        <header class="hud">
+            <div class="hud__mark reveal" style="--d: 0ms">
                 <span class="jb-mark" aria-hidden="true"><span class="jb-mark__j">J</span>B</span>
-                <span class="hero__status"><i></i> Shipping</span>
+                <span class="hud__status"><i></i> Shipping</span>
             </div>
-            <h1 class="hero__name reveal-mask" style="--d: 60ms" aria-label="Josh Bubis">
+            <h1 class="sky-sign reveal-mask" style="--d: 60ms" aria-label="Josh Bubis">
                 <span class="mask-line"><span>Josh</span></span>
                 <span class="mask-line"><span>Bubis</span></span>
             </h1>
-            <p class="hero__line reveal" style="--d: 220ms">
+            <p class="hud__line reveal" style="--d: 220ms">
                 Product engineer — web, mobile, voice, AI, infra.
                 I ship the thing and keep it alive in production.
             </p>
-            <nav class="hero__links reveal" style="--d: 320ms" aria-label="Contact">
+            <nav class="hud__links reveal" style="--d: 320ms" aria-label="Contact">
                 <a href="mailto:josh@joshbubis.com">Email</a>
                 <a href="https://linkedin.com/in/joshbubis" rel="me">LinkedIn</a>
                 <a href="https://github.com/JoshBubis" rel="me">GitHub</a>
-                <a class="hero__studio" href="https://josh.menu" rel="noopener">Josh.Menu</a>
+                <a class="hud__studio" href="https://josh.menu" rel="noopener">Josh.Menu</a>
             </nav>
         </header>
 
-        <main id="main">
-            <section class="band reveal" style="--d: 400ms">
+        <h2 id="work-title" class="city__title">Selected work</h2>
+        <p class="city__hint">Hover a district</p>
+
+        <div class="city__world reveal" style="--d: 400ms" data-city>
+                    <svg class="city__far" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true">
+                        <path fill="#080d14"
+                            d="M0 220V148h18V92h14v28h22V70h10v40h16V118h28V84h12v56h20V60h8V88h18V48h14v36h10V96h24V72h16v52h20V40h11v44h15V88h26V110h18V76h22v48h14V64h9v38h20V98h32V54h13v66h18V80h16v40h22V68h10v50h28V90h14v42h20V58h12v70h24V100h18v36h16V84h10v48h22V72h14v56h18V110h26V86h12v52h20V64h16v78h18V94h14v48h28V76h10v44h22V120h16v36h20V88h12v54h24V100h18V220H0z" />
+                    </svg>
+
+                    <div class="city__mid" aria-hidden="true">
+                        <span class="filler filler--1"></span>
+                        <span class="filler filler--2"></span>
+                        <span class="filler filler--3"></span>
+                        <span class="filler filler--4"></span>
+                        <span class="filler filler--5"></span>
+                        <span class="filler filler--6"></span>
+                        <span class="filler filler--7"></span>
+                        <span class="filler filler--8"></span>
+                        <span class="filler filler--9"></span>
+                        <span class="filler filler--10"></span>
+                        <span class="filler filler--11"></span>
+                    </div>
+
+                    <div class="mono" aria-hidden="true">
+                        <div class="mono__rail"></div>
+                        <div class="mono__car"></div>
+                    </div>
+
+                    <div class="city__stage">
+                        <a class="district district--menu" href="https://josh.menu" rel="noopener"
+                            style="--neon: #10d592; --neon-ink: #04150f;" data-district="menu">
+                            <div class="dossier">
+                                <span class="dossier__idx">01 · Flagship</span>
+                                <span class="dossier__name">Josh.Menu</span>
+                                <span class="dossier__blurb">Studio — custom sites &amp; systems for businesses</span>
+                                <span class="dossier__go">Enter district →</span>
+                            </div>
+                            <ul class="riser" aria-hidden="true">
+                                <li>Craft HTML</li>
+                                <li>CSS systems</li>
+                                <li>Cloudflare</li>
+                                <li>Hub kitchen</li>
+                            </ul>
+                            <div class="cluster">
+                                <div class="bldg bldg--slim" style="--h: 12rem; --w: 2.4rem;">
+                                    <span class="bldg__windows"></span>
+                                </div>
+                                <div class="bldg bldg--glass" style="--h: 22rem; --w: 4.2rem;">
+                                    <span class="bldg__crown bldg__crown--beacon"></span>
+                                    <span class="bldg__setback"></span>
+                                    <span class="bldg__windows"></span>
+                                    <span class="sign sign--vert">
+                                        <span class="sign__text">JOSH.MENU</span>
+                                    </span>
+                                </div>
+                                <div class="bldg bldg--annex" style="--h: 9.5rem; --w: 3.2rem;">
+                                    <span class="sign sign--blade">STUDIO</span>
+                                    <span class="bldg__windows"></span>
+                                </div>
+                            </div>
+                            <span class="reflect" aria-hidden="true"></span>
+                        </a>
+
+                        <a class="district district--catamist" href="https://catamist.com" rel="noopener"
+                            style="--neon: #e4b44c; --neon-ink: #1a1204;" data-district="catamist">
+                            <div class="dossier">
+                                <span class="dossier__idx">02 · Broadcast</span>
+                                <span class="dossier__name">Catamist</span>
+                                <span class="dossier__blurb">AI news — ingest, summarize, publish</span>
+                                <span class="dossier__go">Enter district →</span>
+                            </div>
+                            <ul class="riser" aria-hidden="true">
+                                <li>Rails</li>
+                                <li>LLMs</li>
+                                <li>Editorial CMS</li>
+                                <li>Postgres</li>
+                            </ul>
+                            <div class="cluster">
+                                <div class="bldg bldg--deco" style="--h: 18rem; --w: 6.4rem;">
+                                    <span class="sign sign--roof">
+                                        <span class="sign__text">CATAMIST</span>
+                                    </span>
+                                    <span class="mast"></span>
+                                    <span class="bldg__windows"></span>
+                                    <span class="ticker" aria-hidden="true">
+                                        <span>INGEST · SUMMARIZE · PUBLISH · AI NEWS · INGEST · SUMMARIZE · PUBLISH · AI NEWS · </span>
+                                    </span>
+                                </div>
+                                <div class="bldg bldg--press" style="--h: 11rem; --w: 2.8rem;">
+                                    <span class="bldg__windows"></span>
+                                </div>
+                            </div>
+                            <span class="reflect" aria-hidden="true"></span>
+                        </a>
+
+                        <a class="district district--relayra" href="https://relayra.com" rel="noopener"
+                            style="--neon: #3ee0c0; --neon-ink: #031412;" data-district="relayra">
+                            <div class="dossier">
+                                <span class="dossier__idx">03 · Voice</span>
+                                <span class="dossier__name">Relayra</span>
+                                <span class="dossier__blurb">AI receptionist — web now, iOS &amp; Android in progress</span>
+                                <span class="dossier__go">Enter district →</span>
+                            </div>
+                            <ul class="riser" aria-hidden="true">
+                                <li>Rails</li>
+                                <li>Voice AI</li>
+                                <li>Telephony</li>
+                                <li>iOS / Android</li>
+                            </ul>
+                            <div class="cluster">
+                                <div class="bldg bldg--spire" style="--h: 21rem; --w: 3.1rem;">
+                                    <span class="antenna">
+                                        <i class="ring"></i>
+                                        <i class="ring ring--2"></i>
+                                        <i class="ring ring--3"></i>
+                                    </span>
+                                    <span class="bldg__windows"></span>
+                                </div>
+                                <div class="bldg bldg--comms" style="--h: 14.5rem; --w: 4.4rem;">
+                                    <span class="sign sign--box">
+                                        <span class="sign__text">RELAYRA</span>
+                                    </span>
+                                    <span class="bldg__windows"></span>
+                                </div>
+                            </div>
+                            <span class="reflect" aria-hidden="true"></span>
+                        </a>
+
+                        <a class="district district--hacky" href="https://hacky.chat" rel="noopener"
+                            style="--neon: #7db7ff; --neon-2: #9b8dff; --neon-ink: #071018;" data-district="hacky">
+                            <div class="dossier">
+                                <span class="dossier__idx">04 · Exchange</span>
+                                <span class="dossier__name">HackyChat</span>
+                                <span class="dossier__blurb">Live topic chat with AI matching</span>
+                                <span class="dossier__go">Enter district →</span>
+                            </div>
+                            <ul class="riser" aria-hidden="true">
+                                <li>React</li>
+                                <li>Node</li>
+                                <li>WebSockets</li>
+                                <li>AI matching</li>
+                            </ul>
+                            <div class="cluster">
+                                <div class="bldg bldg--stack" style="--h: 13rem; --w: 2.7rem;">
+                                    <span class="bldg__windows"></span>
+                                </div>
+                                <div class="bldg bldg--stack bldg--stack-mid" style="--h: 17.5rem; --w: 3.6rem;">
+                                    <span class="sign sign--roof sign--violet">
+                                        <span class="sign__text">HACKYCHAT</span>
+                                    </span>
+                                    <span class="sign sign--live">LIVE</span>
+                                    <span class="bldg__windows"></span>
+                                    <span class="skybridge"></span>
+                                </div>
+                                <div class="bldg bldg--stack" style="--h: 14.5rem; --w: 2.9rem;">
+                                    <span class="bldg__windows"></span>
+                                </div>
+                            </div>
+                            <span class="reflect" aria-hidden="true"></span>
+                        </a>
+
+                        <a class="district district--called" href="https://calledfrom.com" rel="noopener"
+                            style="--neon: #c5e32c; --neon-ink: #121404;" data-district="called">
+                            <div class="dossier">
+                                <span class="dossier__idx">05 · Radar</span>
+                                <span class="dossier__name">CalledFrom</span>
+                                <span class="dossier__blurb">US number lookup &amp; spam reports</span>
+                                <span class="dossier__go">Enter district →</span>
+                            </div>
+                            <ul class="riser" aria-hidden="true">
+                                <li>Rails</li>
+                                <li>Number intel</li>
+                                <li>Reports</li>
+                                <li>Telephony</li>
+                            </ul>
+                            <div class="cluster">
+                                <div class="bldg bldg--brutal" style="--h: 16rem; --w: 5.4rem;">
+                                    <span class="sign sign--industrial">
+                                        <span class="sign__text">CALLEDFROM</span>
+                                    </span>
+                                    <span class="bldg__windows"></span>
+                                    <span class="sign sign--vert sign--tube">LOOKUP</span>
+                                </div>
+                                <div class="yard">
+                                    <span class="dish"></span>
+                                    <span class="bldg bldg--bunker" style="--h: 5.4rem; --w: 2.2rem;">
+                                        <span class="bldg__windows"></span>
+                                    </span>
+                                </div>
+                            </div>
+                            <span class="reflect" aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                    <div class="city__street" aria-hidden="true">
+                        <div class="street__wet"></div>
+                        <div class="street__mark">SHIPWRIGHT&nbsp;AVE</div>
+                    </div>
+                </div>
+    </section>
+
+    <div class="shell">
+        <main id="charter">
+            <section class="band charter reveal" style="--d: 480ms">
                 <p class="lede">
                     I bounce between backends, real-time UIs, native apps, agentic
                     voice, and the boring ops that make all of it reliable — DNS,
@@ -68,47 +274,6 @@
                 <p class="lede lede--muted">
                     Résumé on request. This page is the short version.
                 </p>
-            </section>
-
-            <section class="band reveal" style="--d: 480ms" aria-labelledby="work-title">
-                <h2 id="work-title" class="label">Selected work</h2>
-                <ul class="projects">
-                    <li>
-                        <a class="project project--studio" href="https://josh.menu" rel="noopener">
-                            <span class="project__name">Josh.Menu</span>
-                            <span class="project__blurb">Studio — custom sites &amp; systems for businesses</span>
-                            <span class="project__go" aria-hidden="true">→</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="project" href="https://catamist.com" rel="noopener">
-                            <span class="project__name">Catamist</span>
-                            <span class="project__blurb">AI news — ingest, summarize, publish</span>
-                            <span class="project__go" aria-hidden="true">→</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="project" href="https://relayra.com" rel="noopener">
-                            <span class="project__name">Relayra</span>
-                            <span class="project__blurb">AI receptionist — web now, iOS &amp; Android in progress</span>
-                            <span class="project__go" aria-hidden="true">→</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="project" href="https://hacky.chat" rel="noopener">
-                            <span class="project__name">HackyChat</span>
-                            <span class="project__blurb">Live topic chat with AI matching</span>
-                            <span class="project__go" aria-hidden="true">→</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="project" href="https://calledfrom.com" rel="noopener">
-                            <span class="project__name">CalledFrom</span>
-                            <span class="project__blurb">US number lookup &amp; spam reports</span>
-                            <span class="project__go" aria-hidden="true">→</span>
-                        </a>
-                    </li>
-                </ul>
             </section>
 
             <section class="band reveal" style="--d: 560ms" aria-labelledby="focus-title">
@@ -143,7 +308,7 @@
         </footer>
     </div>
 
-    <script src="resume.js?v=r8" defer></script>
+    <script src="resume.js?v=c3" defer></script>
 </body>
 
 </html>

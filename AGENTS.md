@@ -22,20 +22,26 @@ It is **not** the studio. Selling websites lives at `josh.menu`
 `https://josh.menu`. Contact stays `josh@joshbubis.com` for employment; the
 studio uses `josh@josh.menu` on its own site.
 
+## Shared portfolio ops
+
+- Cloudflare / Turnstile / edge purge: `/Users/jbair/Projects/shared_docs/CLOUDFLARE.md`
+  (Hub owns the only API token; Turnstile ≠ CDN purge; **401 on purge ≠ rotate Vault**).
+
 ## Structure
 
-- `index.html` — hero, short about, selected products (incl. Josh.Menu), focus
-  tags, footer. JS: enter animation, cursor glow, scroll progress, chip stagger.
-- `resume.css` — self-contained. Dark ground, red accent, soft atmosphere orbs
-  (no film grain — it read as monitor smudge),
-  mask name reveal. Sections use spacing + short accent ticks (no full-width
-  hairline “page breaks”). Print + `prefers-reduced-motion` covered.
+- `index.html` — HUD (name, status, contact), night-city of product districts
+  (Josh.Menu + four products), charter lede, focus tags, footer. JS: enter
+  animation, cursor glow, scroll progress, chip stagger, skyline parallax,
+  tap-to-inspect on coarse pointers.
+- `resume.css` — self-contained city + type. Dark ground, red accent, per-product
+  neon signs, wet street, mask name reveal. Print, reduced-motion, and a mobile
+  avenue reflow (no film grain).
 - `fonts/` + `fonts.css` — Instrument Sans + Syne.
 - `favicon.svg` — JB maker’s mark (personal; studio uses JM).
 
 ## Shipping
 
-1. Bump `?v=` on `resume.css` (and favicon if changed) when shipping styles.
+1. Bump `?v=` on `resume.css` / `resume.js` (and favicon if changed) when shipping.
 2. Push `main` → GitHub Pages (~10 min CDN lag).
 3. Update `docs/README.md` when structure changes.
 

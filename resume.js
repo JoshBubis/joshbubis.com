@@ -6,6 +6,10 @@
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     var glow = document.querySelector(".cursor-glow");
     var bar = document.querySelector(".scroll-progress");
+    var world = document.querySelector("[data-city]");
+    var far = document.querySelector(".city__far");
+    var mid = document.querySelector(".city__mid");
+    var districts = document.querySelectorAll(".district");
 
     if (!reduce && glow) {
         var x = window.innerWidth / 2;
@@ -41,6 +45,52 @@
         }
         window.addEventListener("scroll", onScroll, { passive: true });
         onScroll();
+    }
+
+    if (!reduce && world && far && window.matchMedia("(min-width: 861px)").matches) {
+        var px = 0;
+        var py = 0;
+        var ptx = 0;
+        var pty = 0;
+        var pTick = false;
+
+        function parallax() {
+            px += (ptx - px) * 0.08;
+            py += (pty - py) * 0.08;
+            far.style.transform = "translate3d(" + (px * -18) + "px, " + (py * -8) + "px, 0)";
+            if (mid) mid.style.transform = "translate3d(" + (px * -10) + "px, 0, 0)";
+            pTick = false;
+        }
+
+        world.addEventListener("pointermove", function (e) {
+            var r = world.getBoundingClientRect();
+            ptx = (e.clientX - r.left) / r.width - 0.5;
+            pty = (e.clientY - r.top) / r.height - 0.5;
+            if (!pTick) {
+                pTick = true;
+                requestAnimationFrame(parallax);
+            }
+        }, { passive: true });
+    }
+
+    var coarse = window.matchMedia("(hover: none)").matches;
+    if (coarse && districts.length && window.matchMedia("(min-width: 861px)").matches) {
+        districts.forEach(function (el) {
+            el.addEventListener("click", function (e) {
+                if (!el.classList.contains("is-lit")) {
+                    e.preventDefault();
+                    districts.forEach(function (d) { d.classList.remove("is-lit"); });
+                    el.classList.add("is-lit");
+                    if (world) world.classList.add("is-inspecting");
+                }
+            });
+        });
+        document.addEventListener("click", function (e) {
+            if (world && !world.contains(e.target)) {
+                districts.forEach(function (d) { d.classList.remove("is-lit"); });
+                world.classList.remove("is-inspecting");
+            }
+        });
     }
 
     if (!reduce && "IntersectionObserver" in window) {

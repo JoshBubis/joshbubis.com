@@ -1,5 +1,8 @@
 # joshbubis.com
 
+
+**Cloudflare / Turnstile / purge (portfolio):** [`shared_docs/CLOUDFLARE.md`](../../shared_docs/CLOUDFLARE.md) — Hub owns the API token; 401 on purge ≠ rotate Vault.
+
 Designed personal landing for job applications — short on purpose. Employers get
 the full résumé as a PDF; this page is name, positioning, products, and contact.
 
@@ -8,13 +11,25 @@ in Selected work is expected. See root [`AGENTS.md`](../AGENTS.md).
 
 ### Structure
 
-- `index.html` — cinematic hero (mask name reveal, status chip, links including
-  Josh.Menu), about, selected work (Josh.Menu + four products), focus tags, footer.
-- `resume.css` — dark ground, red accent, cursor glow, scroll progress, soft
-  orb wash (no film grain). Print and reduced-motion friendly.
+- `index.html` — full-bleed night-city hero (name in the sky, product districts
+  as signed buildings), then charter lede, focus tags, footer.
+- `resume.css` — self-contained city + type. Dark ground, red accent, per-product
+  neon, wet street, print + reduced-motion + mobile “avenue” reflow. No film grain.
+- `resume.js` — enter animation, cursor glow, scroll progress, chip stagger,
+  skyline parallax, coarse-pointer tap-to-inspect on the city.
 - `fonts/` + `fonts.css` — Instrument Sans + Syne.
 - `favicon.svg` — JB mark.
 - `404.html` — branded Pages 404 (self-contained; no studio links).
+
+### City interaction
+
+Desktop: hover or focus a district to light the block, raise a holo dossier,
+and reveal the stack as floor plates on the building. Click the district to
+open the product.
+
+Mobile: districts stack as a walkable avenue; dossier + stack stay visible.
+Coarse pointers on a wide viewport get tap-to-inspect, then a second tap
+follows the link.
 
 ### Boundaries
 
@@ -27,4 +42,5 @@ in Selected work is expected. See root [`AGENTS.md`](../AGENTS.md).
 
 ### Deploy
 
-Push `main` → GitHub Pages. Bump `resume.css?v=` on style changes.
+Push `main` → GitHub Pages. Bump `resume.css?v=` (and `resume.js?v=` if the
+script changed) on style/behavior changes.
