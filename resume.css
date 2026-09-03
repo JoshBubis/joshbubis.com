@@ -1408,9 +1408,28 @@ html.is-ready .chips:not(.is-in) li {
 
     .cluster {
         order: -1;
-        min-height: 13.5rem;
-        margin-bottom: 0.85rem;
+        min-height: 0;
+        height: 8.5rem;
+        margin-bottom: 0.65rem;
+        overflow: hidden;
     }
+
+    .bldg {
+        --h: auto !important;
+        height: 100%;
+    }
+
+    .bldg--glass   { --w: 2.8rem !important; }
+    .bldg--step    { --w: 1.5rem !important; }
+    .bldg--annex   { --w: 1.8rem !important; }
+    .bldg--deco    { --w: 3.6rem !important; }
+    .bldg--press   { --w: 1.6rem !important; }
+    .bldg--spire   { --w: 1.8rem !important; }
+    .bldg--comms   { --w: 2.5rem !important; }
+    .bldg--stack   { --w: 1.6rem !important; }
+    .bldg--stack-mid { --w: 2.2rem !important; }
+    .bldg--brutal  { --w: 3rem !important; }
+    .bldg--bunker  { --w: 1.4rem !important; height: 3.2rem !important; }
 
     .dossier {
         position: relative;
@@ -1444,25 +1463,122 @@ html.is-ready .chips:not(.is-in) li {
     }
 
     .sign--roof {
-        top: 0.4rem;
+        top: 0.25rem;
+        padding: 0.22rem 0.4rem 0.26rem;
     }
 
-    .antenna,
+    .sign__text {
+        font-size: 0.72rem;
+    }
+
+    .sign--blade {
+        font-size: 0.42rem;
+    }
+
+    .sign--vert {
+        padding: 0.3rem 0.16rem;
+    }
+
+    .sign--vert .sign__text {
+        font-size: 0.52rem;
+    }
+
+    .sign--live {
+        font-size: 0.38rem;
+        padding: 0.1rem 0.2rem;
+    }
+
+    .sign--tube {
+        font-size: 0.38rem;
+    }
+
+    .antenna {
+        top: -1rem;
+        height: 1rem;
+    }
+
+    .antenna::after {
+        width: 6px;
+        height: 6px;
+    }
+
+    .ring { width: 1rem; height: 1rem; }
+    .ring--2 { width: 1.4rem; height: 1.4rem; }
+    .ring--3 { width: 1.8rem; height: 1.8rem; }
+
     .tank {
-        top: 0.2rem;
+        top: -0.7rem;
+        width: 0.9rem;
+        height: 0.7rem;
     }
 
     .globe {
-        top: 0.15rem;
-        left: 14%;
-        transform: none;
-        width: 1.7rem;
-        height: 1.7rem;
+        top: -2.4rem;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 1.35rem;
+        height: 1.35rem;
     }
 
-    .peak,
+    .globe__stand {
+        height: 0.35rem;
+    }
+
+    .peak {
+        top: -0.4rem;
+        height: 0.4rem;
+    }
+
     .saw {
-        top: 0;
+        top: -0.35rem;
+        height: 0.35rem;
+    }
+
+    .bldg__crown {
+        height: 0.28rem;
+        top: -0.28rem;
+    }
+
+    .bldg__crown--beacon::after {
+        width: 4px;
+        height: 4px;
+        top: -0.35rem;
+    }
+
+    .bldg__setback {
+        top: 18%;
+        height: 0.2rem;
+    }
+
+    .ticker {
+        height: 0.65rem;
+        bottom: 16%;
+    }
+
+    .ticker span {
+        font-size: 0.36rem;
+    }
+
+    .skybridge {
+        width: 0.45rem;
+        height: 0.25rem;
+    }
+
+    .dish {
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+
+    .yard {
+        gap: 0.2rem;
+    }
+
+    .bldg--silo {
+        border-radius: 0.7rem 0.7rem 0 0;
+    }
+
+    .ledge {
+        height: 0.2rem;
     }
 
     .city__world.is-inspecting .district:not(.is-lit) {
