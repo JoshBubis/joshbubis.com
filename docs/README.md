@@ -15,9 +15,11 @@ in Selected work is expected. See root [`AGENTS.md`](../AGENTS.md).
   as signed buildings: roof names, Catamist globe, Relayra antenna), then
   charter lede, focus tags, footer.
 - `resume.css` — self-contained city + type. Dark ground, red accent, per-product
-  neon, wet street, print + reduced-motion + mobile “avenue” reflow. No film grain.
+  neon, wet street, print + reduced-motion. Mobile is a horizontal snap-scroll
+  avenue (not stacked cards). No film grain.
 - `resume.js` — enter animation, cursor glow, scroll progress, chip stagger,
-  skyline parallax, coarse-pointer tap-to-inspect on the city.
+  skyline parallax, avenue snap lighting + dots, coarse-pointer tap-to-inspect
+  on wide viewports.
 - `fonts/` + `fonts.css` — Instrument Sans + Syne.
 - `favicon.svg` — JB mark.
 - `404.html` — branded Pages 404 (self-contained; no studio links).
@@ -29,7 +31,11 @@ keyboard focus lights that district the same way, shows a dossier at the
 *foot* of the block (never over the sign), and the stack as floor plates.
 Click the district to open the product.
 
-Mobile: districts stack as a walkable avenue; dossier + stack stay visible.
+Mobile: swipe the avenue left-to-right (scroll-snap). Far skyline stays put;
+the current block lights, neighbors peek. Dossier + stack stay on the plaque
+under that block. Dots / `01 / 05` jump to a district. A swipe does not
+follow the product link — a tap does.
+
 Coarse pointers on a wide viewport get tap-to-inspect, then a second tap
 follows the link.
 

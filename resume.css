@@ -429,6 +429,14 @@ html.is-ready .reveal-mask .mask-line:nth-child(2) > span {
 }
 
 /* —— City —— */
+.city__head {
+    display: contents;
+}
+
+.city__rail {
+    display: none;
+}
+
 .city__title {
     position: absolute;
     left: var(--pad);
@@ -1329,107 +1337,268 @@ html.is-ready .chips:not(.is-in) li {
 @media (max-width: 860px) {
     :root {
         --city-h: auto;
+        --skyline: 15.25rem;
+        --ave: 0.52;
+        --curb: 1.05rem;
     }
 
     .city-hero {
         min-height: 0;
+        padding-bottom: 0.4rem;
+    }
+
+    .atmosphere__moon {
+        top: 2.6%;
+        right: 7%;
+        width: 2.5rem;
+        height: 2.5rem;
+        opacity: 0.85;
+    }
+
+    .atmosphere__haze {
+        height: 22%;
+        opacity: 0.55;
+    }
+
+    .cursor-glow {
+        display: none;
+    }
+
+    .sky-sign {
+        font-size: clamp(2.55rem, 13vw, 3.5rem);
+    }
+
+    .hud {
+        pointer-events: auto;
+        gap: 0.7rem;
+        padding-bottom: 0.15rem;
+    }
+
+    .hud__line {
+        font-size: 0.98rem;
+    }
+
+    .city__head {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 0.8rem;
+        margin: 1.15rem var(--pad) 0.55rem;
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
     }
 
     .city__title {
         position: static;
         width: auto;
         height: auto;
-        margin: 1.25rem var(--pad) 0.75rem;
+        margin: 0;
         clip: auto;
         overflow: visible;
         white-space: normal;
-        font-weight: 600;
-        font-size: 0.72rem;
-        letter-spacing: 0.16em;
-        text-transform: uppercase;
-        color: var(--muted);
     }
 
     .city__title::after {
-        content: "";
-        display: block;
-        width: 1.35rem;
-        height: 2px;
-        margin-top: 0.5rem;
-        border-radius: 1px;
-        background: linear-gradient(90deg, var(--accent), transparent);
+        display: none;
     }
 
-    .hud {
+    .city__rail {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.4rem;
         pointer-events: auto;
-        padding-bottom: 0.5rem;
+    }
+
+    .city__pace {
+        margin: 0;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.16em;
+        color: var(--ink);
+        font-variant-numeric: tabular-nums;
+    }
+
+    .city__pace-total {
+        color: var(--muted);
+    }
+
+    .city__dots {
+        display: flex;
+        gap: 0.38rem;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .city__dots button {
+        display: block;
+        width: 0.42rem;
+        height: 0.42rem;
+        padding: 0;
+        border: 0;
+        border-radius: 50%;
+        background: rgba(238, 241, 245, 0.28);
+        box-shadow: none;
+        cursor: pointer;
+        transition: transform 0.25s var(--ease), background 0.25s var(--ease), box-shadow 0.25s var(--ease);
+    }
+
+    .city__dots button[aria-current="true"] {
+        background: var(--accent);
+        box-shadow: 0 0 10px var(--accent-glow);
+        transform: scale(1.35);
     }
 
     .city__world {
+        --skyline: 15.25rem;
         position: relative;
-        overflow: visible;
-        background: none;
+        overflow: hidden;
+        background:
+            linear-gradient(180deg, transparent 0 62%, rgba(11, 16, 22, 0.55) 62%, #05060a 78%, var(--ground) 100%);
         box-shadow: none;
         min-height: 0;
-        margin: 0 var(--pad);
+        margin: 0;
+        padding-bottom: 0.35rem;
         pointer-events: auto;
     }
 
-    .city__far,
-    .city__mid,
-    .mono,
-    .city__street,
-    .reflect,
-    .filler {
+    .city__world::before,
+    .city__world::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        width: min(2.4rem, 8vw);
+        height: var(--skyline);
+        z-index: 5;
+        pointer-events: none;
+    }
+
+    .city__world::before {
+        left: 0;
+        background: linear-gradient(90deg, var(--ground), transparent);
+    }
+
+    .city__world::after {
+        right: 0;
+        background: linear-gradient(270deg, var(--ground), transparent);
+    }
+
+    .mono {
         display: none;
+    }
+
+    .city__far {
+        display: block;
+        left: -8%;
+        right: -8%;
+        top: 0;
+        bottom: auto;
+        height: var(--skyline);
+        opacity: 0.72;
+    }
+
+    .city__mid {
+        display: block;
+        inset: 0 0 auto 0;
+        height: var(--skyline);
+        opacity: 0.55;
+    }
+
+    .filler {
+        display: block;
+        opacity: 0.22;
+    }
+
+    .city__street {
+        display: block;
+        top: var(--skyline);
+        bottom: auto;
+        height: var(--curb);
+        z-index: 4;
+    }
+
+    .street__wet {
+        background:
+            linear-gradient(180deg, rgba(255, 255, 255, 0.07), transparent 42%),
+            repeating-linear-gradient(90deg, transparent 0 36px, rgba(255, 255, 255, 0.045) 36px 38px),
+            linear-gradient(180deg, #0d131b, #05060a);
+        box-shadow: 0 -10px 28px rgba(0, 0, 0, 0.35);
     }
 
     .city__stage {
         position: relative;
         bottom: auto;
+        z-index: 3;
         height: auto;
         display: flex;
-        flex-direction: column;
-        gap: 1.15rem;
-        padding: 0;
+        flex-direction: row;
+        align-items: stretch;
+        gap: 0.65rem;
+        padding: 0 max(11vw, calc(env(safe-area-inset-right) + 2rem)) 0.2rem max(11vw, calc(env(safe-area-inset-left) + 2rem));
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: 11vw;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+    }
+
+    .city__stage::-webkit-scrollbar {
+        display: none;
+    }
+
+    .city__stage:hover .district:not(:hover):not(:focus):not(:focus-visible),
+    .city__stage:focus-within .district:not(:hover):not(:focus):not(:focus-visible) {
+        opacity: unset;
+        filter: unset;
     }
 
     .district {
+        flex: 0 0 min(78vw, 22.5rem);
         min-height: 0;
+        min-width: 0;
         align-items: stretch;
-        padding: 1rem 0.85rem 1.05rem;
-        background:
-            linear-gradient(180deg, rgba(16, 21, 29, 0.55), rgba(8, 10, 14, 0.88));
-        border: 1px solid color-mix(in srgb, var(--neon) 28%, transparent);
-        border-radius: 3px;
-        opacity: 1 !important;
-        filter: none !important;
+        justify-content: flex-start;
+        scroll-snap-align: center;
+        scroll-snap-stop: always;
+        padding: 0 0.15rem 0.15rem;
+        opacity: 0.48;
+        filter: saturate(0.55);
+        transition: filter 0.4s var(--ease), opacity 0.4s var(--ease);
+    }
+
+    .city__world:not(.is-inspecting) .district:first-child,
+    .district.is-lit,
+    .district:is(:focus, :focus-visible) {
+        opacity: 1;
+        filter: none;
+        z-index: 6;
+    }
+
+    .city__world.is-inspecting .district:not(.is-lit):not(:focus):not(:focus-visible) {
+        opacity: 0.4;
+        filter: saturate(0.5);
     }
 
     .cluster {
         order: -1;
-        min-height: 0;
-        height: 8.5rem;
-        margin-bottom: 0.65rem;
-        overflow: hidden;
+        height: var(--skyline);
+        min-height: var(--skyline);
+        margin: 0 0 var(--curb);
+        padding-top: 2.8rem;
+        overflow: visible;
     }
 
     .bldg {
-        --h: auto !important;
-        height: 100%;
+        height: calc(var(--h) * var(--ave));
+        width: calc(var(--w) * 0.88);
     }
 
-    .bldg--glass   { --w: 2.8rem !important; }
-    .bldg--step    { --w: 1.5rem !important; }
-    .bldg--annex   { --w: 1.8rem !important; }
-    .bldg--deco    { --w: 3.6rem !important; }
-    .bldg--press   { --w: 1.6rem !important; }
-    .bldg--spire   { --w: 1.8rem !important; }
-    .bldg--comms   { --w: 2.5rem !important; }
-    .bldg--stack   { --w: 1.6rem !important; }
-    .bldg--stack-mid { --w: 2.2rem !important; }
-    .bldg--brutal  { --w: 3rem !important; }
-    .bldg--bunker  { --w: 1.4rem !important; height: 3.2rem !important; }
+    .reflect {
+        display: none;
+    }
 
     .dossier {
         position: relative;
@@ -1439,11 +1608,16 @@ html.is-ready .chips:not(.is-in) li {
         max-width: none;
         transform: none;
         opacity: 1;
-        padding: 0;
-        background: none;
-        border: 0;
-        box-shadow: none;
-        backdrop-filter: none;
+        margin-top: 0.7rem;
+        padding: 0.8rem 0.9rem 0.45rem;
+        background: rgba(8, 10, 14, 0.82);
+        border: 1px solid color-mix(in srgb, var(--neon) 38%, transparent);
+        border-bottom: 0;
+        border-radius: 3px 3px 0 0;
+        box-shadow:
+            0 10px 28px rgba(0, 0, 0, 0.38),
+            0 0 22px color-mix(in srgb, var(--neon) 10%, transparent);
+        backdrop-filter: blur(12px);
         pointer-events: none;
     }
 
@@ -1455,7 +1629,12 @@ html.is-ready .chips:not(.is-in) li {
         flex-wrap: wrap;
         opacity: 1;
         transform: none;
-        margin-top: 0.7rem;
+        margin-top: 0;
+        padding: 0.15rem 0.9rem 0.75rem;
+        background: rgba(8, 10, 14, 0.82);
+        border: 1px solid color-mix(in srgb, var(--neon) 38%, transparent);
+        border-top: 0;
+        border-radius: 0 0 3px 3px;
     }
 
     .riser li {
@@ -1463,12 +1642,12 @@ html.is-ready .chips:not(.is-in) li {
     }
 
     .sign--roof {
-        top: 0.25rem;
-        padding: 0.22rem 0.4rem 0.26rem;
+        top: -1.55rem;
+        padding: 0.28rem 0.46rem 0.3rem;
     }
 
     .sign__text {
-        font-size: 0.72rem;
+        font-size: 0.92rem;
     }
 
     .sign--blade {
@@ -1476,62 +1655,62 @@ html.is-ready .chips:not(.is-in) li {
     }
 
     .sign--vert {
-        padding: 0.3rem 0.16rem;
+        left: -0.95rem;
+        padding: 0.32rem 0.18rem;
     }
 
     .sign--vert .sign__text {
-        font-size: 0.52rem;
+        font-size: 0.58rem;
     }
 
     .sign--live {
-        font-size: 0.38rem;
+        font-size: 0.4rem;
         padding: 0.1rem 0.2rem;
     }
 
     .sign--tube {
-        font-size: 0.38rem;
+        font-size: 0.4rem;
+        right: -0.6rem;
     }
 
     .antenna {
-        top: -1rem;
-        height: 1rem;
+        top: -1.15rem;
+        height: 1.15rem;
     }
 
     .antenna::after {
-        width: 6px;
-        height: 6px;
+        width: 7px;
+        height: 7px;
     }
 
-    .ring { width: 1rem; height: 1rem; }
-    .ring--2 { width: 1.4rem; height: 1.4rem; }
-    .ring--3 { width: 1.8rem; height: 1.8rem; }
+    .ring { width: 1.15rem; height: 1.15rem; }
+    .ring--2 { width: 1.65rem; height: 1.65rem; }
+    .ring--3 { width: 2.15rem; height: 2.15rem; }
 
     .tank {
-        top: -0.7rem;
-        width: 0.9rem;
-        height: 0.7rem;
+        top: -0.85rem;
+        width: 1rem;
+        height: 0.82rem;
     }
 
     .globe {
-        top: -2.4rem;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 1.35rem;
-        height: 1.35rem;
+        top: -3.15rem;
+        width: 1.55rem;
+        height: 1.55rem;
     }
 
     .globe__stand {
-        height: 0.35rem;
+        height: 0.38rem;
     }
 
     .peak {
-        top: -0.4rem;
-        height: 0.4rem;
+        top: -0.48rem;
+        height: 0.48rem;
     }
 
     .saw {
-        top: -0.35rem;
-        height: 0.35rem;
+        top: -0.38rem;
+        height: 0.38rem;
     }
 
     .bldg__crown {
@@ -1540,19 +1719,14 @@ html.is-ready .chips:not(.is-in) li {
     }
 
     .bldg__crown--beacon::after {
-        width: 4px;
-        height: 4px;
-        top: -0.35rem;
-    }
-
-    .bldg__setback {
-        top: 18%;
-        height: 0.2rem;
+        width: 5px;
+        height: 5px;
+        top: -0.4rem;
     }
 
     .ticker {
-        height: 0.65rem;
-        bottom: 16%;
+        height: 0.62rem;
+        bottom: 22%;
     }
 
     .ticker span {
@@ -1565,12 +1739,12 @@ html.is-ready .chips:not(.is-in) li {
     }
 
     .dish {
-        width: 1.6rem;
-        height: 1.6rem;
+        width: 1.7rem;
+        height: 1.7rem;
     }
 
     .yard {
-        gap: 0.2rem;
+        gap: 0.22rem;
     }
 
     .bldg--silo {
@@ -1580,10 +1754,20 @@ html.is-ready .chips:not(.is-in) li {
     .ledge {
         height: 0.2rem;
     }
+}
 
-    .city__world.is-inspecting .district:not(.is-lit) {
-        opacity: 1;
-        filter: none;
+@media (max-width: 380px) {
+    :root {
+        --skyline: 14.75rem;
+        --ave: 0.48;
+    }
+
+    .city__world {
+        --skyline: 14.75rem;
+    }
+
+    .sign__text {
+        font-size: 0.78rem;
     }
 }
 
@@ -1631,6 +1815,7 @@ html.is-ready .chips:not(.is-in) li {
     .reflect,
     .riser,
     .hud__status,
+    .city__rail,
     .foot {
         display: none !important;
     }

@@ -23,7 +23,7 @@
     <link rel="icon" href="/favicon.svg?v=jb4" type="image/svg+xml">
 
     <link rel="stylesheet" href="fonts.css">
-    <link rel="stylesheet" href="resume.css?v=c7">
+    <link rel="stylesheet" href="resume.css?v=c8">
 </head>
 
 <body>
@@ -61,7 +61,19 @@
             </nav>
         </header>
 
-        <h2 id="work-title" class="city__title">Selected work</h2>
+        <div class="city__head">
+            <h2 id="work-title" class="city__title">Selected work</h2>
+            <nav class="city__rail" aria-label="Walk the avenue">
+                <p class="city__pace"><span data-pace-now>01</span><span class="city__pace-total"> / 05</span></p>
+                <ol class="city__dots">
+                    <li><button type="button" aria-current="true" aria-label="Josh.Menu" data-jump="0"></button></li>
+                    <li><button type="button" aria-label="Catamist" data-jump="1"></button></li>
+                    <li><button type="button" aria-label="Relayra" data-jump="2"></button></li>
+                    <li><button type="button" aria-label="HackyChat" data-jump="3"></button></li>
+                    <li><button type="button" aria-label="CalledFrom" data-jump="4"></button></li>
+                </ol>
+            </nav>
+        </div>
 
         <div class="city__world reveal" style="--d: 400ms" data-city>
                     <svg class="city__far" viewBox="0 0 1200 220" preserveAspectRatio="none" aria-hidden="true">
@@ -88,9 +100,9 @@
                         <div class="mono__car"></div>
                     </div>
 
-                    <div class="city__stage">
+                    <div class="city__stage" data-stage aria-label="Product districts">
                         <a class="district district--menu" href="https://josh.menu" rel="noopener"
-                            style="--neon: #10d592; --neon-ink: #04150f;" data-district="menu">
+                            style="--neon: #10d592; --neon-ink: #04150f;" data-district="menu" data-idx="01">
                             <div class="dossier">
                                 <span class="dossier__idx">01 · Flagship</span>
                                 <span class="dossier__name">Josh.Menu</span>
@@ -127,7 +139,7 @@
                         </a>
 
                         <a class="district district--catamist" href="https://catamist.com" rel="noopener"
-                            style="--neon: #f6d05c; --neon-ink: #1a1204;" data-district="catamist">
+                            style="--neon: #f6d05c; --neon-ink: #1a1204;" data-district="catamist" data-idx="02">
                             <div class="dossier">
                                 <span class="dossier__idx">02 · Broadcast</span>
                                 <span class="dossier__name">Catamist</span>
@@ -163,7 +175,7 @@
                         </a>
 
                         <a class="district district--relayra" href="https://relayra.com" rel="noopener"
-                            style="--neon: #62edd6; --neon-ink: #031412;" data-district="relayra">
+                            style="--neon: #62edd6; --neon-ink: #031412;" data-district="relayra" data-idx="03">
                             <div class="dossier">
                                 <span class="dossier__idx">03 · Voice</span>
                                 <span class="dossier__name">Relayra</span>
@@ -196,7 +208,7 @@
                         </a>
 
                         <a class="district district--hacky" href="https://hacky.chat" rel="noopener"
-                            style="--neon: #7db7ff; --neon-2: #c8bcff; --neon-ink: #071018;" data-district="hacky">
+                            style="--neon: #7db7ff; --neon-2: #c8bcff; --neon-ink: #071018;" data-district="hacky" data-idx="04">
                             <div class="dossier">
                                 <span class="dossier__idx">04 · Exchange</span>
                                 <span class="dossier__name">HackyChat</span>
@@ -230,7 +242,7 @@
                         </a>
 
                         <a class="district district--called" href="https://calledfrom.com" rel="noopener"
-                            style="--neon: #c5e32c; --neon-ink: #121404;" data-district="called">
+                            style="--neon: #c5e32c; --neon-ink: #121404;" data-district="called" data-idx="05">
                             <div class="dossier">
                                 <span class="dossier__idx">05 · Radar</span>
                                 <span class="dossier__name">CalledFrom</span>
@@ -313,7 +325,7 @@
         </footer>
     </div>
 
-    <script src="resume.js?v=c7" defer></script>
+    <script src="resume.js?v=c8" defer></script>
 </body>
 
 </html>

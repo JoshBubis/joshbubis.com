@@ -74,7 +74,13 @@
     }
 
     var coarse = window.matchMedia("(hover: none)").matches;
-    if (coarse && districts.length && window.matchMedia("(min-width: 861px)").matches) {
+    var wide = window.matchMedia("(min-width: 861px)");
+    var avenueMq = window.matchMedia("(max-width: 860px)");
+    var stage = document.querySelector("[data-stage]");
+    var paceNow = document.querySelector("[data-pace-now]");
+    var dots = document.querySelectorAll(".city__dots [data-jump]");
+
+    if (coarse && districts.length && wide.matches) {
         districts.forEach(function (el) {
             el.addEventListener("click", function (e) {
                 if (!el.classList.contains("is-lit")) {
@@ -91,6 +97,86 @@
                 world.classList.remove("is-inspecting");
             }
         });
+    }
+
+    if (stage && districts.length && avenueMq.matches) {
+        var active = 0;
+        var dragging = false;
+        var startX = 0;
+
+        function light(index) {
+            if (index < 0 || index >= districts.length) return;
+            active = index;
+            districts.forEach(function (d, i) {
+                d.classList.toggle("is-lit", i === index);
+            });
+            if (world) world.classList.add("is-inspecting");
+            if (paceNow) paceNow.textContent = districts[index].getAttribute("data-idx") || String(index + 1).padStart(2, "0");
+            dots.forEach(function (btn, i) {
+                if (i === index) btn.setAttribute("aria-current", "true");
+                else btn.removeAttribute("aria-current");
+            });
+        }
+
+        function nearest() {
+            var mid = stage.scrollLeft + stage.clientWidth / 2;
+            var best = 0;
+            var bestDist = Infinity;
+            districts.forEach(function (d, i) {
+                var center = d.offsetLeft + d.offsetWidth / 2;
+                var dist = Math.abs(center - mid);
+                if (dist < bestDist) {
+                    bestDist = dist;
+                    best = i;
+                }
+            });
+            return best;
+        }
+
+        function onAvenueScroll() {
+            light(nearest());
+            if (!reduce && far) {
+                var max = stage.scrollWidth - stage.clientWidth;
+                var p = max > 0 ? stage.scrollLeft / max : 0;
+                far.style.transform = "translate3d(" + (p * -28) + "px, 0, 0)";
+                if (mid) mid.style.transform = "translate3d(" + (p * -14) + "px, 0, 0)";
+            }
+        }
+
+        stage.addEventListener("scroll", onAvenueScroll, { passive: true });
+
+        districts.forEach(function (el) {
+            el.addEventListener("pointerdown", function (e) {
+                dragging = false;
+                startX = e.clientX;
+            });
+            el.addEventListener("pointermove", function (e) {
+                if (Math.abs(e.clientX - startX) > 12) dragging = true;
+            });
+            el.addEventListener("click", function (e) {
+                if (dragging) {
+                    e.preventDefault();
+                    dragging = false;
+                }
+            });
+        });
+
+        function goTo(index) {
+            var d = districts[index];
+            if (!d) return;
+            var left = d.offsetLeft - (stage.clientWidth - d.offsetWidth) / 2;
+            stage.scrollLeft = Math.max(0, left);
+            light(index);
+        }
+
+        dots.forEach(function (btn) {
+            btn.addEventListener("click", function () {
+                goTo(Number(btn.getAttribute("data-jump")));
+            });
+        });
+
+        light(0);
+        onAvenueScroll();
     }
 
     if (!reduce && "IntersectionObserver" in window) {
