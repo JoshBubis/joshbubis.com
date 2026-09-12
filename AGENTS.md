@@ -32,7 +32,7 @@ studio uses `josh@josh.menu` on its own site.
 - `index.html` — HUD (name, status, email / LinkedIn / GitHub), night-city of
   product districts (Josh.Menu + four products), charter lede, focus tags,
   footer. JS: enter animation, cursor glow, scroll progress, chip stagger,
-  skyline parallax, mobile avenue snap, tap-to-inspect on coarse pointers.
+  skyline parallax, mobile avenue snap + walk cue, tap-to-inspect on coarse pointers.
 - `resume.css` — self-contained city + type. Dark ground, red accent, per-product
   roof signs, Catamist globe, Relayra antenna pulse, quiet silhouette variety.
   Print, reduced-motion, and a mobile horizontal avenue (no film grain).

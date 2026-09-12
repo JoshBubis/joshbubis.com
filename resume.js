@@ -110,7 +110,11 @@
             districts.forEach(function (d, i) {
                 d.classList.toggle("is-lit", i === index);
             });
-            if (world) world.classList.add("is-inspecting");
+            if (world) {
+                world.classList.add("is-inspecting");
+                world.classList.toggle("has-walked", index > 0);
+                world.classList.toggle("is-end", index === districts.length - 1);
+            }
             if (paceNow) paceNow.textContent = districts[index].getAttribute("data-idx") || String(index + 1).padStart(2, "0");
             dots.forEach(function (btn, i) {
                 if (i === index) btn.setAttribute("aria-current", "true");
@@ -164,14 +168,24 @@
         function goTo(index) {
             var d = districts[index];
             if (!d) return;
-            var left = d.offsetLeft - (stage.clientWidth - d.offsetWidth) / 2;
-            stage.scrollLeft = Math.max(0, left);
+            if (index === 0) {
+                stage.scrollLeft = 0;
+            } else {
+                var left = d.offsetLeft - (stage.clientWidth - d.offsetWidth) / 2;
+                stage.scrollLeft = Math.max(0, left);
+            }
             light(index);
         }
 
         dots.forEach(function (btn) {
             btn.addEventListener("click", function () {
                 goTo(Number(btn.getAttribute("data-jump")));
+            });
+        });
+
+        document.querySelectorAll("[data-walk-next]").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+                goTo(Math.min(active + 1, districts.length - 1));
             });
         });
 

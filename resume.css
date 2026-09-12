@@ -437,6 +437,10 @@ html.is-ready .reveal-mask .mask-line:nth-child(2) > span {
     display: none;
 }
 
+.city__go {
+    display: none;
+}
+
 .city__title {
     position: absolute;
     left: var(--pad);
@@ -1403,11 +1407,33 @@ html.is-ready .chips:not(.is-in) li {
     }
 
     .city__rail {
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        gap: 0.4rem;
+        gap: 0.38rem;
+        min-width: 6.5rem;
         pointer-events: auto;
+    }
+
+    .city__hint {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        background: none;
+        font: inherit;
+        font-size: 0.86rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--ink);
+        cursor: pointer;
+        transition: opacity 0.35s var(--ease);
+    }
+
+    .city__hint span {
+        color: var(--accent);
+        letter-spacing: 0;
     }
 
     .city__pace {
@@ -1417,6 +1443,19 @@ html.is-ready .chips:not(.is-in) li {
         letter-spacing: 0.16em;
         color: var(--ink);
         font-variant-numeric: tabular-nums;
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .city__world.has-walked ~ * .city__pace,
+    .city__head:has(+ .city__world.has-walked) .city__pace {
+        position: static;
+        opacity: 1;
+    }
+
+    .city__head:has(+ .city__world.has-walked) .city__hint {
+        display: none;
     }
 
     .city__pace-total {
@@ -1425,7 +1464,7 @@ html.is-ready .chips:not(.is-in) li {
 
     .city__dots {
         display: flex;
-        gap: 0.38rem;
+        gap: 0.28rem;
         margin: 0;
         padding: 0;
         list-style: none;
@@ -1433,12 +1472,12 @@ html.is-ready .chips:not(.is-in) li {
 
     .city__dots button {
         display: block;
-        width: 0.42rem;
-        height: 0.42rem;
+        width: 0.55rem;
+        height: 0.55rem;
         padding: 0;
         border: 0;
         border-radius: 50%;
-        background: rgba(238, 241, 245, 0.28);
+        background: rgba(238, 241, 245, 0.32);
         box-shadow: none;
         cursor: pointer;
         transition: transform 0.25s var(--ease), background 0.25s var(--ease), box-shadow 0.25s var(--ease);
@@ -1447,7 +1486,7 @@ html.is-ready .chips:not(.is-in) li {
     .city__dots button[aria-current="true"] {
         background: var(--accent);
         box-shadow: 0 0 10px var(--accent-glow);
-        transform: scale(1.35);
+        transform: scale(1.28);
     }
 
     .city__world {
@@ -1463,25 +1502,52 @@ html.is-ready .chips:not(.is-in) li {
         pointer-events: auto;
     }
 
-    .city__world::before,
-    .city__world::after {
+    .city__world::before {
         content: "";
         position: absolute;
         top: 0;
-        width: min(2.4rem, 8vw);
+        left: 0;
+        width: 1.1rem;
         height: var(--skyline);
         z-index: 5;
         pointer-events: none;
-    }
-
-    .city__world::before {
-        left: 0;
         background: linear-gradient(90deg, var(--ground), transparent);
     }
 
-    .city__world::after {
-        right: 0;
-        background: linear-gradient(270deg, var(--ground), transparent);
+    .city__go {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        right: max(0.65rem, env(safe-area-inset-right));
+        top: calc(var(--skyline) * 0.42);
+        z-index: 7;
+        width: 2.35rem;
+        height: 2.35rem;
+        padding: 0;
+        border: 1px solid rgba(238, 241, 245, 0.28);
+        border-radius: 50%;
+        background: rgba(8, 10, 14, 0.72);
+        color: var(--ink);
+        font-size: 1.15rem;
+        line-height: 1;
+        box-shadow: 0 0 18px rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(8px);
+        cursor: pointer;
+        animation: walk-pulse 1.8s var(--ease) infinite;
+    }
+
+    .city__world.has-walked .city__go,
+    .city__world.is-end .city__go {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        animation: none;
+    }
+
+    @keyframes walk-pulse {
+        0%, 100% { transform: translateX(0); box-shadow: 0 0 18px rgba(0, 0, 0, 0.35); }
+        50% { transform: translateX(0.28rem); box-shadow: 0 0 18px rgba(226, 58, 58, 0.22); }
     }
 
     .mono {
@@ -1534,15 +1600,27 @@ html.is-ready .chips:not(.is-in) li {
         display: flex;
         flex-direction: row;
         align-items: stretch;
-        gap: 0.65rem;
-        padding: 0 max(11vw, calc(env(safe-area-inset-right) + 2rem)) 0.2rem max(11vw, calc(env(safe-area-inset-left) + 2rem));
+        gap: 0.7rem;
+        padding: 0 max(10vw, calc(env(safe-area-inset-right) + 1.6rem)) 0.2rem max(4.5vw, calc(env(safe-area-inset-left) + 0.85rem));
         overflow-x: auto;
         overflow-y: hidden;
         scroll-snap-type: x mandatory;
-        scroll-padding-inline: 11vw;
+        scroll-padding-inline: 4.5vw;
         -webkit-overflow-scrolling: touch;
         overscroll-behavior-x: contain;
         scrollbar-width: none;
+    }
+
+    html.is-ready .city__world:not(.has-walked) .city__stage {
+        animation: avenue-nudge 2.5s var(--ease) 0.85s 1;
+    }
+
+    @keyframes avenue-nudge {
+        0%, 22% { transform: none; }
+        38% { transform: translateX(-1.35rem); }
+        54% { transform: none; }
+        68% { transform: translateX(-0.85rem); }
+        100% { transform: none; }
     }
 
     .city__stage::-webkit-scrollbar {
@@ -1556,7 +1634,7 @@ html.is-ready .chips:not(.is-in) li {
     }
 
     .district {
-        flex: 0 0 min(78vw, 22.5rem);
+        flex: 0 0 min(70vw, 20rem);
         min-height: 0;
         min-width: 0;
         align-items: stretch;
@@ -1564,9 +1642,13 @@ html.is-ready .chips:not(.is-in) li {
         scroll-snap-align: center;
         scroll-snap-stop: always;
         padding: 0 0.15rem 0.15rem;
-        opacity: 0.48;
-        filter: saturate(0.55);
+        opacity: 0.72;
+        filter: saturate(0.78);
         transition: filter 0.4s var(--ease), opacity 0.4s var(--ease);
+    }
+
+    .district:first-child {
+        scroll-snap-align: start;
     }
 
     .city__world:not(.is-inspecting) .district:first-child,
@@ -1578,8 +1660,8 @@ html.is-ready .chips:not(.is-in) li {
     }
 
     .city__world.is-inspecting .district:not(.is-lit):not(:focus):not(:focus-visible) {
-        opacity: 0.4;
-        filter: saturate(0.5);
+        opacity: 0.68;
+        filter: saturate(0.72);
     }
 
     .cluster {
@@ -1780,7 +1862,9 @@ html.is-ready .chips:not(.is-in) li {
     .dish,
     .sign--live,
     .globe__orb::before,
-    .bldg__crown--beacon::after {
+    .bldg__crown--beacon::after,
+    .city__go,
+    html.is-ready .city__world:not(.has-walked) .city__stage {
         animation: none;
     }
 
@@ -1816,6 +1900,7 @@ html.is-ready .chips:not(.is-in) li {
     .riser,
     .hud__status,
     .city__rail,
+    .city__go,
     .foot {
         display: none !important;
     }

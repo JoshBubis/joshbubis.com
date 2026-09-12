@@ -31,10 +31,12 @@ keyboard focus lights that district the same way, shows a dossier at the
 *foot* of the block (never over the sign), and the stack as floor plates.
 Click the district to open the product.
 
-Mobile: swipe the avenue left-to-right (scroll-snap). Far skyline stays put;
-the current block lights, neighbors peek. Dossier + stack stay on the plaque
-under that block. Dots / `01 / 05` jump to a district. A swipe does not
-follow the product link — a tap does.
+Mobile: swipe the avenue left-to-right (scroll-snap). The first block sits
+left so the next sign peeks, a `Walk →` control and street chevron advance
+one district, and the stage nudges once if you haven’t walked yet. After the
+first swipe, `Walk →` becomes `02 / 05`. Far skyline stays put; the current
+block lights. Dossier + stack stay on the plaque. A swipe does not follow
+the product link — a tap does.
 
 Coarse pointers on a wide viewport get tap-to-inspect, then a second tap
 follows the link.
