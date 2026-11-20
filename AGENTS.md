@@ -1,5 +1,7 @@
 # AGENTS.md — joshbubis.com
 
+This file defers to `/Users/jbair/Projects/MAP.md`. Read that first.
+
 Static GitHub Pages **personal landing / résumé pointer** for job applications.
 `/Users/jbair/Projects/joshbubis.com`.
 
